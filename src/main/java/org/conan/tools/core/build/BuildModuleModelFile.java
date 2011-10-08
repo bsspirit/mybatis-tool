@@ -23,6 +23,7 @@ import org.conan.tools.util.match.DateMatch;
  *
  * @author conan
  */
+@Deprecated
 public class BuildModuleModelFile {
 
     public BuildModuleModelFile(ModuleModelPO po) {

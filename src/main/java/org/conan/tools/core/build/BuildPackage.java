@@ -12,7 +12,6 @@ public class BuildPackage {
 
     public BuildPackage(PackagePO po) {
         PackageTree pack = new PackageTree(po);
-
         String[] trees = pack.getTreeFolderArray();
         for (String tree : trees) {
             createPackage(tree);
@@ -22,7 +21,6 @@ public class BuildPackage {
     }
 
     public static boolean createPackage(String folder) {
-        
         File dir = new File(folder);
         return dir.mkdirs();
     }

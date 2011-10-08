@@ -13,9 +13,10 @@ import org.conan.tools.util.match.DateMatch;
 import org.conan.tools.util.match.StringMatch;
 
 /**
- *
+ * 
  * @author Conan
  */
+@Deprecated
 public class BuildIbatisTestFile {
 
     public BuildIbatisTestFile(TestPO po) {

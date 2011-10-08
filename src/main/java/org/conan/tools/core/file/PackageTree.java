@@ -18,11 +18,14 @@ public class PackageTree {
     }
 
     public static final String DAO = "dao";
+    public static final String SERVICE = "service";
+    public static final String IMPL = "impl";
     public static final String IBATIS = "ibatis";
     public static final String SQL = "sql";
     public static final String MODEL = "model";
     public static final String WEB = "web";
     public static final String POINT = ".";
+
     private String root;
     private String module;
     private String basePackage;
@@ -54,6 +57,14 @@ public class PackageTree {
 
     public String getDAOFolder() {
         return getModuleFolder() + File.separator + DAO;
+    }
+
+    public String getServiceFolder() {
+        return getModuleFolder() + File.separator + SERVICE;
+    }
+
+    public String getServiceImplFolder() {
+        return getServiceFolder() + File.separator + IMPL;
     }
 
     @Deprecated
@@ -96,6 +107,14 @@ public class PackageTree {
         return getModulePackage() + POINT + DAO;
     }
 
+    public String getServicePackage() {
+        return getModulePackage() + POINT + SERVICE;
+    }
+
+    public String getServiceImplPackage() {
+        return getServicePackage() + POINT + IMPL;
+    }
+
     @Deprecated
     public String getIbatisPackage() {
         return getDAOPackage() + POINT + IBATIS;
@@ -134,25 +153,29 @@ public class PackageTree {
     }
 
     public String[] getTreePackageArray() {
-        String[] tree = new String[6];
+        String[] tree = new String[8];
         tree[0] = getBasePackage();
         tree[1] = getModulePackage();
         tree[2] = getDAOPackage();
         tree[3] = getIbatisSQLPackage();
         tree[4] = getModelPackage();
         tree[5] = getFormWebPackage();
+        tree[6] = getServicePackage();
+        tree[7] = getServiceImplPackage();
         // tree[3] = getIbatisPackage();
         return tree;
     }
 
     public String[] getTreeFolderArray() {
-        String[] tree = new String[6];
+        String[] tree = new String[8];
         tree[0] = getRootFolder();
         tree[1] = getBaseFolder();
         tree[2] = getModuleFolder();
         tree[3] = getDAOFolder();
         tree[4] = getModelFolder();
         tree[5] = getFormWebFolder();
+        tree[6] = getServiceFolder();
+        tree[7] = getServiceImplFolder();
         // tree[4] = getIbatisFolder();
         // tree[5] = getIbatisSQLFolder();
         // tree[7] = getIbatisTestFolder();
@@ -165,10 +188,12 @@ public class PackageTree {
         sb.append(getBasePackage() + "\n");
         sb.append(getModulePackage() + "\n");
         sb.append(getDAOPackage() + "\n");
-        sb.append(getIbatisSQLPackage() + "\n");
+        sb.append(getServicePackage() + "\n");
+        sb.append(getServiceImplPackage() + "\n");
         sb.append(getModelPackage() + "\n");
         sb.append(getFormWebPackage() + "\n");
         // sb.append(getIbatisPackage() + "\n");
+        // sb.append(getIbatisSQLPackage() + "\n");
         return sb.toString();
     }
 
@@ -178,6 +203,8 @@ public class PackageTree {
         sb.append(getBaseFolder() + "\n");
         sb.append(getModuleFolder() + "\n");
         sb.append(getDAOFolder() + "\n");
+        sb.append(getServiceFolder() + "\n");
+        sb.append(getServiceImplFolder() + "\n");
         sb.append(getModelFolder() + "\n");
         sb.append(getFormWebFolder() + "\n");
         // sb.append(getIbatisFolder() + "\n");

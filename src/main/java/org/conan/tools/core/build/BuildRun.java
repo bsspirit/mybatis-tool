@@ -7,7 +7,6 @@ import org.conan.tools.core.model.ModelPO;
 import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.core.model.ParamObject;
 import org.conan.tools.core.model.SqlPO;
-import org.conan.tools.core.model.TestPO;
 import org.conan.tools.core.xml.MarshallerBookMooch;
 import org.conan.tools.core.xmlloader.DaoToolType;
 
