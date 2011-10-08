@@ -2,6 +2,7 @@ package org.conan.tools.core.build;
 
 import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.core.model.DaoPO;
+import org.conan.tools.core.model.FormPO;
 import org.conan.tools.core.model.ModelPO;
 import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.core.model.ParamObject;
@@ -49,7 +50,13 @@ public class BuildRun {
         for (SqlPO sql : po.getSqlList()) {
             new BuildIbatisSQLFile(sql);
         }
+        for (FormPO form : po.getFormList()) {
+            new BuildFormFile(form);
+        }
 
+        // new BuildSQLCreateFile(po.getSqlCreate());
+
+        // /////////////////////////////////////////////
         // for (TestPO test : po.getTestList()) {
         // new BuildIbatisTestFile(test);
         // }
@@ -59,9 +66,7 @@ public class BuildRun {
         // for (ModuleModelPO mm : po.getMmList()) {
         // new BuildModuleModelFile(mm);
         // }
-        // for (FormPO form : po.getFormList()) {
-        // new BuildFormFile(form);
-        // }
+        // //////////////////////////////////////////////
 
     }
 

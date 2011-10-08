@@ -40,35 +40,35 @@ import ${import_model};
 @Service(value="${model_1}Service")
 public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
 
-	@Autowired
+    @Autowired
     ${dao} ${model_1}DAO;
 
-	@Override
+    @Override
     public int ${insert}(${dto} dto) {
         return ${model_1}DAO.${insert}(dto);
     }
 
-	@Override
+    @Override
     public int ${delete}(int id) {
         return ${model_1}DAO.${delete}(id);
     }
 
-	@Override
+    @Override
     public int ${update}(${dto} dto) {
         return ${model_1}DAO.${update}(dto);
     }
 
-	@Override
+    @Override
     public ${dto} ${getId}(int id) {
         return ${model_1}DAO.${getId}(id);
     }
 
-	@Override
+    @Override
     public List<${dto}> ${getList}(Map<String, Object> paramMap) {
         return ${model_1}DAO.${getList}(paramMap);
     }
 
-	@Override
+    @Override
     public PageOutObject<${dto}> ${getPage}(Map<String, Object> paramMap, PageInObject page) {
         paramMap.put("page", page);
         List<${dto}> list = ${model_1}DAO.${getList}(paramMap);

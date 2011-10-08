@@ -24,20 +24,19 @@ public class VelocityFactory {
     public final static String SERVICE_VM = "org/conan/tools/core/vm/service.vm";
     public final static String SERVICE_IMPL_VM = "org/conan/tools/core/vm/serviceImpl.vm";
     public final static String FORM_MODEL_VM = "org/conan/tools/core/vm/formModel.vm";
+    public final static String SQL_CREATE_VM = "org/conan/tools/core/vm/sqlCreate.vm";
+    public final static String SQL_DROP_VM = "org/conan/tools/core/vm/sqlDrop.vm";
     private String writer;
 
     public static void main(String[] args) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("model", "User");
-
         VelocityFactory vf = new VelocityFactory(MODEL_VM, map);
         vf.getWriter();
-
     }
 
     public VelocityFactory(String vm, Map<String, String> map) {
         initVelocity();
-
         VelocityContext context = setContextAttribute(map);
         mergeTemplate(vm, context);
     }

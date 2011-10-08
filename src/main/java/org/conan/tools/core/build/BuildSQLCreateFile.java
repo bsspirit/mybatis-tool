@@ -8,7 +8,7 @@ import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
-import org.conan.tools.core.model.DaoPO;
+import org.conan.tools.core.model.SqlCreatePO;
 import org.conan.tools.util.match.DateMatch;
 
 /**
@@ -17,7 +17,7 @@ import org.conan.tools.util.match.DateMatch;
  */
 public class BuildSQLCreateFile {
 
-    public BuildSQLCreateFile(DaoPO po) {
+    public BuildSQLCreateFile(SqlCreatePO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
@@ -27,10 +27,10 @@ public class BuildSQLCreateFile {
         map.put("copyright", CopyRightObject.COPYRIGHT);
 
         map.put("model", po.getModel());
-        map.put("import_model", clazz.getModelPackageClazz());
-        map.put("dao_package", pack.getDAOPackage());
+//        map.put("import_model", clazz.getModelPackageClazz());
+//        map.put("dao_package", pack.getDAOPackage());
 
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.DAO_VM, map);
-        new WriteFile(clazz.getDAOFile(), vf.getWriter());
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_CREATE_VM, map);
+        new WriteFile(clazz.getSQLCreateFile(), vf.getWriter());
     }
 }

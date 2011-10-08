@@ -30,6 +30,7 @@ public class ParamObject {
     private List<TestPO> testList = new ArrayList<TestPO>(50);
     private List<ServicePO> serviceList = new ArrayList<ServicePO>(50);
     private List<ServiceImplPO> serviceImplList = new ArrayList<ServiceImplPO>(50);
+    private SqlCreatePO sqlCreate = new SqlCreatePO();
 
     public void init(DaoToolType obj) {
         String filePath = obj.getFilePath();
@@ -51,7 +52,7 @@ public class ParamObject {
                 String model = StringMatch.first2Uppercase(modelType.getName());
                 String table = modelType.getTable();
 
-                // clazz,dao,service,serviceImpl,ibatis,test
+                // clazz,dao,service,serviceImpl,ibatis,test,sqlcreate
                 clazzList.add(new ClazzPO(filePath, project, module, model));
                 daoList.add(new DaoPO(filePath, project, module, model));
                 serviceList.add(new ServicePO(filePath, project, module, model));
@@ -154,6 +155,10 @@ public class ParamObject {
 
     public List<ServiceImplPO> getServiceImplList() {
         return serviceImplList;
+    }
+
+    public SqlCreatePO getSqlCreate() {
+        return sqlCreate;
     }
 
 }
