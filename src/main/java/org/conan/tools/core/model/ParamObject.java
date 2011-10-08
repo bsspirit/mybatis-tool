@@ -10,12 +10,11 @@ import org.conan.tools.core.xmlloader.FinderType;
 import org.conan.tools.core.xmlloader.ModelType;
 import org.conan.tools.core.xmlloader.ModuleType;
 import org.conan.tools.core.xmlloader.PropType;
-import org.conan.tools.core.xmlloader.TypeSType;
 import org.conan.tools.util.imports.ImportClazz;
 import org.conan.tools.util.match.StringMatch;
 
 /**
- *
+ * 
  * @author conan
  */
 public class ParamObject {
@@ -29,6 +28,8 @@ public class ParamObject {
     private List<IbatisPO> ibatisList = new ArrayList<IbatisPO>(50);
     private List<SqlPO> sqlList = new ArrayList<SqlPO>(50);
     private List<TestPO> testList = new ArrayList<TestPO>(50);
+    private List<ServicePO> serviceList = new ArrayList<ServicePO>(50);
+    private List<ServiceImplPO> serviceImplList = new ArrayList<ServiceImplPO>(50);
 
     public void init(DaoToolType obj) {
         String filePath = obj.getFilePath();
@@ -38,7 +39,7 @@ public class ParamObject {
 
             String module = moduleType.getName();
 
-            //package
+            // package
             packageList.add(new PackagePO(filePath, project, module));
 
             // moduleModel
@@ -50,16 +51,19 @@ public class ParamObject {
                 String model = StringMatch.first2Uppercase(modelType.getName());
                 String table = modelType.getTable();
 
-                // clazz,dao,ibatis,test
+                // clazz,dao,service,serviceImpl,ibatis,test
                 clazzList.add(new ClazzPO(filePath, project, module, model));
                 daoList.add(new DaoPO(filePath, project, module, model));
-                ibatisList.add(new IbatisPO(filePath, project, module, model));
-                testList.add(new TestPO(filePath, project, module, model));
-                
+                serviceList.add(new ServicePO(filePath, project, module, model));
+                serviceImplList.add(new ServiceImplPO(filePath, project, module, model));
+                // ibatisList.add(new IbatisPO(filePath, project, module,
+                // model));
+                // testList.add(new TestPO(filePath, project, module, model));
+
                 // moduleModel
                 mmpo.property.add(new PropertyBean(StringMatch.first2Lowercase(model) + "DTO", model + "DTO"));
 
-                //model,sql,form
+                // model,sql,form
                 ModelPO mpo = new ModelPO(filePath, project, module, model);
                 modelList.add(mpo);
                 SqlPO spo = new SqlPO(filePath, project, module, model, table);
@@ -72,33 +76,37 @@ public class ParamObject {
                     String propType = prop.getType().value();
                     boolean propNull = prop.isNull();
 
-                    //model,sql
+                    // model,sql
                     mpo.property.add(new PropertyBean(propName, propType));
                     fpo.property.add(new PropertyBean(propName, propType));
                     spo.property.add(new PropertyBean(propName, propType, propNull));
 
-                    //sql
+                    // sql
                     if (propName.equals("mark")) {
                         spo.mark = true;
                     }
 
-                    //model
-                    switch(prop.getType()){
-                    case TIMESTAMP :mpo.imports.add(ImportClazz.getImport(prop.getType()));break;
-                    case DATE:mpo.imports.add(ImportClazz.getImport(prop.getType()));break;
+                    // model
+                    switch (prop.getType()) {
+                    case TIMESTAMP:
+                        mpo.imports.add(ImportClazz.getImport(prop.getType()));
+                        break;
+                    case DATE:
+                        mpo.imports.add(ImportClazz.getImport(prop.getType()));
+                        break;
                     }
-                    
-//                    if (prop.getType() == TypeSType.TIMESTAMP) {
-//                        mpo.imports.add(ImportClazz.getImport(prop.getType()));
-//                    }
+
+                    // if (prop.getType() == TypeSType.TIMESTAMP) {
+                    // mpo.imports.add(ImportClazz.getImport(prop.getType()));
+                    // }
                 }
 
-                for(FinderType finder : modelType.getFinder()){
+                for (FinderType finder : modelType.getFinder()) {
                     String id = finder.getId();
                     String sql = finder.getSql();
 
-                    //sql
-                    spo.finder.add(new SqlFinderBean(StringMatch.first2Lowercase(model)+"."+id,sql));
+                    // sql
+                    spo.finder.add(new SqlFinderBean(StringMatch.first2Lowercase(model) + "." + id, sql));
                 }
             }
         }
@@ -140,5 +148,12 @@ public class ParamObject {
         return formList;
     }
 
-    
+    public List<ServicePO> getServiceList() {
+        return serviceList;
+    }
+
+    public List<ServiceImplPO> getServiceImplList() {
+        return serviceImplList;
+    }
+
 }

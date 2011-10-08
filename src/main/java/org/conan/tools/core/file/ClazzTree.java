@@ -70,6 +70,10 @@ public class ClazzTree {
     public String getDAOPackageClazz() {
         return pack.getDAOPackage() + PackageTree.POINT + getModel() + DAO;
     }
+    
+    public String getServicePackageClazz() {
+        return pack.getServicePackage() + PackageTree.POINT + getModel() + SERVICE;
+    }
 
     public String getIbatisPackageClazz() {
         return pack.getIbatisPackage() + PackageTree.POINT + getModel() + DAO_IBATIS;

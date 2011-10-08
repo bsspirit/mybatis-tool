@@ -21,6 +21,8 @@ public class VelocityFactory {
     public final static String IBATIS_VM = "org/conan/tools/core/vm/ibatis.vm";
     public final static String IBATIS_TEST_VM = "org/conan/tools/core/vm/ibatisTest.vm";
     public final static String IBATIS_SQL_VM = "org/conan/tools/core/vm/ibatisSQL.vm";
+    public final static String SERVICE_VM = "org/conan/tools/core/vm/service.vm";
+    public final static String SERVICE_IMPL_VM = "org/conan/tools/core/vm/serviceImpl.vm";
     public final static String FORM_MODEL_VM = "org/conan/tools/core/vm/formModel.vm";
     private String writer;
 
