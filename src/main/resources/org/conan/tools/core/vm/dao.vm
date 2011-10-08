@@ -12,8 +12,6 @@ package ${dao_package};
 import java.util.List;
 import java.util.Map;
 import com.q24.base.dao.MybatisDAO;
-import com.q24.base.dao.PageInObject;
-import com.q24.base.dao.PageOutObject;
 
 import ${import_model};
 
@@ -30,7 +28,6 @@ public interface ${dao} extends MybatisDAO {
 
     ${dto} ${getId}(int id);
     List<${dto}> ${getList}(Map<String,Object> paramMap);
-    PageOutObject<${dto}> ${getPage}(Map<String,Object> paramMap, PageInObject page);
     int ${getList}Count(Map<String,Object> paramMap);
 }
 
