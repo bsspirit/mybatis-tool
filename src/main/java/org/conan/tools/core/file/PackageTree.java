@@ -6,7 +6,7 @@ import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.util.match.StringMatch;
 
 /**
- *
+ * 
  * @author Conan
  */
 public class PackageTree {
@@ -16,6 +16,7 @@ public class PackageTree {
         this.basePackage = po.getBasePackage();
         this.module = po.getModule();
     }
+
     public static final String DAO = "dao";
     public static final String IBATIS = "ibatis";
     public static final String SQL = "sql";
@@ -34,7 +35,7 @@ public class PackageTree {
         return getRootFolder() + File.separator + ProjectTree.SRC;
     }
 
-    public String getWebFolder(){
+    public String getWebFolder() {
         return getRootFolder() + File.separator + ProjectTree.WEB;
     }
 
@@ -55,10 +56,17 @@ public class PackageTree {
         return getModuleFolder() + File.separator + DAO;
     }
 
+    @Deprecated
     public String getIbatisFolder() {
         return getDAOFolder() + File.separator + IBATIS;
     }
 
+    /*
+     * sql file into DAO folder
+     * 
+     * @see getDAOFolder()
+     */
+    @Deprecated
     public String getIbatisSQLFolder() {
         return getIbatisFolder() + File.separator + SQL;
     }
@@ -67,11 +75,12 @@ public class PackageTree {
         return getModuleFolder() + File.separator + MODEL;
     }
 
+    @Deprecated
     public String getIbatisTestFolder() {
         return StringMatch.point2Separator(getTestFolder() + File.separator + basePackage) + File.separator + module + File.separator + DAO + File.separator + IBATIS;
     }
 
-    public String getFormWebFolder(){
+    public String getFormWebFolder() {
         return StringMatch.point2Separator(getWebFolder() + File.separator + basePackage) + File.separator + module + File.separator + WEB;
     }
 
@@ -87,19 +96,20 @@ public class PackageTree {
         return getModulePackage() + POINT + DAO;
     }
 
+    @Deprecated
     public String getIbatisPackage() {
         return getDAOPackage() + POINT + IBATIS;
     }
 
     public String getIbatisSQLPackage() {
-        return getIbatisPackage() + POINT + SQL;
+        return getDAOPackage() + POINT + SQL;
     }
 
     public String getModelPackage() {
         return getModulePackage() + POINT + MODEL;
     }
 
-    public String getFormWebPackage(){
+    public String getFormWebPackage() {
         return getModulePackage() + POINT + WEB;
     }
 
@@ -124,28 +134,28 @@ public class PackageTree {
     }
 
     public String[] getTreePackageArray() {
-        String[] tree = new String[7];
+        String[] tree = new String[6];
         tree[0] = getBasePackage();
         tree[1] = getModulePackage();
         tree[2] = getDAOPackage();
-        tree[3] = getIbatisPackage();
-        tree[4] = getIbatisSQLPackage();
-        tree[5] = getModelPackage();
-        tree[6] = getFormWebPackage();
+        tree[3] = getIbatisSQLPackage();
+        tree[4] = getModelPackage();
+        tree[5] = getFormWebPackage();
+        // tree[3] = getIbatisPackage();
         return tree;
     }
 
     public String[] getTreeFolderArray() {
-        String[] tree = new String[9];
+        String[] tree = new String[6];
         tree[0] = getRootFolder();
         tree[1] = getBaseFolder();
         tree[2] = getModuleFolder();
         tree[3] = getDAOFolder();
-        tree[4] = getIbatisFolder();
-        tree[5] = getIbatisSQLFolder();
-        tree[6] = getModelFolder();
-        tree[7] = getIbatisTestFolder();
-        tree[8] = getFormWebFolder();
+        tree[4] = getModelFolder();
+        tree[5] = getFormWebFolder();
+        // tree[4] = getIbatisFolder();
+        // tree[5] = getIbatisSQLFolder();
+        // tree[7] = getIbatisTestFolder();
         return tree;
     }
 
@@ -155,10 +165,10 @@ public class PackageTree {
         sb.append(getBasePackage() + "\n");
         sb.append(getModulePackage() + "\n");
         sb.append(getDAOPackage() + "\n");
-        sb.append(getIbatisPackage() + "\n");
         sb.append(getIbatisSQLPackage() + "\n");
         sb.append(getModelPackage() + "\n");
         sb.append(getFormWebPackage() + "\n");
+        // sb.append(getIbatisPackage() + "\n");
         return sb.toString();
     }
 
@@ -168,11 +178,11 @@ public class PackageTree {
         sb.append(getBaseFolder() + "\n");
         sb.append(getModuleFolder() + "\n");
         sb.append(getDAOFolder() + "\n");
-        sb.append(getIbatisFolder() + "\n");
-        sb.append(getIbatisSQLFolder() + "\n");
         sb.append(getModelFolder() + "\n");
-        sb.append(getIbatisTestFolder() + "\n");
         sb.append(getFormWebFolder() + "\n");
+        // sb.append(getIbatisFolder() + "\n");
+        // sb.append(getIbatisSQLFolder() + "\n");
+        // sb.append(getIbatisTestFolder() + "\n");
         return sb.toString();
     }
 }

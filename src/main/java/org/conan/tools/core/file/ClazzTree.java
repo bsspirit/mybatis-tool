@@ -1,6 +1,7 @@
 package org.conan.tools.core.file;
 
 import java.io.File;
+
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -28,16 +29,18 @@ public class ClazzTree {
         return pack.getDAOFolder() + File.separator + getDAOClazz();
     }
 
+    @Deprecated
     public String getIbatisFile() {
         return pack.getIbatisFolder() + File.separator + getIbatisClazz();
     }
 
+    @Deprecated
     public String getIbatisTestFile() {
         return pack.getIbatisTestFolder() + File.separator + getIbatisTestClazz();
     }
 
     public String getIbatisSQLFile() {
-        return pack.getIbatisSQLFolder() + File.separator + getIbatisSQLClazz();
+        return pack.getDAOFolder() + File.separator + getIbatisSQLClazz();
     }
 
     public String getModelFile() {

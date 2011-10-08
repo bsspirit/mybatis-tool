@@ -3,9 +3,7 @@ package org.conan.tools.core.build;
 import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.core.model.FormPO;
-import org.conan.tools.core.model.IbatisPO;
 import org.conan.tools.core.model.ModelPO;
-import org.conan.tools.core.model.ModuleModelPO;
 import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.core.model.ParamObject;
 import org.conan.tools.core.model.SqlPO;
@@ -14,13 +12,13 @@ import org.conan.tools.core.xml.MarshallerBookMooch;
 import org.conan.tools.core.xmlloader.DaoToolType;
 
 /**
- *
+ * 
  * @author conan
  */
 public class BuildRun {
 
     public static void init() {
-    	DaoToolType obj = MarshallerBookMooch.unmarshaller();
+        DaoToolType obj = MarshallerBookMooch.unmarshaller();
         ParamObject po = new ParamObject();
         po.init(obj);
 
@@ -40,21 +38,19 @@ public class BuildRun {
             new BuildDAOFile(dao);
         }
 
-//        for (IbatisPO ibatis : po.getIbatisList()) {
-//            new BuildIbatisFile(ibatis);
-//        }
-
         for (SqlPO sql : po.getSqlList()) {
             new BuildIbatisSQLFile(sql);
         }
 
-        for (TestPO test : po.getTestList()) {
-            new BuildIbatisTestFile(test);
-        }
-
-        for (ModuleModelPO mm : po.getMmList()) {
-            new BuildModuleModelFile(mm);
-        }
+        // for (TestPO test : po.getTestList()) {
+        // new BuildIbatisTestFile(test);
+        // }
+        // for (IbatisPO ibatis : po.getIbatisList()) {
+        // new BuildIbatisFile(ibatis);
+        // }
+        // for (ModuleModelPO mm : po.getMmList()) {
+        // new BuildModuleModelFile(mm);
+        // }
 
         for (FormPO form : po.getFormList()) {
             new BuildFormFile(form);
