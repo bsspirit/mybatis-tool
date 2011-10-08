@@ -4,9 +4,10 @@
 	<property file="build.properties" />
 
 	<target name="init">
-		<echo>ant genJaxb   .....   generate config files</echo>
-		<echo>ant jaxb2src  .....   copy the config to src</echo>
+		<echo>ant genJaxb   .....   generate jaxb files</echo>
+		<echo>ant jaxb2src  .....   copy jaxb to src</echo>
 		<echo>ant run       .....   generate source code</echo>
+		<echo>ant cleanJaxb .....   clean jaxb files</echo>
 		<echo>ant cleanGen  .....   clean config files</echo>
 	</target>
 
@@ -21,19 +22,13 @@
 		<echo>fromdir: ${tool_jaxb}</echo>
 		<echo>todir: ${src}</echo>
 		<copy todir="${src}">
-			<fileset dir="${tool_jaxb_code}">
-				<exclude name="DAOTool.xsd" />
-			</fileset>
+			<fileset dir="${tool_jaxb_code}"/>
 		</copy>
 	</target>
 
 	<target name="cleanJaxb">
-		<echo>clean jaxb: ${tool_jaxb}</echo>
-		<delete>
-			<fileset dir="${tool_jaxb}">
-				<exclude name="DAOTool.xsd" />
-			</fileset>
-		</delete>
+		<echo>clean jaxb: ${tool_jaxb_code}</echo>
+		<delete dir="${tool_jaxb_code}/org"/>
 	</target>
 
 	<target name="run" depends="cleanGen">

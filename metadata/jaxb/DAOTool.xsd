@@ -10,7 +10,7 @@
     <xsd:element name="table" type="xsd:string"></xsd:element>
     <xsd:element name="null" type="xsd:boolean"></xsd:element>
 
-    <xsd:element name="bookmooch" type="bookmoochType"></xsd:element>
+    <xsd:element name="daoTool" type="daoToolType"></xsd:element>
     <xsd:element name="modules" type="modulesType"></xsd:element>
     <xsd:element name="module" type="moduleType"></xsd:element>
     <xsd:element name="model" type="modelType"></xsd:element>
@@ -27,11 +27,12 @@
             <xsd:enumeration value="Float" />
             <xsd:enumeration value="Double" />
             <xsd:enumeration value="Timestamp" />
+            <xsd:enumeration value="Date" />
         </xsd:restriction>
     </xsd:simpleType>
 
 
-    <xsd:complexType name="bookmoochType">
+    <xsd:complexType name="daoToolType">
         <xsd:sequence>
             <xsd:element ref="filePath"/>
             <xsd:element ref="project" maxOccurs="1" />
