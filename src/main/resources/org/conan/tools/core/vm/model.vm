@@ -1,0 +1,38 @@
+#set( $dto = ${model}+"DTO" )
+$copyright
+package ${model_package};
+
+#foreach($import in $model_imports )
+import ${import};
+#end
+import com.q24.base.BaseObject;
+
+/**
+ * This is $model Model DTO
+ * @author $author
+ * @date $date
+ */
+public class ${dto} extends BaseObject {
+
+private static final long serialVersionUID = ${timestamp};
+
+${model_constructorMethods}
+
+private int id;
+#foreach($property in $model_properties )
+private ${property};
+#end
+
+public int getId() {
+return this.id;
+}
+
+$model_getMethods
+
+public void setId(int id) {
+this.id = id;
+}
+
+$model_setMethods
+
+}

@@ -1,0 +1,36 @@
+#set( $dao = ${model}+"DAO" )
+#set( $dto = ${model}+"DTO" )
+#set( $insert = "insert"+${model})
+#set( $delete = "delete"+${model})
+#set( $update = "update"+${model})
+#set( $getId = "get"+${model}+"ById")
+#set( $getList = "get"+${model}+"s")
+#set( $getPage = ${getList}+"Paging")
+$copyright
+package ${dao_package};
+
+import java.util.List;
+import java.util.Map;
+import com.q24.base.dao.MybatisDAO;
+import com.q24.base.dao.PageInObject;
+import com.q24.base.dao.PageOutObject;
+
+import ${import_model};
+
+/**
+ * This is ${model} DAO interface
+ * @author $author
+ * @date $date
+ */
+public interface ${dao} extends MybatisDAO {
+
+    int ${insert}(${dto} dto);
+    int ${delete}(int id);
+    int ${update}(${dto} dto);
+
+    ${dto} ${getId}(int id);
+    List<${dto}> ${getList}(Map<String,Object> paramMap);
+    PageOutObject<${dto}> ${getPage}(Map<String,Object> paramMap, PageInObject page);
+    int ${getList}Count(Map<String,Object> paramMap);
+}
+

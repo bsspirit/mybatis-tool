@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<daoTool xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="./metadata/jaxb/DAOTool.xsd">
+
+	<filePath>metadata/gen</filePath>
+	<project>org.conan.aocheng</project>
+	<modules>
+		<module>
+			<name>ac</name>
+			<model>
+				<name>catalog</name>
+				<table>t_ac_catalog</table>
+				<prop><name>name</name><type>String</type></prop>
+			</model>
+			<model>
+				<name>prod</name>
+				<table>t_ac_prod</table>
+				<prop><name>catid</name><type>Integer</type></prop>
+				<prop><name>title</name><type>String</type></prop>
+				<prop><name>content</name><type>String</type><null>true</null></prop>
+				<prop><name>image_url</name><type>String</type><null>true</null></prop>
+				<prop><name>description</name><type>String</type><null>true</null></prop>
+				<prop><name>create_date</name><type>Timestamp</type></prop>
+			</model>
+		</module>
+	</modules>
+</daoTool>

@@ -1,0 +1,17 @@
+#set( $dto = ${model}+"DTO" )
+#set( $form = ${model}+"Form" )
+$copyright
+package ${form_package};
+
+import ${import_model};
+
+/**
+ * This is $form Form Model
+ * @author $author
+ * @date $date
+ */
+public class ${form} extends ${dto} {
+
+${model_constructorMethods}
+
+}

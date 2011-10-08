@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!--
+    This is BankLog sql
+    @author Conan Zhang
+    @date 2011-09-26
+-->
+<mapper namespace="com.q24.bank.dao.BankLogDAO">
+
+    <resultMap id="bankLog.result" type="bankLogDTO">
+        <result property="id" column="id" javaType="int"/>
+        <result property="tran_ref_no" column="tran_ref_no" javaType="String"/>
+        <result property="code" column="code" javaType="String"/>
+        <result property="description" column="description" javaType="String"/>
+        <result property="create_date" column="create_date" javaType="java.sql.Timestamp"/>
+        <result property="bankid" column="bankid" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="bankLog.select">
+        SELECT
+            id,
+            tran_ref_no,
+            code,
+            description,
+            create_date,
+            bankid
+    </sql>
+
+    <sql id="bankLog.condition">
+        <if test="tran_ref_no!=null">tran_ref_no = #{tran_ref_no} and</if>
+        <if test="code!=null">code = #{code} and</if>
+        <if test="description!=null">description = #{description} and</if>
+        <if test="create_date!=null">create_date = #{create_date} and</if>
+        <if test="bankid!=null">bankid = #{bankid} and</if>
+        1=1
+    </sql>
+
+    <insert id="bankLog.insertBankLog" parameterType="bankLogDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_bank_log(
+            tran_ref_no,
+            code,
+            description,
+            create_date,
+            bankid
+        ) VALUES (
+            #{tran_ref_no},
+            #{code},
+            #{description},
+            #{create_date},
+            #{bankid}
+        )
+    </insert>
+
+    <delete id="bankLog.deleteBankLog" parameterType="java.lang.Integer">
+        DELETE FROM t_bank_log
+        WHERE
+            id = #{id}
+    </delete>
+
+    <update id="bankLog.updateBankLog" parameterType="bankLogDTO">
+        UPDATE t_bank_log
+        SET
+            <if test="tran_ref_no!=null">tran_ref_no = #{tran_ref_no},</if>
+            <if test="code!=null">code = #{code},</if>
+            <if test="description!=null">description = #{description},</if>
+            <if test="create_date!=null">create_date = #{create_date},</if>
+            <if test="bankid!=null">bankid = #{bankid},</if>
+            id = #{id}
+        WHERE
+            id = #{id}
+    </update>
+
+    <select id="bankLog.getBankLogById" parameterType="java.lang.Integer" resultMap="bankLog.result">
+        <include refid="bankLog.select"/>
+        FROM
+            t_bank_log
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="bankLog.getBankLogs" parameterType="java.util.Map" resultMap="bankLog.result">
+        <include refid="bankLog.select"/>
+        FROM
+            t_bank_log
+        WHERE
+        <include refid="bankLog.condition"/>
+        <include refid="mysql.page.order"/>
+        <include refid="mysql.page.limit"/>
+    </select>
+
+    <select id="bankLog.getBankLogsCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+            count(id)
+        FROM
+            t_bank_log
+        WHERE
+        <include refid="bankLog.condition"/>
+    </select>
+
+
+</mapper>

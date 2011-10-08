@@ -1,0 +1,66 @@
+#set( $dao = ${model}+"DAO" )
+#set( $dto = ${model}+"DTO" )
+#set( $ibatis = ${dao}+"Ibatis")
+#set( $insert = "insert"+${model})
+#set( $delete = "delete"+${model})
+#set( $update = "update"+${model})
+#set( $getId = "get"+${model}+"ById")
+#set( $getList = "get"+${model}+"s")
+#set( $getPage = ${getList}+"Paging")
+#set( $getCount = ${getList}+"Count")
+#set( $insert_id = ${model_1}+"."+${insert})
+#set( $delete_id = ${model_1}+"."+${delete})
+#set( $update_id = ${model_1}+"."+${update})
+#set( $getId_id = ${model_1}+"."+${getId})
+#set( $getList_id = ${model_1}+"."+${getList})
+#set( $getCount_id = ${model_1}+"."+${getCount})
+$copyright
+package ${dao_ibatis_package};
+
+import java.util.List;
+import java.util.Map;
+import org.conan.common.dao.ibatis.BaseIbatisDAO;
+import org.conan.common.model.PageInObject;
+import org.conan.common.model.PageOutObject;
+
+import ${import_dao};
+import ${import_model};
+
+/**
+ * This is ${model} DAO implemention
+ * @spring.bean id="${model_1}DAO"
+ * @spring.property name="dataSource" ref="dataSource"
+ * @spring.property name="sqlMapClient" ref="sqlMapClient"
+ * @author $author
+ * @date $date
+ */
+public class ${ibatis} extends BaseIbatisDAO implements ${dao} {
+
+    public int ${insert}(${dto} dto) {
+        return (Integer) getSqlMapClientTemplate().insert("${insert_id}", dto);
+    }
+
+    public int ${delete}(int id) {
+        return getSqlMapClientTemplate().delete("${delete_id}", id);
+    }
+
+    public int ${update}(${dto} dto) {
+        return getSqlMapClientTemplate().update("${update_id}", dto);
+    }
+
+    public ${dto} ${getId}(int id) {
+        return (${dto}) getSqlMapClientTemplate().queryForObject("${getId_id}", id);
+    }
+
+    public List<${dto}> ${getList}(Map paramMap) {
+        return getSqlMapClientTemplate().queryForList("${getList_id}", paramMap);
+    }
+
+    public PageOutObject<${dto}> ${getPage}(Map paramMap, PageInObject page) {
+        paramMap.put("page", page);
+        List<${dto}> list = getSqlMapClientTemplate().queryForList("${getList_id}", paramMap);
+        int count = (Integer) getSqlMapClientTemplate().queryForObject("${getCount_id}", paramMap);
+        return new PageOutObject(count, list, page);
+    }
+
+}

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!--
+    This is BankTransfer sql
+    @author Conan Zhang
+    @date 2011-09-26
+-->
+<mapper namespace="com.q24.bank.dao.BankTransferDAO">
+
+    <resultMap id="bankTransfer.result" type="bankTransferDTO">
+        <result property="id" column="id" javaType="int"/>
+        <result property="tran_date" column="tran_date" javaType="String"/>
+        <result property="tran_time" column="tran_time" javaType="String"/>
+        <result property="tran_flag" column="tran_flag" javaType="String"/>
+        <result property="tran_msg" column="tran_msg" javaType="String"/>
+        <result property="taocan_flag" column="taocan_flag" javaType="String"/>
+        <result property="taocan_type" column="taocan_type" javaType="String"/>
+        <result property="tran_fee" column="tran_fee" javaType="String"/>
+        <result property="p_flowno" column="p_flowno" javaType="String"/>
+        <result property="tran_ref_no" column="tran_ref_no" javaType="String"/>
+        <result property="bankid" column="bankid" javaType="Integer"/>
+    </resultMap>
+
+    <sql id="bankTransfer.select">
+        SELECT
+            id,
+            tran_date,
+            tran_time,
+            tran_flag,
+            tran_msg,
+            taocan_flag,
+            taocan_type,
+            tran_fee,
+            p_flowno,
+            tran_ref_no,
+            bankid
+    </sql>
+
+    <sql id="bankTransfer.condition">
+        <if test="tran_date!=null">tran_date = #{tran_date} and</if>
+        <if test="tran_time!=null">tran_time = #{tran_time} and</if>
+        <if test="tran_flag!=null">tran_flag = #{tran_flag} and</if>
+        <if test="tran_msg!=null">tran_msg = #{tran_msg} and</if>
+        <if test="taocan_flag!=null">taocan_flag = #{taocan_flag} and</if>
+        <if test="taocan_type!=null">taocan_type = #{taocan_type} and</if>
+        <if test="tran_fee!=null">tran_fee = #{tran_fee} and</if>
+        <if test="p_flowno!=null">p_flowno = #{p_flowno} and</if>
+        <if test="tran_ref_no!=null">tran_ref_no = #{tran_ref_no} and</if>
+        <if test="bankid!=null">bankid = #{bankid} and</if>
+        1=1
+    </sql>
+
+    <insert id="bankTransfer.insertBankTransfer" parameterType="bankTransferDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_bank_transfer(
+            <if test="tran_date!=null ">tran_date,</if>
+            <if test="tran_time!=null ">tran_time,</if>
+            <if test="tran_flag!=null ">tran_flag,</if>
+            <if test="tran_msg!=null ">tran_msg,</if>
+            <if test="taocan_flag!=null ">taocan_flag,</if>
+            <if test="taocan_type!=null ">taocan_type,</if>
+            <if test="tran_fee!=null ">tran_fee,</if>
+            <if test="p_flowno!=null ">p_flowno,</if>
+            tran_ref_no,
+            bankid
+        ) VALUES (
+            <if test="tran_date!=null">#{tran_date},</if>
+            <if test="tran_time!=null">#{tran_time},</if>
+            <if test="tran_flag!=null">#{tran_flag},</if>
+            <if test="tran_msg!=null">#{tran_msg},</if>
+            <if test="taocan_flag!=null">#{taocan_flag},</if>
+            <if test="taocan_type!=null">#{taocan_type},</if>
+            <if test="tran_fee!=null">#{tran_fee},</if>
+            <if test="p_flowno!=null">#{p_flowno},</if>
+            #{tran_ref_no},
+            #{bankid}
+        )
+    </insert>
+
+    <delete id="bankTransfer.deleteBankTransfer" parameterType="java.lang.Integer">
+        DELETE FROM t_bank_transfer
+        WHERE
+            id = #{id}
+    </delete>
+
+    <update id="bankTransfer.updateBankTransfer" parameterType="bankTransferDTO">
+        UPDATE t_bank_transfer
+        SET
+            <if test="tran_date!=null">tran_date = #{tran_date},</if>
+            <if test="tran_time!=null">tran_time = #{tran_time},</if>
+            <if test="tran_flag!=null">tran_flag = #{tran_flag},</if>
+            <if test="tran_msg!=null">tran_msg = #{tran_msg},</if>
+            <if test="taocan_flag!=null">taocan_flag = #{taocan_flag},</if>
+            <if test="taocan_type!=null">taocan_type = #{taocan_type},</if>
+            <if test="tran_fee!=null">tran_fee = #{tran_fee},</if>
+            <if test="p_flowno!=null">p_flowno = #{p_flowno},</if>
+            <if test="tran_ref_no!=null">tran_ref_no = #{tran_ref_no},</if>
+            <if test="bankid!=null">bankid = #{bankid},</if>
+            id = #{id}
+        WHERE
+            id = #{id}
+    </update>
+
+    <select id="bankTransfer.getBankTransferById" parameterType="java.lang.Integer" resultMap="bankTransfer.result">
+        <include refid="bankTransfer.select"/>
+        FROM
+            t_bank_transfer
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="bankTransfer.getBankTransfers" parameterType="java.util.Map" resultMap="bankTransfer.result">
+        <include refid="bankTransfer.select"/>
+        FROM
+            t_bank_transfer
+        WHERE
+        <include refid="bankTransfer.condition"/>
+        <include refid="mysql.page.order"/>
+        <include refid="mysql.page.limit"/>
+    </select>
+
+    <select id="bankTransfer.getBankTransfersCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+            count(id)
+        FROM
+            t_bank_transfer
+        WHERE
+        <include refid="bankTransfer.condition"/>
+    </select>
+
+
+</mapper>

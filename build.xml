@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DAOTool" default="init" basedir=".">
+
+	<property file="DAOTool.properties" />
+
+	<path id="daoTool.classpath">
+		<path location="${classes}" />
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Description -->
+	<target name="init">
+		<echo>ant cleanGen	.....	clean config files</echo>
+		<echo>ant gen     	..... 	generate config files</echo>
+		<echo>ant override	..... 	override config files</echo>
+		<echo>ant test    	..... 	junit Test</echo>
+		<echo>ant report  	..... 	test Report</echo>
+		<echo>ant package 	..... 	package to CRMChance.jar</echo>
+		<echo>ant javadoc 	..... 	generate javadoc</echo>
+		<echo>ant checkstyle..... 	check source code grammar style</echo>
+	</target>
+
+	<target name="genJaxb">
+		<echo>generate jaxb code</echo>
+		<echo>package: org.conan.tools.core.xmlloader</echo>
+		<echo>Command: D:/tookit/Java/jdk163/bin/xjc -p org.conan.tools.core.xmlloader -d . DAOTool.xsd</echo>
+	</target>
+
+	<target name="jaxb2src">
+		<echo>copy jaxb code to src</echo>
+		<echo>fromdir: ${tool_jaxb}</echo>
+		<echo>todir: ${src}</echo>
+		<copy todir="${src}">
+			<fileset dir="${tool_jaxb}">
+				<exclude name="DAOTool.xsd" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="cleanJaxb">
+		<echo>clean jaxb: ${tool_jaxb}</echo>
+		<delete>
+			<fileset dir="${tool_jaxb}">
+				<exclude name="DAOTool.xsd" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="dao-genernate" depends="cleanGen">
+		<echo>RUN: org.conan.tools.core.build.BuildRun</echo>
+	</target>
+
+	<target name="copy2Src">
+		<echo>fromdir: ${tool_gen_src}</echo>
+		<echo>todir: ${project_src}</echo>
+		<copy todir="${project_src}">
+			<fileset dir="${tool_gen_src}" />
+		</copy>
+	</target>
+
+	<target name="copy2Test">
+		<echo>fromdir: ${tool_gen_test}</echo>
+		<echo>todir: ${project_test}</echo>
+		<copy todir="${project_test}">
+			<fileset dir="${tool_gen_test}" />
+		</copy>
+	</target>
+
+	<target name="cleanGen">
+		<echo>clean gen src and test</echo>
+		<delete dir="${tool_gen_src}" />
+		<delete dir="${tool_gen_test}" />
+		<delete dir="${tool_gen_web}" />
+	</target>
+
+</project>

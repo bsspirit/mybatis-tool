@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookmooch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./metadata/jaxb/DAOTool.xsd">
+
+    <filePath>/home/conan/workspace/netbeans/BookMoochTool/metadata/gen</filePath>
+    <project>org.conan.bookmooch</project>
+    <modules>
+        <module>
+            <name>user</name>
+            <model>
+                <name>user</name>
+                <table>t_user</table>
+                <prop><name>groupId</name><type>Integer</type></prop>
+                <prop><name>username</name><type>String</type></prop>
+                <prop><name>password</name><type>String</type></prop>
+                <prop><name>email</name><type>String</type></prop>
+                <prop><name>realname</name><type>String</type><null>true</null></prop>
+                <prop><name>sex</name><type>Integer</type><null>true</null></prop>
+                <prop><name>phone1</name><type>String</type><null>true</null></prop>
+                <prop><name>phone2</name><type>String</type><null>true</null></prop>
+                <prop><name>deliver</name><type>String</type><null>true</null></prop>
+                <prop><name>msn</name><type>String</type><null>true</null></prop>
+                <prop><name>qq</name><type>String</type><null>true</null></prop>
+                <prop><name>photo</name><type>String</type><null>true</null></prop>
+                <prop><name>question</name><type>String</type><null>true</null></prop>
+                <prop><name>answer</name><type>String</type><null>true</null></prop>
+                <prop><name>status</name><type>Integer</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>userAddress</name>
+                <table>t_user_address</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>completeAddress</name><type>String</type></prop>
+                <prop><name>zipcode</name><type>String</type><null>true</null></prop>
+                <prop><name>city</name><type>String</type><null>true</null></prop>
+                <prop><name>country</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>userPoint</name>
+                <table>t_user_point</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>point</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>userSign</name>
+                <table>t_user_sign</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>title</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <finder>
+                    <id>getLastSignByUserId</id>
+                    <sql>
+                        <![CDATA[
+                        select id,userId,title,updateTime
+                        from t_user_sign
+                        where userId = #userId#
+                        order by id desc limit 0,1
+                         ]]>
+                    </sql>
+                </finder>
+            </model>
+            <model>
+                <name>userVisit</name>
+                <table>t_user_visit</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>visitId</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <finder>
+                    <id>findVisitors</id>
+                    <sql>
+                        <![CDATA[
+                        select
+                            t.id as id,
+                            t.userId as userId,
+                            t.visitId as visitId,
+                            t.updateTime as updateTime
+                        from
+                        (
+                            select *
+                            from t_user_visit
+                            where
+                                <isNotNull property="userId">
+                                userId =#userId# and
+                                </isNotNull>
+
+                                <isNotNull property="visitId">
+                                visitId = #visitId# and
+                                </isNotNull>
+
+                                1=1
+                            order by updateTime desc
+                        ) as t
+                        group by userId,visitId
+                        order by t.updateTime desc
+                        <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>findVisitorsCount</id>
+                    <sql>
+                        <![CDATA[
+                        select count(*) as count
+                        from t_user_visit
+                        where
+                            <isNotNull property="userId">
+                            userId =#userId# and
+                            </isNotNull>
+
+                            <isNotNull property="visitId">
+                            visitId = #visitId# and
+                            </isNotNull>
+
+                            1=1
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+            <model>
+                <name>userBookFavorite</name>
+                <table>t_user_book_favorite</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>type</name><type>String</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+            </model>
+        </module>
+        <module>
+            <name>friend</name>
+            <model>
+                <name>userFriend</name>
+                <table>t_user_friend</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>friendId</name><type>Integer</type></prop>
+                <prop><name>tagId</name><type>Integer</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <finder>
+                    <id>getMyFriends</id>
+                    <sql>
+                        <![CDATA[
+                            select
+                                f.id as id,
+                                f.userId as userId,
+                                f.friendId as friendId,
+                                t.tag as tag
+                            from t_user_friend f,t_user_friend_tag t
+                            where  f.tagId = t.id and f.userId = #userId#
+                            <include refid="mysql.page.order"/>
+                            <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>getMyFriendsCount</id>
+                    <sql>
+                        <![CDATA[
+                            select count(f.id) as count
+                            from t_user_friend f,t_user_friend_tag t
+                            where  f.tagId = t.id and f.userId = #userId#
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>findFrindsByUsername</id>
+                    <sql>
+                        <![CDATA[
+                        select 
+                            u.id as userId,
+                            u.username as username,
+                            u.email as email,
+                            u.sex as sex,
+                            u.photo as photo,
+                            u.msn as msn,
+                            a.city as city,
+                            f.id as friend
+                        from t_user u
+                        left join t_user_friend f on u.id = f.friendId and f.userId=#userId#
+                        left join t_user_address a on u.id = a.userId
+                        where u.username=#username# and u.id!=#userId#
+                        ]]>
+                    </sql>
+                </finder>
+                 <finder>
+                    <id>findFrindsByEmail</id>
+                    <sql>
+                        <![CDATA[
+                        select
+                            u.id as userId,
+                            u.username as username,
+                            u.email as email,
+                            u.sex as sex,
+                            u.photo as photo,
+                            u.msn as msn,
+                            a.city as city,
+                            f.id as friend
+                        from t_user u
+                        left join t_user_friend f on u.id = f.friendId and f.userId=#userId#
+                        left join t_user_address a on u.id = a.userId
+                        where u.email=#email# and u.id!=#userId#
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+            <model>
+                <name>friendTag</name>
+                <table>t_user_friend_tag</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>tag</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <finder>
+                    <id>getMyFriendTag</id>
+                    <sql>
+                        <![CDATA[
+                        select *
+                        from t_user_friend_tag
+                        where userId=#userId# || userId = -1
+                        order by id asc
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+        </module>
+        <module>
+            <name>tgroup</name>
+            <model>
+                <name>tgroup</name>
+                <table>t_tgroup</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>logo</name><type>String</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>open</name><type>String</type><null>true</null></prop>
+                <prop><name>request</name><type>String</type><null>true</null></prop>
+                <prop><name>owner</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>status</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>tgroupUser</name>
+                <table>t_tgroup_user</table>
+                <prop><name>tgroupId</name><type>Integer</type></prop>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>userType</name><type>String</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+                <finder>
+                    <id>findTgroupByUserId</id>
+                    <sql>
+                        <![CDATA[
+                        select
+                            t.id as id,
+                            t.name as name,
+                            t.logo as logo,
+                            u.updateTime as updateTime
+                        from
+                            t_tgroup t,
+                            t_tgroup_user u
+                        where
+                            t.id = u.tgroupId and
+                            u.userId=#userId#
+                        <include refid="mysql.page.order"/>
+                        <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>findTgroupByUserIdCount</id>
+                    <sql>
+                        <![CDATA[
+                        select count(*) as count
+                        from t_tgroup_user
+                        where userId=#userId#
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+            <model>
+                <name>tgroupTopic</name>
+                <table>t_tgroup_topic</table>
+                <prop><name>tgroupId</name><type>Integer</type></prop>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>title</name><type>String</type></prop>
+                <prop><name>content</name><type>String</type></prop>
+                <prop><name>type</name><type>String</type><null>true</null></prop>
+                <prop><name>topicKey</name><type>Long</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+                <finder>
+                    <id>findTopicsByUserId</id>
+                    <sql>
+                        <![CDATA[
+                        select
+                            t.id,
+                            t.userId,
+                            t.title,
+                            t.type,
+                            t.topicKey,
+                            t.updateTime,
+                            t.tgroupId,
+                            g.name,
+                            g.logo
+                        from
+                            t_tgroup_topic t,
+                            t_tgroup g
+                        where
+                            t.tgroupId = g.id and
+                            t.userId = #userId#
+                        <include refid="mysql.page.order"/>
+                        <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+
+                <finder>
+                    <id>findLastTopics</id>
+                    <sql>
+                        <![CDATA[
+                        select
+                            t.id as topicId,
+                            t.tgroupId as 'tgroupId',
+                            t.title as 'title',
+                            t.userId as 'author',
+                            t.updateTime,
+                            t.topicKey as 'topicKey',
+                            (
+                                select count(*)
+                                from t_tgroup_topic t2
+                                where t2.topicKey = t.topicKey and t2.type='tgroup_topic_reply'
+
+                                <isNotNull property="tgroupId">
+                                and t.tgroupId=#tgroupId#
+                                </isNotNull>
+
+                            ) as 'replyCount',
+                            (
+                                select max(t3.updateTime)
+                                from t_tgroup_topic t3
+                                where t3.topicKey = t.topicKey
+
+                                <isNotNull property="tgroupId">
+                                and t3.tgroupId=#tgroupId#
+                                </isNotNull>
+
+                                group by t3.topicKey
+                            ) as 'replyTime'
+                        from t_tgroup_topic t
+                        where t.type='tgroup_topic_new'
+
+                        <isNotNull property="tgroupId">
+                        and t.tgroupId=#tgroupId#
+                        </isNotNull>
+                        
+                        order by replyTime desc
+                        <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>findLastTopicsCount</id>
+                    <sql>
+                        <![CDATA[
+                        select count(*) as count
+                        from t_tgroup_topic t
+                        where
+                            t.type='tgroup_topic_new'
+                            
+                            <isNotNull property="tgroupId">
+                            and t.tgroupId=#tgroupId#
+                            </isNotNull>
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+        </module>
+        <module>
+            <name>book</name>
+            <model>
+                <name>book</name>
+                <table>t_book</table>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>localTitle</name><type>String</type></prop>
+                <prop><name>author</name><type>String</type></prop>
+                <prop><name>image</name><type>String</type></prop>
+                <prop><name>libraryId</name><type>Integer</type></prop>
+                <prop><name>owner</name><type>Integer</type></prop>
+                <prop><name>holder</name><type>Integer</type></prop>
+                <prop><name>area</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>depreciation</name><type>String</type><null>true</null></prop>
+                <prop><name>confer</name><type>Boolean</type><null>true</null></prop>
+                <prop><name>lifecycle</name><type>Integer</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>status</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>bookTransfer</name>
+                <table>t_book_transfer</table>
+                <prop><name>bookId</name><type>Integer</type></prop>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>fromUser</name><type>Integer</type></prop>
+                <prop><name>toUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+            </model>
+            <model>
+                <name>bookWish</name>
+                <table>t_book_wish</table>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>hit</name><type>Integer</type><null>true</null></prop>
+                <prop><name>favorite</name><type>Integer</type><null>true</null></prop>
+                <prop><name>exchange</name><type>Integer</type><null>true</null></prop>
+            </model>
+        </module>
+        <module>
+            <name>library</name>
+            <model>
+                <name>library</name>
+                <table>t_library</table>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>origin</name><type>String</type></prop>
+                <prop><name>author</name><type>String</type><null>true</null></prop>
+                <prop><name>translator</name><type>String</type><null>true</null></prop>
+                <prop><name>title</name><type>String</type><null>true</null></prop>
+                <prop><name>localTitle</name><type>String</type><null>true</null></prop>
+                <prop><name>page</name><type>String</type><null>true</null></prop>
+                <prop><name>publisher</name><type>String</type><null>true</null></prop>
+                <prop><name>localPublisher</name><type>String</type><null>true</null></prop>
+                <prop><name>date</name><type>String</type><null>true</null></prop>
+                <prop><name>contentDesc</name><type>String</type><null>true</null></prop>
+                <prop><name>authorDesc</name><type>String</type><null>true</null></prop>
+                <prop><name>image</name><type>String</type><null>true</null></prop>
+                <prop><name>price</name><type>Float</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>libraryRecommended</name>
+                <table>t_library_recommended</table>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>userId</name><type>Integer</type><null>true</null></prop>
+                <prop><name>userName</name><type>String</type><null>true</null></prop>
+                <prop><name>isbnLink</name><type>String</type></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>libraryReview</name>
+                <table>t_library_review</table>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>userName</name><type>String</type></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>libraryTag</name>
+                <table>t_library_tag</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>libraryTagLib</name>
+                <table>t_library_tag_lib</table>
+                <prop><name>tagId</name><type>Integer</type></prop>
+                <prop><name>isbn</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+            </model>
+        </module>
+        <module>
+            <name>order</name>
+            <model>
+                <name>order</name>
+                <table>t_order</table>
+                <prop><name>fromUser</name><type>Integer</type></prop>
+                <prop><name>fromUserRealname</name><type>String</type></prop>
+                <prop><name>fromUserAddress</name><type>String</type></prop>
+                <prop><name>fromUserPhone</name><type>String</type></prop>
+                <prop><name>fromUserZipcode</name><type>String</type><null>true</null></prop>
+                <prop><name>toUser</name><type>Integer</type></prop>
+                <prop><name>toUserRealname</name><type>String</type></prop>
+                <prop><name>toUserAddress</name><type>String</type></prop>
+                <prop><name>toUserPhone</name><type>String</type></prop>
+                <prop><name>toUserZipcode</name><type>String</type><null>true</null></prop>
+                <prop><name>bookId</name><type>Integer</type></prop>
+                <prop><name>bookTitle</name><type>String</type></prop>
+                <prop><name>bookIsbn</name><type>String</type></prop>
+                <prop><name>fee</name><type>Float</type></prop>
+                <prop><name>payway</name><type>String</type><null>true</null></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>status</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+                <finder>
+                    <id>getExpressOrder</id>
+                    <sql>
+                        <![CDATA[
+                            select * from t_order
+                            where
+                            mark = 0 and
+                            (status = 'order_status_agree' or
+                            status='order_status_deliver' or
+                            status='order_status_error')
+                            <include refid="mysql.page.order"/>
+                            <include refid="mysql.page.limit"/>
+                        ]]>
+                    </sql>
+                </finder>
+                <finder>
+                    <id>getExpressOrderCount</id>
+                    <sql>
+                        <![CDATA[
+                            select count(*) as count
+                            from t_order
+                            where
+                            mark = 0 and
+                            (status = 'order_status_agree' or
+                            status='order_status_deliver' or
+                            status='order_status_error')
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+        </module>
+        <module>
+            <name>news</name>
+            <model>
+                <name>news</name>
+                <table>t_news</table>
+                <prop><name>title</name><type>String</type></prop>
+                <prop><name>content</name><type>String</type></prop>
+                <prop><name>author</name><type>Integer</type></prop>
+                <prop><name>type</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+        </module>
+        <module>
+            <name>system</name>
+            <model>
+                <name>baseInfo</name>
+                <table>t_base_info</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>typeName</name><type>String</type></prop>
+                <prop><name>label</name><type>String</type></prop>
+                <prop><name>value</name><type>String</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>baseType</name>
+                <table>t_base_type</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>label</name><type>String</type></prop>
+                <prop><name>value</name><type>String</type><null>true</null></prop>
+                <prop><name>description</name><type>String</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+        </module>
+        <module>
+            <name>message</name>
+            <model>
+                <name>messageSys</name>
+                <table>t_message_sys</table>
+                <prop><name>fromId</name><type>Integer</type></prop>
+                <prop><name>toId</name><type>Integer</type></prop>
+                <prop><name>title</name><type>String</type></prop>
+                <prop><name>content</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>status</name><type>Integer</type><null>true</null></prop>
+                <prop><name>type</name><type>String</type><null>true</null></prop>
+                <prop><name>hint</name><type>String</type><null>true</null></prop>
+                <prop><name>sysKey</name><type>Long</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>messageBox</name>
+                <table>t_message_box</table>
+                <prop><name>fromId</name><type>Integer</type></prop>
+                <prop><name>toId</name><type>Integer</type></prop>
+                <prop><name>title</name><type>String</type></prop>
+                <prop><name>content</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type><null>true</null></prop>
+                <prop><name>status</name><type>Integer</type><null>true</null></prop>
+                <prop><name>hint</name><type>String</type><null>true</null></prop>
+                <prop><name>msgKey</name><type>Long</type><null>true</null></prop>
+                <prop><name>mark</name><type>Integer</type><null>true</null></prop>
+            </model>
+            <model>
+                <name>emailSend</name>
+                <table>t_email_send</table>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>fromAddr</name><type>String</type></prop>
+                <prop><name>toAddr</name><type>String</type></prop>
+                <prop><name>title</name><type>String</type></prop>
+                <prop><name>content</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>status</name><type>Integer</type></prop>
+                <prop><name>mark</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>messageQueue</name>
+                <table>t_message_queue</table>
+                <prop><name>msgId</name><type>Integer</type></prop>
+                <prop><name>userId</name><type>Integer</type></prop>
+                <prop><name>msgType</name><type>String</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type>><null>true</null></prop>
+                <finder>
+                    <id>clearNotRead</id>
+                    <sql>
+                        <![CDATA[
+                        delete from t_message_queue
+                        where
+                            userId=#userId# and
+                            msgType=#msgType#
+                        ]]>
+                    </sql>
+                </finder>
+            </model>
+        </module>
+        <module>
+            <name>privilege</name>
+            <model>
+                <name>group</name>
+                <table>t_group</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+                <prop><name>parentId</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>role</name>
+                <table>t_role</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>roleGroup</name>
+                <table>t_role_group</table>
+                <prop><name>roleId</name><type>Integer</type></prop>
+                <prop><name>groupId</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>privilege</name>
+                <table>t_privilege</table>
+                <prop><name>operationId</name><type>Integer</type></prop>
+                <prop><name>resourceId</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>rolePrivilege</name>
+                <table>t_role_privilege</table>
+                <prop><name>roleId</name><type>Integer</type></prop>
+                <prop><name>privilegeId</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>resource</name>
+                <table>t_resource</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+                <prop><name>typeId</name><type>Integer</type></prop>
+            </model>
+            <model>
+                <name>resourceType</name>
+                <table>t_resource_type</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>operation</name>
+                <table>t_operation</table>
+                <prop><name>name</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+        </module>
+        <module>
+            <name>record</name>
+            <model>
+                <name>recordPrivilege</name>
+                <table>t_record_privilege</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordSystem</name>
+                <table>t_record_system</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordNews</name>
+                <table>t_record_news</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordOrder</name>
+                <table>t_record_order</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordBook</name>
+                <table>t_record_book</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordUser</name>
+                <table>t_record_user</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordMessage</name>
+                <table>t_record_message</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordFriend</name>
+                <table>t_record_friend</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+            <model>
+                <name>recordLibrary</name>
+                <table>t_record_library</table>
+                <prop><name>updateUser</name><type>Integer</type></prop>
+                <prop><name>updateTime</name><type>Timestamp</type></prop>
+                <prop><name>operate</name><type>String</type></prop>
+                <prop><name>fkId</name><type>String</type></prop>
+                <prop><name>description</name><type>String</type></prop>
+            </model>
+        </module>
+    </modules>
+</bookmooch>

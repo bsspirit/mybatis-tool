@@ -1,0 +1,134 @@
+#set( $dao = ${model}+"DAO" )
+#set( $dto = ${model}+"DTO" )
+#set( $dto_1 = ${model_1}+"DTO" )
+#set( $ibatis = ${dao}+"Ibatis")
+#set( $insert = "insert"+${model})
+#set( $delete = "delete"+${model})
+#set( $update = "update"+${model})
+#set( $getId = "get"+${model}+"ById")
+#set( $getList = "get"+${model}+"s")
+#set( $getPage = ${getList}+"Paging")
+#set( $getCount = ${getList}+"Count")
+#set( $select_id = ${model_1}+".select")
+#set( $cache_id = ${model_1}+".cache")
+#set( $result_id = ${model_1}+".result")
+#set( $condition_id = ${model_1}+".condition")
+#set( $insert_id = ${model_1}+"."+${insert})
+#set( $delete_id = ${model_1}+"."+${delete})
+#set( $update_id = ${model_1}+"."+${update})
+#set( $getId_id = ${model_1}+"."+${getId})
+#set( $getList_id = ${model_1}+"."+${getList})
+#set( $getCount_id = ${model_1}+"."+${getCount})
+#set( $paramId = "#"+"{id}")
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!--
+    This is ${model} sql
+    @author $author
+    @date $date
+-->
+<mapper namespace="${import_dao}.${dao}">
+
+    <resultMap id="${result_id}" type="${dto_1}">
+        <result property="id" column="id" javaType="int"/>
+#foreach($sql_result_map in $sql_result_maps )
+        ${sql_result_map}
+#end
+    </resultMap>
+
+    <sql id="${select_id}">
+        SELECT
+            id,
+#foreach($sql_select in $sql_selects )
+            ${sql_select}
+#end
+    </sql>
+
+    <sql id="${condition_id}">
+#foreach($sql_condition in $sql_conditions )
+        ${sql_condition}
+#end
+        1=1
+    </sql>
+
+    <insert id="${insert_id}" parameterType="${dto_1}" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO $table(
+#foreach($sql_insert_name in $sql_inserts_name )
+            ${sql_insert_name}
+#end
+        ) VALUES (
+#foreach($sql_insert_value in $sql_inserts_value )
+            ${sql_insert_value}
+#end
+        )
+    </insert>
+
+#if($sql_delete_mark)
+    <delete id="${delete_id}" parameterType="java.lang.Integer">
+        UPDATE $table
+        SET
+            mark = 1
+        WHERE
+            id = ${paramId}
+    </delete>
+#{else}
+    <delete id="${delete_id}" parameterType="java.lang.Integer">
+        DELETE FROM $table
+        WHERE
+            id = ${paramId}
+    </delete>
+#end
+
+    <update id="${update_id}" parameterType="${dto_1}">
+        UPDATE $table
+        SET
+#foreach($sql_update in $sql_updates )
+            $sql_update
+#end
+            id = ${paramId}
+        WHERE
+            id = ${paramId}
+    </update>
+
+    <select id="${getId_id}" parameterType="java.lang.Integer" resultMap="${result_id}">
+        <include refid="${select_id}"/>
+        FROM
+            $table
+        WHERE
+#if($sql_delete_mark)
+            mark = 0 and
+#end
+            id = ${paramId}
+    </select>
+
+    <select id="${getList_id}" parameterType="java.util.Map" resultMap="${result_id}">
+        <include refid="${select_id}"/>
+        FROM
+            $table
+        WHERE
+#if($sql_delete_mark)
+            mark = 0 and
+#end
+        <include refid="${condition_id}"/>
+        <include refid="mysql.page.order"/>
+        <include refid="mysql.page.limit"/>
+    </select>
+
+    <select id="${getCount_id}" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+            count(id)
+        FROM
+            $table
+        WHERE
+#if($sql_delete_mark)
+            mark = 0 and
+#end
+        <include refid="${condition_id}"/>
+    </select>
+
+#foreach($sql_finder in $sql_finders )
+    $sql_finder
+#end
+
+</mapper>

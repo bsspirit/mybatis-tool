@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<daoTool xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="./metadata/jaxb/DAOTool.xsd">
+
+	<filePath>metadata/gen</filePath>
+	<project>org.conan.taobao</project>
+	<modules>
+		<module>
+			<name>ad</name>
+			<model>
+				<name>user</name>
+				<table>t_ad_user</table>
+				<prop><name>userid</name><type>Long</type></prop>
+				<prop><name>nick</name><type>String</type></prop>
+				<prop><name>uid</name><type>String</type></prop>
+				<prop><name>create_date</name><type>Date</type></prop>
+			</model>
+			<model>
+				<name>config</name>
+				<table>t_ad_config</table>
+				<prop><name>nick</name><type>String</type></prop>
+				<prop><name>width</name><type>Integer</type></prop>
+				<prop><name>pic_size</name><type>Integer</type></prop>
+				<prop><name>enter_show</name><type>Integer</type></prop>
+				<prop><name>favor_show</name><type>Integer</type></prop>
+				<prop><name>title_show</name><type>Integer</type></prop>
+				<prop><name>shoptype</name><type>Integer</type></prop>
+				<prop><name>create_date</name><type>Timestamp</type></prop>
+			</model>
+			<model>
+				<name>item</name>
+				<table>t_ad_item</table>
+				<prop><name>itemid</name><type>Long</type></prop>
+				<prop><name>nick</name><type>String</type></prop>
+				<prop><name>title</name><type>String</type></prop>
+				<prop><name>price</name><type>Float</type></prop>
+				<prop><name>pic_url</name><type>String</type></prop>
+				<prop><name>desc_url</name><type>String</type></prop>
+				<prop><name>dtime</name><type>Date</type></prop>
+				<prop><name>create_date</name><type>Timestamp</type></prop>
+			</model>
+		</module>
+	</modules>
+</daoTool>
