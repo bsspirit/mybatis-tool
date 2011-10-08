@@ -40,9 +40,9 @@ public class BuildRun {
             new BuildDAOFile(dao);
         }
 
-        for (IbatisPO ibatis : po.getIbatisList()) {
-            new BuildIbatisFile(ibatis);
-        }
+//        for (IbatisPO ibatis : po.getIbatisList()) {
+//            new BuildIbatisFile(ibatis);
+//        }
 
         for (SqlPO sql : po.getSqlList()) {
             new BuildIbatisSQLFile(sql);
