@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.clazz.ModelClazzBean;
-import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.factory.VelocityFactory;
-import org.conan.tools.util.match.DateMatch;
-import org.conan.tools.core.io.OutputFile;
+import org.conan.tools.core.file.ClazzTree;
+import org.conan.tools.core.file.PackageTree;
+import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.ModelPO;
+import org.conan.tools.util.match.DateMatch;
 
 /**
  * 
@@ -39,6 +39,6 @@ public class BuildModelFile {
         map.put("model_getMethods", mcb.getGetMethod());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.MODEL_VM, map);
-        new OutputFile(clazz.getModelFile(), vf.getWriter());
+        new WriteFile(clazz.getModelFile(), vf.getWriter());
     }
 }

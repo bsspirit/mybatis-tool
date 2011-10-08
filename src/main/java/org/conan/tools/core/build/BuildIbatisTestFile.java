@@ -2,13 +2,14 @@ package org.conan.tools.core.build;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
-import org.conan.tools.core.factory.VelocityFactory;
-import org.conan.tools.util.match.DateMatch;
-import org.conan.tools.core.io.OutputFile;
+import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.TestPO;
+import org.conan.tools.util.match.DateMatch;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -33,6 +34,6 @@ public class BuildIbatisTestFile {
         map.put("dao_ibatis_package", pack.getIbatisPackage());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.IBATIS_TEST_VM, map);
-        new OutputFile(clazz.getIbatisTestFile(), vf.getWriter());
+        new WriteFile(clazz.getIbatisTestFile(), vf.getWriter());
     }
 }
