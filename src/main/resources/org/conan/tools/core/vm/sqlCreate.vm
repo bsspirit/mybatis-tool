@@ -1,0 +1,7 @@
+use bank;
+
+CREATE TABLE t_bank(
+	id int primary key auto_increment,
+	bank_name varchar(32) not null unique,
+	create_date timestamp not null default now()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

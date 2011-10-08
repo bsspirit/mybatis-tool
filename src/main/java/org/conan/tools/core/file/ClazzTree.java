@@ -26,6 +26,7 @@ public class ClazzTree {
     public static final String MODULE_DTO = "ModuleDTO";
     public static final String XML_FILE = ".xml";
     public static final String JAVA_FILE = ".java";
+    public static final String SQL_FILE = ".sql";
     private PackageTree pack;
     private String model;
 
@@ -55,6 +56,14 @@ public class ClazzTree {
         return pack.getServiceImplFolder() + File.separator + getServiceImplClazz();
     }
 
+    public String getSQLCreateFile() {
+        return pack.getSQLFolder() + File.separator + getSQLCreateClazz();
+    }
+
+    public String getSQLDropFile() {
+        return pack.getSQLFolder() + File.separator + getSQLDropClazz();
+    }
+
     public String getModelFile() {
         return pack.getModelFolder() + File.separator + getModelClazz();
     }
@@ -70,7 +79,7 @@ public class ClazzTree {
     public String getDAOPackageClazz() {
         return pack.getDAOPackage() + PackageTree.POINT + getModel() + DAO;
     }
-    
+
     public String getServicePackageClazz() {
         return pack.getServicePackage() + PackageTree.POINT + getModel() + SERVICE;
     }
@@ -121,6 +130,14 @@ public class ClazzTree {
         return StringMatch.first2Uppercase(model) + MODULE_DTO + JAVA_FILE;
     }
 
+    public String getSQLCreateClazz() {
+        return "create" + SQL_FILE;
+    }
+
+    public String getSQLDropClazz() {
+        return "drop" + SQL_FILE;
+    }
+
     public String getModel() {
         return model;
     }
@@ -134,13 +151,15 @@ public class ClazzTree {
     }
 
     public String[] getTreeFileArray() {
-        String[] tree = new String[6];
+        String[] tree = new String[8];
         tree[0] = getDAOFile();
         tree[1] = getIbatisSQLFile();
         tree[2] = getModelFile();
         tree[3] = getWebFormFile();
         tree[4] = getServiceFile();
         tree[5] = getServiceImplFile();
+        tree[6] = getSQLCreateFile();
+        tree[7] = getSQLDropFile();
         // tree[1] = getIbatisFile();
         // tree[4] = getIbatisTestFile();
         return tree;
@@ -168,6 +187,9 @@ public class ClazzTree {
         sb.append(getServiceFile() + "\n");
         sb.append(getServiceImplFile() + "\n");
         sb.append(getWebFormFile() + "\n");
+        sb.append(getSQLCreateFile() + "\n");
+        sb.append(getSQLDropFile() + "\n");
+
         // sb.append(getIbatisFile() + "\n");
         // sb.append(getIbatisTestFile() + "\n");
         return sb.toString();

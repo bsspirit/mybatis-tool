@@ -5,13 +5,14 @@
 package org.conan.tools.core.file;
 
 /**
- *
+ * 
  * @author Conan
  */
-public class ProjectTree {
+public interface ProjectTree {
 
-    public static final String SRC = "src";
-    public static final String TEST = "test";
-    public static final String WEB = "web";
+    String SRC = "src";
+    String TEST = "test";
+    String WEB = "web";
+    String SQL = "sql";
 
 }
