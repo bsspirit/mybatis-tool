@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="./metadata/jaxb/DAOTool.xsd">
 
 	<filePath>metadata/gen</filePath>
-	<project>org.conan2</project>
+	<project>org.conan</project>
 	<modules>
 		<module>
 			<name>bank</name>
