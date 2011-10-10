@@ -11,7 +11,7 @@ package ${dao_package};
 
 import java.util.List;
 import java.util.Map;
-import com.q24.base.dao.MybatisDAO;
+import ${base}.base.dao.MybatisDAO;
 
 import ${import_model};
 

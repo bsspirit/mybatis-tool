@@ -25,6 +25,7 @@ public class BuildDAOFile {
         map.put("date", DateMatch.getNowDate());
         map.put("author", CopyRightObject.AUTHOR);
         map.put("copyright", CopyRightObject.COPYRIGHT);
+        map.put("base", po.getBasePackage());
 
         map.put("model", po.getModel());
         map.put("import_model", clazz.getModelPackageClazz());

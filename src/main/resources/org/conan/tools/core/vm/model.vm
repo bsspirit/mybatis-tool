@@ -5,7 +5,7 @@ package ${model_package};
 #foreach($import in $model_imports )
 import ${import};
 #end
-import com.q24.base.BaseObject;
+import ${base}.base.BaseObject;
 
 /**
  * This is $model Model DTO

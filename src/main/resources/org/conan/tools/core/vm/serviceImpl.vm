@@ -24,9 +24,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.q24.base.service.SpringServiceImpl;
-import com.q24.base.service.PageInObject;
-import com.q24.base.service.PageOutObject;
+import ${base}.base.service.SpringServiceImpl;
+import ${base}.base.service.PageInObject;
+import ${base}.base.service.PageOutObject;
 
 import ${import_dao};
 import ${import_service};

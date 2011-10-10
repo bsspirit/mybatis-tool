@@ -11,9 +11,9 @@ package ${service_package};
 
 import java.util.List;
 import java.util.Map;
-import com.q24.base.service.PageInObject;
-import com.q24.base.service.PageOutObject;
-import com.q24.base.service.SpringService;
+import ${base}.base.service.PageInObject;
+import ${base}.base.service.PageOutObject;
+import ${base}.base.service.SpringService;
 
 import ${import_model};
 
