@@ -9,7 +9,6 @@ import org.conan.tools.core.build.tree.PackageTree;
 import org.conan.tools.core.build.tree.ResourceTree;
 import org.conan.tools.core.clazz.ModelClazzBean;
 import org.conan.tools.core.clazz.SqlMapBean;
-import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.model.CopyRight;
 import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.core.model.FormPO;
@@ -52,7 +51,7 @@ final public class BuildFactory {
     }
 
     /**
-     * sql create
+     * sql create //TODO
      */
     public static void buildSQLCreate(SqlPO po) {
         ResourceTree res = new ResourceTree(po);
@@ -69,9 +68,9 @@ final public class BuildFactory {
         VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_CREATE_VM, map);
         new WriteFile(res.getSQLCreateFile(), vf.getWriter());
     }
-    
+
     /**
-     * sql drop
+     * sql drop //TODO
      */
     public static void buildSQLDrop(SqlPO po) {
         ResourceTree res = new ResourceTree(po);
@@ -85,7 +84,7 @@ final public class BuildFactory {
         // map.put("import_model", clazz.getModelPackageClazz());
         // map.put("dao_package", pack.getDAOPackage());
 
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_CREATE_VM, map);
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_DROP_VM, map);
         new WriteFile(res.getSQLCreateFile(), vf.getWriter());
     }
 

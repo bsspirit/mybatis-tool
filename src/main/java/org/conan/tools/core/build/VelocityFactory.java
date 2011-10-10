@@ -1,4 +1,4 @@
-package org.conan.tools.core.factory;
+package org.conan.tools.core.build;
 
 import java.io.StringWriter;
 import java.util.HashMap;
