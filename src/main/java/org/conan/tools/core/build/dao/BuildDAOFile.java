@@ -1,4 +1,4 @@
-package org.conan.tools.core.build;
+package org.conan.tools.core.build.dao;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
-import org.conan.tools.core.model.ServicePO;
+import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
 
@@ -15,9 +15,9 @@ import org.conan.tools.util.match.DateMatch;
  * 
  * @author Conan
  */
-public class BuildServiceFile {
+public class BuildDAOFile {
 
-    public BuildServiceFile(ServicePO po) {
+    public BuildDAOFile(DaoPO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
@@ -25,12 +25,13 @@ public class BuildServiceFile {
         map.put("date", DateMatch.getNowDate());
         map.put("author", CopyRightObject.AUTHOR);
         map.put("copyright", CopyRightObject.COPYRIGHT);
+        map.put("base", po.getBasePackage());
 
         map.put("model", po.getModel());
         map.put("import_model", clazz.getModelPackageClazz());
-        map.put("service_package", pack.getServicePackage());
+        map.put("dao_package", pack.getDAOPackage());
 
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.SERVICE_VM, map);
-        new WriteFile(clazz.getServiceFile(), vf.getWriter());
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.DAO_VM, map);
+        new WriteFile(clazz.getDAOFile(), vf.getWriter());
     }
 }

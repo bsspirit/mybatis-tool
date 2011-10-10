@@ -1,14 +1,14 @@
 package org.conan.tools;
 
 import org.conan.tools.core.JAXBMarshaller;
-import org.conan.tools.core.build.createClazz;
-import org.conan.tools.core.build.BuildDAOFile;
-import org.conan.tools.core.build.BuildFormFile;
-import org.conan.tools.core.build.BuildIbatisSQLFile;
-import org.conan.tools.core.build.BuildModelFile;
-import org.conan.tools.core.build.createPackage;
-import org.conan.tools.core.build.BuildServiceFile;
-import org.conan.tools.core.build.BuildServiceImplFile;
+import org.conan.tools.core.build.dao.BuildDAOFile;
+import org.conan.tools.core.build.dao.BuildIbatisSQLFile;
+import org.conan.tools.core.build.dir.CreateClazz;
+import org.conan.tools.core.build.dir.CreatePackage;
+import org.conan.tools.core.build.model.BuildModelFile;
+import org.conan.tools.core.build.service.BuildServiceFile;
+import org.conan.tools.core.build.service.BuildServiceImplFile;
+import org.conan.tools.core.build.web.BuildFormFile;
 import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.core.model.FormPO;
@@ -32,11 +32,11 @@ public class BuildRun {
         po.init(obj);
 
         for (PackagePO pack : po.getPackageList()) {
-            new createPackage(pack);
+            new CreatePackage(pack);
         }
 
         for (ClazzPO clazz : po.getClazzList()) {
-            new createClazz(clazz);
+            new CreateClazz(clazz);
         }
 
         for (ModelPO model : po.getModelList()) {

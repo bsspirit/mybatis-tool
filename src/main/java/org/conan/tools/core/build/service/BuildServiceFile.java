@@ -1,4 +1,4 @@
-package org.conan.tools.core.build;
+package org.conan.tools.core.build.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,34 +7,30 @@ import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
-import org.conan.tools.core.model.TestPO;
+import org.conan.tools.core.model.ServicePO;
 import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
-import org.conan.tools.util.match.StringMatch;
 
 /**
  * 
  * @author Conan
  */
-@Deprecated
-public class BuildIbatisTestFile {
+public class BuildServiceFile {
 
-    public BuildIbatisTestFile(TestPO po) {
+    public BuildServiceFile(ServicePO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("date", DateMatch.getNowDate());
         map.put("author", CopyRightObject.AUTHOR);
         map.put("copyright", CopyRightObject.COPYRIGHT);
 
         map.put("model", po.getModel());
-        map.put("model_1", StringMatch.first2Lowercase(po.getModel()));
         map.put("import_model", clazz.getModelPackageClazz());
-        map.put("import_dao", clazz.getDAOPackageClazz());
-        map.put("dao_ibatis_package", pack.getIbatisPackage());
+        map.put("service_package", pack.getServicePackage());
 
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.IBATIS_TEST_VM, map);
-        new WriteFile(clazz.getIbatisTestFile(), vf.getWriter());
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.SERVICE_VM, map);
+        new WriteFile(clazz.getServiceFile(), vf.getWriter());
     }
 }

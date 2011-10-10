@@ -1,36 +1,37 @@
-package org.conan.tools.core.build;
+package org.conan.tools.core.build.dir;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.ClazzPO;
 
 /**
- *
+ * 
  * @author Conan
  */
-public class createClazz {
+public class CreateClazz {
 
-    public createClazz(ClazzPO po) {
+    public CreateClazz(ClazzPO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
-        String[] trees = clazz.getTreeFileArray();
+        List<String> trees = clazz.getTreeFile();
         for (String tree : trees) {
             try {
-                createClazz(tree);
+                create(tree);
             } catch (IOException ex) {
-                Logger.getLogger(createClazz.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CreateClazz.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         System.out.println(clazz.printTreeFile());
     }
 
-    public static boolean createClazz(String file) throws IOException {
-        File dir = new File(file);
-        return dir.createNewFile();
+    private void create(String file) throws IOException {
+        new File(file).createNewFile();
     }
 }

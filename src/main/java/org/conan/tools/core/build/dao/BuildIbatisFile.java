@@ -1,4 +1,4 @@
-package org.conan.tools.core.build;
+package org.conan.tools.core.build.dao;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,17 +7,19 @@ import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
-import org.conan.tools.core.model.SqlCreatePO;
+import org.conan.tools.core.model.IbatisPO;
 import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
+import org.conan.tools.util.match.StringMatch;
 
 /**
  * 
  * @author Conan
  */
-public class BuildSQLCreateFile {
+@Deprecated
+public class BuildIbatisFile {
 
-    public BuildSQLCreateFile(SqlCreatePO po) {
+    public BuildIbatisFile(IbatisPO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
@@ -27,10 +29,12 @@ public class BuildSQLCreateFile {
         map.put("copyright", CopyRightObject.COPYRIGHT);
 
         map.put("model", po.getModel());
-//        map.put("import_model", clazz.getModelPackageClazz());
-//        map.put("dao_package", pack.getDAOPackage());
+        map.put("model_1", StringMatch.first2Lowercase(po.getModel()));
+        map.put("import_model", clazz.getModelPackageClazz());
+        map.put("import_dao", clazz.getDAOPackageClazz());
+        map.put("dao_ibatis_package", pack.getIbatisPackage());
 
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_CREATE_VM, map);
-        new WriteFile(clazz.getSQLCreateFile(), vf.getWriter());
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.IBATIS_VM, map);
+        new WriteFile(clazz.getIbatisFile(), vf.getWriter());
     }
 }

@@ -1,6 +1,8 @@
 package org.conan.tools.core.file;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.conan.tools.util.match.StringMatch;
 
@@ -8,11 +10,10 @@ import org.conan.tools.util.match.StringMatch;
  * 
  * @author Conan
  */
-public class ClazzTree {
+public class ClazzTree extends FileTree {
 
     public ClazzTree(String model, PackageTree pack) {
-        this.pack = pack;
-        this.model = model;
+        super(model, pack);
     }
 
     public static final String DAO = "DAO";
@@ -20,15 +21,11 @@ public class ClazzTree {
     public static final String DAO_IBATIS_TEST = "DAOIbatisTest";
     public static final String SERVICE = "Service";
     public static final String SERVICE_IMPL = "ServiceImpl";
-
     public static final String DTO = "DTO";
     public static final String FORM = "Form";
     public static final String MODULE_DTO = "ModuleDTO";
     public static final String XML_FILE = ".xml";
     public static final String JAVA_FILE = ".java";
-    public static final String SQL_FILE = ".sql";
-    private PackageTree pack;
-    private String model;
 
     public String getDAOFile() {
         return pack.getDAOFolder() + File.separator + getDAOClazz();
@@ -54,14 +51,6 @@ public class ClazzTree {
 
     public String getServiceImplFile() {
         return pack.getServiceImplFolder() + File.separator + getServiceImplClazz();
-    }
-
-    public String getSQLCreateFile() {
-        return pack.getSQLFolder() + File.separator + getSQLCreateClazz();
-    }
-
-    public String getSQLDropFile() {
-        return pack.getSQLFolder() + File.separator + getSQLDropClazz();
     }
 
     public String getModelFile() {
@@ -130,38 +119,20 @@ public class ClazzTree {
         return StringMatch.first2Uppercase(model) + MODULE_DTO + JAVA_FILE;
     }
 
-    public String getSQLCreateClazz() {
-        return "create" + SQL_FILE;
-    }
-
-    public String getSQLDropClazz() {
-        return "drop" + SQL_FILE;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
     public String getModelLowercase() {
         return StringMatch.first2Lowercase(model);
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String[] getTreeFileArray() {
-        String[] tree = new String[8];
-        tree[0] = getDAOFile();
-        tree[1] = getIbatisSQLFile();
-        tree[2] = getModelFile();
-        tree[3] = getWebFormFile();
-        tree[4] = getServiceFile();
-        tree[5] = getServiceImplFile();
-        tree[6] = getSQLCreateFile();
-        tree[7] = getSQLDropFile();
-        // tree[1] = getIbatisFile();
-        // tree[4] = getIbatisTestFile();
+    public List<String> getTreeFile() {
+        List<String> tree = new ArrayList<String>();
+        tree.add(getDAOFile());
+        tree.add(getIbatisSQLFile());
+        tree.add(getModelFile());
+        tree.add(getWebFormFile());
+        tree.add(getServiceFile());
+        tree.add(getServiceImplFile());
+        // tree.add(getIbatisFile());
+        // tree.add(getIbatisTestFile());
         return tree;
     }
 
@@ -175,23 +146,6 @@ public class ClazzTree {
         sb.append(getWebFormClazz() + "\n");
         // sb.append(getIbatisClazz() + "\n");
         // sb.append(getIbatisTestClazz() + "\n");
-        return sb.toString();
-    }
-
-    public String printTreeFile() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getDAOFile() + "\n");
-        sb.append(getServiceFile() + "\n");
-        sb.append(getIbatisSQLFile() + "\n");
-        sb.append(getModelFile() + "\n");
-        sb.append(getServiceFile() + "\n");
-        sb.append(getServiceImplFile() + "\n");
-        sb.append(getWebFormFile() + "\n");
-        sb.append(getSQLCreateFile() + "\n");
-        sb.append(getSQLDropFile() + "\n");
-
-        // sb.append(getIbatisFile() + "\n");
-        // sb.append(getIbatisTestFile() + "\n");
         return sb.toString();
     }
 }

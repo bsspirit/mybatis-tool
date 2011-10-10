@@ -1,4 +1,4 @@
-package org.conan.tools.core.build;
+package org.conan.tools.core.build.dir;
 
 import java.io.File;
 import org.conan.tools.core.file.PackageTree;
@@ -8,9 +8,9 @@ import org.conan.tools.core.model.PackagePO;
  *
  * @author Conan
  */
-public class createPackage {
+public class CreatePackage {
 
-    public createPackage(PackagePO po) {
+    public CreatePackage(PackagePO po) {
         PackageTree pack = new PackageTree(po);
         String[] trees = pack.getTreeFolderArray();
         for (String tree : trees) {
