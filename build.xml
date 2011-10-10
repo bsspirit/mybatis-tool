@@ -38,9 +38,7 @@
 
 	<target name="cleanGen">
 		<echo>clean gen src and test</echo>
-		<delete dir="${tool_gen_src}" />
-		<delete dir="${tool_gen_test}" />
-		<delete dir="${tool_gen_web}" />
+		<delete dir="${tool_gen}" />
 	</target>
 
 </project>

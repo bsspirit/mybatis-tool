@@ -165,6 +165,8 @@ public class PackageTree extends FileTree {
         tree.add(getServiceFolder());
         tree.add(getServiceImplFolder());
         tree.add(getSQLFolder());
+        tree.add(getTestFolder());
+        tree.add(getResourceFolder());
         // tree.add(getIbatisFolder());
         // tree.add(getIbatisSQLFolder());
         // tree.add(getIbatisTestFolder());
