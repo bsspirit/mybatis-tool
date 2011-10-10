@@ -5,16 +5,13 @@
 package org.conan.tools.core.xml;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
@@ -26,10 +23,10 @@ import org.conan.tools.core.xmlloader.PropType;
 import org.conan.tools.core.xmlloader.TypeSType;
 
 /**
- *
+ * 
  * @author conan
  */
-public class MarshallerBookMooch {
+public class JAXBMarshaller {
 
     public static void marshaller() {
         try {
@@ -61,7 +58,6 @@ public class MarshallerBookMooch {
             bm.setProject("org.conan.bookmooch");
             bm.setModules(modules);
 
-
             JAXBContext jc = JAXBContext.newInstance("org.conan.tools.core.xmlloader");
             Marshaller m = jc.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -71,31 +67,23 @@ public class MarshallerBookMooch {
             m.marshal(bm, os);
             os.close();
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JAXBException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(JAXBMarshaller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static DaoToolType unmarshaller() {
-    	DaoToolType bm = null;
+    public static DaoToolType unmarshaller(String name) {
+        DaoToolType bm = null;
         JAXBContext jc;
         try {
             jc = JAXBContext.newInstance("org.conan.tools.core.xmlloader");
             Unmarshaller um = jc.createUnmarshaller();
-            InputStream is = new FileInputStream("daoTool-config.xml");
+            InputStream is = new FileInputStream(name);
             JAXBElement o = (JAXBElement) um.unmarshal(is);
             bm = (DaoToolType) o.getValue();
             is.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JAXBException ex) {
-            Logger.getLogger(MarshallerBookMooch.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(JAXBMarshaller.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(bm);
         return bm;
@@ -103,6 +91,6 @@ public class MarshallerBookMooch {
 
     public static void main(String[] args) {
         marshaller();
-        unmarshaller();
+        unmarshaller("daoTool-config.xml");
     }
 }

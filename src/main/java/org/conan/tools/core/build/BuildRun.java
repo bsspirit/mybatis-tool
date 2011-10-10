@@ -9,7 +9,7 @@ import org.conan.tools.core.model.ParamObject;
 import org.conan.tools.core.model.ServiceImplPO;
 import org.conan.tools.core.model.ServicePO;
 import org.conan.tools.core.model.SqlPO;
-import org.conan.tools.core.xml.MarshallerBookMooch;
+import org.conan.tools.core.xml.JAXBMarshaller;
 import org.conan.tools.core.xmlloader.DaoToolType;
 
 /**
@@ -17,9 +17,9 @@ import org.conan.tools.core.xmlloader.DaoToolType;
  * @author conan
  */
 public class BuildRun {
-
+    
     public static void init() {
-        DaoToolType obj = MarshallerBookMooch.unmarshaller();
+        DaoToolType obj = JAXBMarshaller.unmarshaller("daoTool-config.xml");
         ParamObject po = new ParamObject();
         po.init(obj);
 
