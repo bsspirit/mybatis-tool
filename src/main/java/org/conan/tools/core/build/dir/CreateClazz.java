@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.conan.tools.core.build.ClazzTree;
-import org.conan.tools.core.build.PackageTree;
+import org.conan.tools.core.build.tree.ClazzTree;
 import org.conan.tools.core.model.ClazzPO;
 
 /**
@@ -17,9 +16,7 @@ import org.conan.tools.core.model.ClazzPO;
 public class CreateClazz {
 
     public CreateClazz(ClazzPO po) {
-        PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), pack);
-
+        ClazzTree clazz = new ClazzTree(po.getModel(), po);
         List<String> trees = clazz.getTreeFile();
         for (String tree : trees) {
             try {
