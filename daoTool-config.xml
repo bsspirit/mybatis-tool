@@ -37,5 +37,14 @@
 				<prop><name>tran_ref_no</name><type>String</type></prop>
 			</model>
 		</module>
+		<module>
+			<name>user</name>
+			<model>
+				<name>user</name>
+				<table>t_user</table>
+				<prop><name>name</name><type>String</type></prop>
+				<prop><name>create_date</name><type>Timestamp</type></prop>
+			</model>
+		</module>
 	</modules>
 </daoTool>
