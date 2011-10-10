@@ -4,6 +4,8 @@
 
 	<filePath>metadata/gen</filePath>
 	<project>org.conan</project>
+	<dbname>bank</dbname>
+	
 	<modules>
 		<module>
 			<name>bank</name>

@@ -4,6 +4,7 @@
     <xsd:element name="filePath" type="xsd:string"></xsd:element>
     <xsd:element name="project" type="xsd:string"></xsd:element>
     <xsd:element name="name" type="xsd:string"></xsd:element>
+    <xsd:element name="dbname" type="xsd:string"></xsd:element>
     <xsd:element name="id" type="xsd:string"></xsd:element>
     <xsd:element name="sql" type="xsd:string"></xsd:element>
     <xsd:element name="type" type="typeSType"></xsd:element>
@@ -34,7 +35,8 @@
 
     <xsd:complexType name="daoToolType">
         <xsd:sequence>
-            <xsd:element ref="filePath"/>
+            <xsd:element ref="filePath" maxOccurs="1" />
+            <xsd:element ref="dbname" maxOccurs="1" />
             <xsd:element ref="project" maxOccurs="1" />
             <xsd:element ref="modules" maxOccurs="1" />
         </xsd:sequence>

@@ -28,7 +28,8 @@ import org.conan.tools.util.match.StringMatch;
 final public class BuildFactory {
 
     public static void buildALL(ParamObject po) {
-        buildSQLCreate(po.getSqlCreate());// sql create
+        // buildSQLCreate(po.getSqlPO());// sql create
+        buildSQLDrop(po.getSqlPO());// sql drop
 
         for (ModelPO model : po.getModelList()) {// model
             buildModel(model);
@@ -61,7 +62,7 @@ final public class BuildFactory {
         map.put("author", CopyRight.AUTHOR);
         map.put("copyright", CopyRight.COPYRIGHT);
 
-        map.put("model", po.getModel());
+        // map.put("model", po.getModel());
         // map.put("import_model", clazz.getModelPackageClazz());
         // map.put("dao_package", pack.getDAOPackage());
 
@@ -80,12 +81,11 @@ final public class BuildFactory {
         map.put("author", CopyRight.AUTHOR);
         map.put("copyright", CopyRight.COPYRIGHT);
 
-        map.put("model", po.getModel());
-        // map.put("import_model", clazz.getModelPackageClazz());
-        // map.put("dao_package", pack.getDAOPackage());
+        map.put("dbname", po.getDbname());
+        map.put("tables", po.getTables());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_DROP_VM, map);
-        new WriteFile(res.getSQLCreateFile(), vf.getWriter());
+        new WriteFile(res.getSQLDropFile(), vf.getWriter());
     }
 
     /**

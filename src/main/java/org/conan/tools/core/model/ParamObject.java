@@ -31,15 +31,18 @@ public class ParamObject {
     private List<TestPO> testList = new ArrayList<TestPO>(50);
     private List<ServicePO> serviceList = new ArrayList<ServicePO>(50);
     private List<ServiceImplPO> serviceImplList = new ArrayList<ServiceImplPO>(50);
-    private SqlPO sqlCreate = new SqlPO();
+    private SqlPO sqlPO;
 
     public void init(DaoToolType obj) {
 
         String filePath = obj.getFilePath();
         String project = obj.getProject();
+        String dbname = obj.getDbname();
 
         // folder
         filePO = new FilePO(filePath);
+        // sql
+        sqlPO = new SqlPO(filePath, dbname);
 
         for (ModuleType moduleType : obj.getModules().getModule()) {
 
@@ -62,6 +65,7 @@ public class ParamObject {
                 daoList.add(new DaoPO(filePath, project, module, model));
                 serviceList.add(new ServicePO(filePath, project, module, model));
                 serviceImplList.add(new ServiceImplPO(filePath, project, module, model));
+                sqlPO.tables.add(table);
                 // ibatisList.add(new IbatisPO(filePath, project, module,
                 // model));
                 // testList.add(new TestPO(filePath, project, module, model));
@@ -162,8 +166,8 @@ public class ParamObject {
         return serviceImplList;
     }
 
-    public SqlPO getSqlCreate() {
-        return sqlCreate;
+    public SqlPO getSqlPO() {
+        return sqlPO;
     }
 
     public FilePO getFilePO() {

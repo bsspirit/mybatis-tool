@@ -1,0 +1,9 @@
+#This is ${dbname} sql
+#@author ${author}
+#@date ${date}
+
+use ${dbname};
+
+#foreach($table in $tables )
+DROP TABLE IF EXISTS ${table};
+#end

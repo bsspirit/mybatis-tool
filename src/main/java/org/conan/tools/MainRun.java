@@ -19,49 +19,6 @@ public class MainRun {
 
         CreateFactory.createALL(po);
         BuildFactory.buildALL(po);
-
-        // // model
-        // for (ModelPO model : po.getModelList()) {
-        // new BuildModelFile(model);
-        // }
-        //
-        // for (DaoPO dao : po.getDaoList()) {
-        // new BuildDAOFile(dao);
-        // }
-        //
-        // for (SqlPO sql : po.getSqlList()) {
-        // new BuildIbatisSQLFile(sql);
-        // }
-        // for (ServicePO service : po.getServiceList()) {
-        // new BuildServiceFile(service);
-        // }
-        //
-        // for (ServiceImplPO serviceImpl : po.getServiceImplList()) {
-        // new BuildServiceImplFile(serviceImpl);
-        // }
-        // -------------------------------
-
-
-       
-
-        // for (FormPO form : po.getFormList()) {
-        // new BuildFormFile(form);
-        // }
-
-        // new BuildSQLCreateFile(po.getSqlCreate());
-
-        // /////////////////////////////////////////////
-        // for (TestPO test : po.getTestList()) {
-        // new BuildIbatisTestFile(test);
-        // }
-        // for (IbatisPO ibatis : po.getIbatisList()) {
-        // new BuildIbatisFile(ibatis);
-        // }
-        // for (ModuleModelPO mm : po.getMmList()) {
-        // new BuildModuleModelFile(mm);
-        // }
-        // //////////////////////////////////////////////
-
     }
 
     public static void main(String[] args) {
