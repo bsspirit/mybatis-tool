@@ -13,19 +13,9 @@ import org.conan.tools.util.match.StringMatch;
 public class ClazzTree extends FileTree {
 
     public ClazzTree(String model, PackageTree pack) {
-        super(model, pack);
+        this.pack = pack;
+        this.model = model;
     }
-
-    public static final String DAO = "DAO";
-    public static final String DAO_IBATIS = "DAOIbatis";
-    public static final String DAO_IBATIS_TEST = "DAOIbatisTest";
-    public static final String SERVICE = "Service";
-    public static final String SERVICE_IMPL = "ServiceImpl";
-    public static final String DTO = "DTO";
-    public static final String FORM = "Form";
-    public static final String MODULE_DTO = "ModuleDTO";
-    public static final String XML_FILE = ".xml";
-    public static final String JAVA_FILE = ".java";
 
     public String getDAOFile() {
         return pack.getDAOFolder() + File.separator + getDAOClazz();

@@ -1,6 +1,8 @@
 package org.conan.tools.core.build;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.util.match.StringMatch;
@@ -9,22 +11,13 @@ import org.conan.tools.util.match.StringMatch;
  * 
  * @author Conan
  */
-public class PackageTree {
+public class PackageTree extends FileTree {
 
     public PackageTree(PackagePO po) {
         this.root = po.getRoot();
         this.basePackage = po.getBasePackage();
         this.module = po.getModule();
     }
-
-    public static final String DAO = "dao";
-    public static final String SERVICE = "service";
-    public static final String IMPL = "impl";
-    public static final String IBATIS = "ibatis";
-    public static final String SQL = "sql";
-    public static final String MODEL = "model";
-    public static final String WEB = "web";
-    public static final String POINT = ".";
 
     private String root;
     private String module;
@@ -35,23 +28,23 @@ public class PackageTree {
     }
 
     public String getSrcFolder() {
-        return getRootFolder() + File.separator + ProjectTree.SRC;
+        return getRootFolder() + File.separator + SRC;
     }
 
     public String getWebFolder() {
-        return getRootFolder() + File.separator + ProjectTree.WEB;
+        return getRootFolder() + File.separator + WEB;
     }
-    
+
     public String getSQLFolder() {
-        return getRootFolder() + File.separator + ProjectTree.SQL;
+        return getRootFolder() + File.separator + SQL;
     }
-    
-    public String getResourceFolder(){
-        return getRootFolder() + File.separator + ProjectTree.RES;
+
+    public String getResourceFolder() {
+        return getRootFolder() + File.separator + RES;
     }
 
     public String getTestFolder() {
-        return getRootFolder() + File.separator + ProjectTree.TEST;
+        return getRootFolder() + File.separator + TEST;
     }
 
     public String getBaseFolder() {
@@ -160,68 +153,44 @@ public class PackageTree {
         this.root = root;
     }
 
-    public String[] getTreePackageArray() {
-        String[] tree = new String[8];
-        tree[0] = getBasePackage();
-        tree[1] = getModulePackage();
-        tree[2] = getDAOPackage();
-        tree[3] = getIbatisSQLPackage();
-        tree[4] = getModelPackage();
-        tree[5] = getFormWebPackage();
-        tree[6] = getServicePackage();
-        tree[7] = getServiceImplPackage();
-        // tree[3] = getIbatisPackage();
+    @Override
+    public List<String> getTreeFile() {
+        List<String> tree = new ArrayList<String>();
+        tree.add(getRootFolder());
+        tree.add(getBaseFolder());
+        tree.add(getModuleFolder());
+        tree.add(getDAOFolder());
+        tree.add(getModelFolder());
+        tree.add(getFormWebFolder());
+        tree.add(getServiceFolder());
+        tree.add(getServiceImplFolder());
+        tree.add(getSQLFolder());
+        // tree.add(getIbatisFolder());
+        // tree.add(getIbatisSQLFolder());
+        // tree.add(getIbatisTestFolder());
         return tree;
     }
 
-    public String[] getTreeFolderArray() {
-        String[] tree = new String[10];
-        tree[0] = getRootFolder();
-        tree[1] = getBaseFolder();
-        tree[2] = getModuleFolder();
-        tree[3] = getDAOFolder();
-        tree[4] = getModelFolder();
-        tree[5] = getFormWebFolder();
-        tree[6] = getServiceFolder();
-        tree[7] = getServiceImplFolder();
-        tree[8] = getSQLFolder();
-        tree[9] = getResourceFolder();
-        // tree[4] = getIbatisFolder();
-        // tree[5] = getIbatisSQLFolder();
-        // tree[7] = getIbatisTestFolder();
+    public List<String> getTreePackage() {
+        List<String> tree = new ArrayList<String>();
+        tree.add(getBasePackage());
+        tree.add(getModulePackage());
+        tree.add(getDAOPackage());
+        tree.add(getIbatisSQLPackage());
+        tree.add(getModelPackage());
+        tree.add(getFormWebPackage());
+        tree.add(getServicePackage());
+        tree.add(getServiceImplPackage());
+        // tree.add(getIbatisPackage());
         return tree;
     }
 
     public String printTreePackage() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getRootFolder() + "\n");
-        sb.append(getBasePackage() + "\n");
-        sb.append(getModulePackage() + "\n");
-        sb.append(getDAOPackage() + "\n");
-        sb.append(getServicePackage() + "\n");
-        sb.append(getServiceImplPackage() + "\n");
-        sb.append(getModelPackage() + "\n");
-        sb.append(getFormWebPackage() + "\n");
-        // sb.append(getIbatisPackage() + "\n");
-        // sb.append(getIbatisSQLPackage() + "\n");
+        for (String file : getTreePackage()) {
+            sb.append(file + "\n");
+        }
         return sb.toString();
     }
 
-    public String printTreeFolder() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getRootFolder() + "\n");
-        sb.append(getBaseFolder() + "\n");
-        sb.append(getModuleFolder() + "\n");
-        sb.append(getDAOFolder() + "\n");
-        sb.append(getServiceFolder() + "\n");
-        sb.append(getServiceImplFolder() + "\n");
-        sb.append(getModelFolder() + "\n");
-        sb.append(getFormWebFolder() + "\n");
-        sb.append(getSQLFolder() + "\n");
-        sb.append(getResourceFolder() + "\n");
-        // sb.append(getIbatisFolder() + "\n");
-        // sb.append(getIbatisSQLFolder() + "\n");
-        // sb.append(getIbatisTestFolder() + "\n");
-        return sb.toString();
-    }
 }
