@@ -6,6 +6,7 @@ package org.conan.tools.core.clazz;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -83,7 +84,7 @@ public class MethodBean {
     }
 
     public static void main(String[] args) {
-        List list = new ArrayList();
+        List<PropertyBean> list = new ArrayList<PropertyBean>();
         list.add(new PropertyBean("name", "String"));
         list.add(new PropertyBean("age", "Integer"));
 
