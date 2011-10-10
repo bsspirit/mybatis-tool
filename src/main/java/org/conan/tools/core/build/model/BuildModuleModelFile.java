@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.conan.tools.core.build.ClazzTree;
+import org.conan.tools.core.build.PackageTree;
 import org.conan.tools.core.clazz.ModelClazzBean;
 import org.conan.tools.core.factory.VelocityFactory;
-import org.conan.tools.core.file.ClazzTree;
-import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.ModuleModelPO;
 import org.conan.tools.util.io.WriteFile;

@@ -3,9 +3,9 @@ package org.conan.tools.core.build.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.conan.tools.core.build.ClazzTree;
+import org.conan.tools.core.build.PackageTree;
 import org.conan.tools.core.factory.VelocityFactory;
-import org.conan.tools.core.file.ClazzTree;
-import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.TestPO;
 import org.conan.tools.util.io.WriteFile;

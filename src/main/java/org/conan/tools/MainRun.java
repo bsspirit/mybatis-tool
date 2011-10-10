@@ -24,7 +24,7 @@ import org.conan.tools.core.xmlloader.DaoToolType;
  * 
  * @author conan
  */
-public class BuildRun {
+public class MainRun {
     
     public static void init() {
         DaoToolType obj = JAXBMarshaller.unmarshaller("daoTool-config.xml");

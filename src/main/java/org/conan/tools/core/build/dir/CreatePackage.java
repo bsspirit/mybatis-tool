@@ -1,7 +1,8 @@
 package org.conan.tools.core.build.dir;
 
 import java.io.File;
-import org.conan.tools.core.file.PackageTree;
+
+import org.conan.tools.core.build.PackageTree;
 import org.conan.tools.core.model.PackagePO;
 
 /**

@@ -3,10 +3,10 @@ package org.conan.tools.core.build.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.conan.tools.core.build.ClazzTree;
+import org.conan.tools.core.build.PackageTree;
 import org.conan.tools.core.clazz.ModelClazzBean;
 import org.conan.tools.core.factory.VelocityFactory;
-import org.conan.tools.core.file.ClazzTree;
-import org.conan.tools.core.file.PackageTree;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.FormPO;
 import org.conan.tools.util.io.WriteFile;
