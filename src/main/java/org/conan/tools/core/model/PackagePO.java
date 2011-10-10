@@ -5,29 +5,20 @@
 package org.conan.tools.core.model;
 
 /**
- *
+ * 
  * @author conan
  */
-public class PackagePO {
+public class PackagePO extends FilePO {
 
-    String root;
-    String module;
-    String basePackage;
+    protected String module;
+    protected String basePackage;
 
     public PackagePO() {
     }
 
     public PackagePO(String root, String basePackage, String module) {
-        this.root = root;
+        super(root);
         this.module = module;
-        this.basePackage = basePackage;
-    }
-
-    public String getBasePackage() {
-        return basePackage;
-    }
-
-    public void setBasePackage(String basePackage) {
         this.basePackage = basePackage;
     }
 
@@ -39,11 +30,12 @@ public class PackagePO {
         this.module = module;
     }
 
-    public String getRoot() {
-        return root;
+    public String getBasePackage() {
+        return basePackage;
     }
 
-    public void setRoot(String root) {
-        this.root = root;
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
     }
+
 }

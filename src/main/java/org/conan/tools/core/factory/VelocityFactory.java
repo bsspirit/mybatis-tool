@@ -29,13 +29,13 @@ public class VelocityFactory {
     private String writer;
 
     public static void main(String[] args) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("model", "User");
         VelocityFactory vf = new VelocityFactory(MODEL_VM, map);
         vf.getWriter();
     }
 
-    public VelocityFactory(String vm, Map<String, String> map) {
+    public VelocityFactory(String vm, Map<String, Object> map) {
         initVelocity();
         VelocityContext context = setContextAttribute(map);
         mergeTemplate(vm, context);

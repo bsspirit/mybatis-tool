@@ -80,7 +80,7 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getDAOClazz() {
-        return getModel() + DAO + JAVA_FILE;
+        return getModel() + DAO_I + JAVA_FILE;
     }
 
     @Deprecated

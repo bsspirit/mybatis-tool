@@ -21,7 +21,7 @@ public class ModelPO extends ClazzPO {
     public ModelPO(String root, String basePackage, String module, String model) {
         super(root, basePackage, module, model);
     }
-
+    
     public List<PropertyBean> getProperty() {
         return property;
     }

@@ -19,6 +19,7 @@ import org.conan.tools.util.match.StringMatch;
  */
 public class ParamObject {
 
+    private FilePO filePO;
     private List<PackagePO> packageList = new ArrayList<PackagePO>(50);
     private List<ClazzPO> clazzList = new ArrayList<ClazzPO>(50);
     private List<ModelPO> modelList = new ArrayList<ModelPO>(50);
@@ -26,15 +27,19 @@ public class ParamObject {
     private List<ModuleModelPO> mmList = new ArrayList<ModuleModelPO>(20);
     private List<DaoPO> daoList = new ArrayList<DaoPO>(50);
     private List<IbatisPO> ibatisList = new ArrayList<IbatisPO>(50);
-    private List<SqlPO> sqlList = new ArrayList<SqlPO>(50);
+    private List<SqlXMLPO> sqlList = new ArrayList<SqlXMLPO>(50);
     private List<TestPO> testList = new ArrayList<TestPO>(50);
     private List<ServicePO> serviceList = new ArrayList<ServicePO>(50);
     private List<ServiceImplPO> serviceImplList = new ArrayList<ServiceImplPO>(50);
-    private SqlCreatePO sqlCreate = new SqlCreatePO();
+    private SqlPO sqlCreate = new SqlPO();
 
     public void init(DaoToolType obj) {
+
         String filePath = obj.getFilePath();
         String project = obj.getProject();
+
+        // folder
+        filePO = new FilePO(filePath);
 
         for (ModuleType moduleType : obj.getModules().getModule()) {
 
@@ -67,7 +72,7 @@ public class ParamObject {
                 // model,sql,form
                 ModelPO mpo = new ModelPO(filePath, project, module, model);
                 modelList.add(mpo);
-                SqlPO spo = new SqlPO(filePath, project, module, model, table);
+                SqlXMLPO spo = new SqlXMLPO(filePath, project, module, model, table);
                 sqlList.add(spo);
                 FormPO fpo = new FormPO(filePath, project, module, model);
                 formList.add(fpo);
@@ -133,7 +138,7 @@ public class ParamObject {
         return ibatisList;
     }
 
-    public List<SqlPO> getSqlList() {
+    public List<SqlXMLPO> getSqlList() {
         return sqlList;
     }
 
@@ -157,8 +162,12 @@ public class ParamObject {
         return serviceImplList;
     }
 
-    public SqlCreatePO getSqlCreate() {
+    public SqlPO getSqlCreate() {
         return sqlCreate;
+    }
+
+    public FilePO getFilePO() {
+        return filePO;
     }
 
 }

@@ -17,7 +17,7 @@ public class ClazzPO extends PackagePO {
         super(root, basePackage, module);
         this.model = model;
     }
-    String model;
+    protected String model;
 
     public String getModel() {
         return model;
