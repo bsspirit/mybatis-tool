@@ -8,9 +8,9 @@ import org.conan.tools.core.clazz.ModelClazzBean;
 import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
-import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.ModelPO;
+import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
 
 /**

@@ -45,6 +45,10 @@ public class PackageTree {
     public String getSQLFolder() {
         return getRootFolder() + File.separator + ProjectTree.SQL;
     }
+    
+    public String getResourceFolder(){
+        return getRootFolder() + File.separator + ProjectTree.RES;
+    }
 
     public String getTestFolder() {
         return getRootFolder() + File.separator + ProjectTree.TEST;
@@ -171,7 +175,7 @@ public class PackageTree {
     }
 
     public String[] getTreeFolderArray() {
-        String[] tree = new String[9];
+        String[] tree = new String[10];
         tree[0] = getRootFolder();
         tree[1] = getBaseFolder();
         tree[2] = getModuleFolder();
@@ -181,6 +185,7 @@ public class PackageTree {
         tree[6] = getServiceFolder();
         tree[7] = getServiceImplFolder();
         tree[8] = getSQLFolder();
+        tree[9] = getResourceFolder();
         // tree[4] = getIbatisFolder();
         // tree[5] = getIbatisSQLFolder();
         // tree[7] = getIbatisTestFolder();
@@ -213,6 +218,7 @@ public class PackageTree {
         sb.append(getModelFolder() + "\n");
         sb.append(getFormWebFolder() + "\n");
         sb.append(getSQLFolder() + "\n");
+        sb.append(getResourceFolder() + "\n");
         // sb.append(getIbatisFolder() + "\n");
         // sb.append(getIbatisSQLFolder() + "\n");
         // sb.append(getIbatisTestFolder() + "\n");

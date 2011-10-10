@@ -1,4 +1,4 @@
-package org.conan.tools.core.io;
+package org.conan.tools.util.io;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

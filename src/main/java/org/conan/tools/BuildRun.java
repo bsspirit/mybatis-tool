@@ -1,5 +1,14 @@
-package org.conan.tools.core.build;
+package org.conan.tools;
 
+import org.conan.tools.core.JAXBMarshaller;
+import org.conan.tools.core.build.createClazz;
+import org.conan.tools.core.build.BuildDAOFile;
+import org.conan.tools.core.build.BuildFormFile;
+import org.conan.tools.core.build.BuildIbatisSQLFile;
+import org.conan.tools.core.build.BuildModelFile;
+import org.conan.tools.core.build.createPackage;
+import org.conan.tools.core.build.BuildServiceFile;
+import org.conan.tools.core.build.BuildServiceImplFile;
 import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.core.model.FormPO;
@@ -9,7 +18,6 @@ import org.conan.tools.core.model.ParamObject;
 import org.conan.tools.core.model.ServiceImplPO;
 import org.conan.tools.core.model.ServicePO;
 import org.conan.tools.core.model.SqlPO;
-import org.conan.tools.core.xml.JAXBMarshaller;
 import org.conan.tools.core.xmlloader.DaoToolType;
 
 /**
@@ -24,11 +32,11 @@ public class BuildRun {
         po.init(obj);
 
         for (PackagePO pack : po.getPackageList()) {
-            new BuildPackage(pack);
+            new createPackage(pack);
         }
 
         for (ClazzPO clazz : po.getClazzList()) {
-            new BuildClazz(clazz);
+            new createClazz(clazz);
         }
 
         for (ModelPO model : po.getModelList()) {

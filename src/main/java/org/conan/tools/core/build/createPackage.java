@@ -8,9 +8,9 @@ import org.conan.tools.core.model.PackagePO;
  *
  * @author Conan
  */
-public class BuildPackage {
+public class createPackage {
 
-    public BuildPackage(PackagePO po) {
+    public createPackage(PackagePO po) {
         PackageTree pack = new PackageTree(po);
         String[] trees = pack.getTreeFolderArray();
         for (String tree : trees) {

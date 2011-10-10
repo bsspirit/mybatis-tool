@@ -14,5 +14,6 @@ public interface ProjectTree {
     String TEST = "test";
     String WEB = "web";
     String SQL = "sql";
+    String RES = "resource";
 
 }

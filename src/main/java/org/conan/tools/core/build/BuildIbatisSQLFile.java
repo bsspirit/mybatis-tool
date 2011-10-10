@@ -7,9 +7,9 @@ import org.conan.tools.core.clazz.SqlMapBean;
 import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
-import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.SqlPO;
+import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
 import org.conan.tools.util.match.StringMatch;
 

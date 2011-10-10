@@ -12,9 +12,9 @@ import org.conan.tools.core.model.ClazzPO;
  *
  * @author Conan
  */
-public class BuildClazz {
+public class createClazz {
 
-    public BuildClazz(ClazzPO po) {
+    public createClazz(ClazzPO po) {
         PackageTree pack = new PackageTree(po);
         ClazzTree clazz = new ClazzTree(po.getModel(), pack);
 
@@ -23,7 +23,7 @@ public class BuildClazz {
             try {
                 createClazz(tree);
             } catch (IOException ex) {
-                Logger.getLogger(BuildClazz.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(createClazz.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         System.out.println(clazz.printTreeFile());

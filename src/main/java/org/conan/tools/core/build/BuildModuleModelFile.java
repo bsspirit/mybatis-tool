@@ -14,9 +14,9 @@ import org.conan.tools.core.clazz.ModelClazzBean;
 import org.conan.tools.core.factory.VelocityFactory;
 import org.conan.tools.core.file.ClazzTree;
 import org.conan.tools.core.file.PackageTree;
-import org.conan.tools.core.io.WriteFile;
 import org.conan.tools.core.model.CopyRightObject;
 import org.conan.tools.core.model.ModuleModelPO;
+import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
 
 /**
@@ -33,7 +33,7 @@ public class BuildModuleModelFile {
         ModelClazzBean mcb = new ModelClazzBean(po);
 
         try {
-            BuildClazz.createClazz(clazz.getModelModuleFile());
+            createClazz.createClazz(clazz.getModelModuleFile());
         } catch (IOException ex) {
             Logger.getLogger(BuildModuleModelFile.class.getName()).log(Level.SEVERE, null, ex);
         }
