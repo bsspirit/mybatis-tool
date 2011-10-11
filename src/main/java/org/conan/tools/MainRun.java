@@ -3,7 +3,7 @@ package org.conan.tools;
 import org.conan.tools.core.JAXBMarshaller;
 import org.conan.tools.core.build.BuildFactory;
 import org.conan.tools.core.build.CreateFactory;
-import org.conan.tools.core.model.ParamObject;
+import org.conan.tools.core.parser.ParamObject;
 import org.conan.tools.core.xmlloader.DaoToolType;
 
 /**

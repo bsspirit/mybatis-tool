@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.conan.tools.core.util.PropertyBean;
-import org.conan.tools.core.util.SqlFinderBean;
+import org.conan.tools.core.parser.PropertyBean;
+import org.conan.tools.core.parser.SqlFinderBean;
 
 /**
  *
@@ -17,10 +17,10 @@ import org.conan.tools.core.util.SqlFinderBean;
  */
 public class SqlXMLPO extends ClazzPO {
 
-    String table;
-    boolean mark;//标记删除
-    List<PropertyBean> property = new LinkedList<PropertyBean>();
-    List<SqlFinderBean> finder = new ArrayList<SqlFinderBean>();
+    private String table;
+    private boolean mark;//标记删除
+    private List<PropertyBean> property = new LinkedList<PropertyBean>();
+    private List<SqlFinderBean> finder = new ArrayList<SqlFinderBean>();
 
     public SqlXMLPO() {
     }

@@ -7,7 +7,7 @@ package org.conan.tools.core.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.util.PropertyBean;
+import org.conan.tools.core.parser.PropertyBean;
 
 /**
  *
@@ -15,8 +15,8 @@ import org.conan.tools.core.util.PropertyBean;
  */
 public class ModelPO extends ClazzPO {
 
-    List<PropertyBean> property = new ArrayList<PropertyBean>(10);
-    List<String> imports = new ArrayList<String>(10);
+    private List<PropertyBean> property = new ArrayList<PropertyBean>(10);
+    private List<String> imports = new ArrayList<String>(10);
 
     public ModelPO(){}
     public ModelPO(String root, String basePackage, String module, String model) {

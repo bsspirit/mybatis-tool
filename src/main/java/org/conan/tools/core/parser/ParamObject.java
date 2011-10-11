@@ -1,11 +1,21 @@
-package org.conan.tools.core.model;
+package org.conan.tools.core.parser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.util.PropertyBean;
-import org.conan.tools.core.util.SqlFinderBean;
-import org.conan.tools.core.util.TableBean;
+import org.conan.tools.core.model.ClazzPO;
+import org.conan.tools.core.model.DaoPO;
+import org.conan.tools.core.model.FilePO;
+import org.conan.tools.core.model.FormPO;
+import org.conan.tools.core.model.IbatisPO;
+import org.conan.tools.core.model.ModelPO;
+import org.conan.tools.core.model.ModuleModelPO;
+import org.conan.tools.core.model.PackagePO;
+import org.conan.tools.core.model.ServiceImplPO;
+import org.conan.tools.core.model.ServicePO;
+import org.conan.tools.core.model.SqlPO;
+import org.conan.tools.core.model.SqlXMLPO;
+import org.conan.tools.core.model.TestPO;
 import org.conan.tools.core.xmlloader.DaoToolType;
 import org.conan.tools.core.xmlloader.FinderType;
 import org.conan.tools.core.xmlloader.ModelType;
@@ -21,6 +31,7 @@ import org.conan.tools.util.match.StringMatch;
 public class ParamObject {
 
     private FilePO filePO;
+    private SqlPO sqlPO;
     private List<PackagePO> packageList = new ArrayList<PackagePO>(50);
     private List<ClazzPO> clazzList = new ArrayList<ClazzPO>(50);
     private List<ModelPO> modelList = new ArrayList<ModelPO>(50);
@@ -32,7 +43,6 @@ public class ParamObject {
     private List<TestPO> testList = new ArrayList<TestPO>(50);
     private List<ServicePO> serviceList = new ArrayList<ServicePO>(50);
     private List<ServiceImplPO> serviceImplList = new ArrayList<ServiceImplPO>(50);
-    private SqlPO sqlPO;
 
     public void init(DaoToolType obj) {
 
@@ -74,7 +84,7 @@ public class ParamObject {
                 // testList.add(new TestPO(filePath, project, module, model));
 
                 // moduleModel
-                mmpo.property.add(new PropertyBean(StringMatch.first2Lowercase(model) + "DTO", model + "DTO"));
+                mmpo.getProperty().add(new PropertyBean(StringMatch.first2Lowercase(model) + "DTO", model + "DTO"));
 
                 // model,sql,form
                 ModelPO mpo = new ModelPO(filePath, project, module, model);
@@ -92,19 +102,19 @@ public class ParamObject {
                     String propDefault = prop.getDefault();
 
                     // model,sql
-                    mpo.property.add(new PropertyBean(propName, propType));
-                    fpo.property.add(new PropertyBean(propName, propType));
-                    spo.property.add(new PropertyBean(propName, propType, propNull));
+                    mpo.getProperty().add(new PropertyBean(propName, propType));
+                    fpo.getProperty().add(new PropertyBean(propName, propType));
+                    spo.getProperty().add(new PropertyBean(propName, propType, propNull));
                     tb.getPbs().add(new PropertyBean(propName, propType, propNull, propUnique, propDefault));
 
                     // sql
                     if (propName.equals("mark")) {
-                        spo.mark = true;
+                        spo.setMark(true);
                     }
 
                     // model
                     if (JavaSQLMatch.isJavaImport(prop.getType())) {
-                        mpo.imports.add(JavaSQLMatch.sql2JAVA(prop.getType()));
+                        mpo.getImports().add(JavaSQLMatch.sql2JAVA(prop.getType()));
                     }
                 }
 
@@ -113,7 +123,7 @@ public class ParamObject {
                     String sql = finder.getSql();
 
                     // sql
-                    spo.finder.add(new SqlFinderBean(StringMatch.first2Lowercase(model) + "." + id, sql));
+                    spo.getFinder().add(new SqlFinderBean(StringMatch.first2Lowercase(model) + "." + id, sql));
                 }
             }
         }

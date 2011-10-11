@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.conan.tools.core.util;
+package org.conan.tools.core.parser;
 
 import org.conan.tools.util.match.JavaSQLMatch;
 

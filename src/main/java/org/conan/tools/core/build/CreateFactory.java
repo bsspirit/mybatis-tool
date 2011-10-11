@@ -13,7 +13,7 @@ import org.conan.tools.core.build.tree.ResourceTree;
 import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.core.model.FilePO;
 import org.conan.tools.core.model.PackagePO;
-import org.conan.tools.core.model.ParamObject;
+import org.conan.tools.core.parser.ParamObject;
 
 final public class CreateFactory {
 

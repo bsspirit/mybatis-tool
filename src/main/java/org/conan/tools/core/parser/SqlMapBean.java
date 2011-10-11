@@ -1,4 +1,4 @@
-package org.conan.tools.core.util;
+package org.conan.tools.core.parser;
 
 import java.util.ArrayList;
 import java.util.List;
