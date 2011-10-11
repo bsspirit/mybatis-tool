@@ -31,7 +31,7 @@
 <mapper namespace="${import_dao}.${dao}">
 
     <resultMap id="${result_id}" type="${dto_1}">
-        <result property="id" column="id" javaType="int"/>
+        <result property="id" column="id" javaType="java.lang.Integer"/>
 #foreach($sql_result_map in $sql_result_maps )
         ${sql_result_map}
 #end
