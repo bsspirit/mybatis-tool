@@ -14,8 +14,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 -->
 	
 	<context:annotation-config />
-	#foreach($module in $modules)
-<context:component-scan base-package="org.conan.${module}.service.impl"/>
-	#end
+#foreach($module in $modules)
+	<context:component-scan base-package="org.conan.${module}.service.impl"/>
+#end
 
 </beans>
