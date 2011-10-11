@@ -11,7 +11,7 @@ import org.conan.tools.core.xmlloader.FinderType;
 import org.conan.tools.core.xmlloader.ModelType;
 import org.conan.tools.core.xmlloader.ModuleType;
 import org.conan.tools.core.xmlloader.PropType;
-import org.conan.tools.util.imports.ImportClazz;
+import org.conan.tools.util.match.JavaSQLMatch;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -66,7 +66,7 @@ public class ParamObject {
                 daoList.add(new DaoPO(filePath, project, module, model));
                 serviceList.add(new ServicePO(filePath, project, module, model));
                 serviceImplList.add(new ServiceImplPO(filePath, project, module, model));
-                
+
                 TableBean tb = new TableBean(table);
                 sqlPO.tables.add(tb);
                 // ibatisList.add(new IbatisPO(filePath, project, module,
@@ -86,7 +86,7 @@ public class ParamObject {
 
                 for (PropType prop : modelType.getProp()) {
                     String propName = prop.getName();
-                    String propType = prop.getType().value();
+                    String propType = prop.getType();
                     boolean propNull = prop.isNull();
                     boolean propUnique = prop.isUnique();
                     String propDefault = prop.getDefault();
@@ -103,18 +103,9 @@ public class ParamObject {
                     }
 
                     // model
-                    switch (prop.getType()) {
-                    case TIMESTAMP:
-                        mpo.imports.add(ImportClazz.getImport(prop.getType()));
-                        break;
-                    case DATE:
-                        mpo.imports.add(ImportClazz.getImport(prop.getType()));
-                        break;
+                    if (JavaSQLMatch.isJavaImport(prop.getType())) {
+                        mpo.imports.add(JavaSQLMatch.sql2JAVA(prop.getType()));
                     }
-
-                    // if (prop.getType() == TypeSType.TIMESTAMP) {
-                    // mpo.imports.add(ImportClazz.getImport(prop.getType()));
-                    // }
                 }
 
                 for (FinderType finder : modelType.getFinder()) {

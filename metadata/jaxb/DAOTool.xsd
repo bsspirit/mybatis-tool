@@ -7,7 +7,7 @@
     <xsd:element name="dbname" type="xsd:string"></xsd:element>
     <xsd:element name="id" type="xsd:string"></xsd:element>
     <xsd:element name="sql" type="xsd:string"></xsd:element>
-    <xsd:element name="type" type="typeSType"></xsd:element>
+    <xsd:element name="type" type="xsd:string"></xsd:element>
     <xsd:element name="table" type="xsd:string"></xsd:element>
     <xsd:element name="null" type="xsd:boolean"></xsd:element>
     <xsd:element name="unique" type="xsd:boolean"></xsd:element>
@@ -20,7 +20,7 @@
     <xsd:element name="prop" type="propType"></xsd:element>
     <xsd:element name="finder" type="finderType"></xsd:element>
 
-
+	<!--
     <xsd:simpleType name="typeSType" >
         <xsd:restriction base="xsd:string" >
             <xsd:enumeration value="Boolean" />
@@ -33,6 +33,7 @@
             <xsd:enumeration value="Date" />
         </xsd:restriction>
     </xsd:simpleType>
+    -->
 
 
     <xsd:complexType name="daoToolType">

@@ -4,6 +4,8 @@
  */
 package org.conan.tools.core.util;
 
+import org.conan.tools.util.match.JavaSQLMatch;
+
 /**
  * 
  * @author Conan
@@ -63,11 +65,7 @@ public class PropertyBean {
     }
 
     public String getTypeName() {
-        return this.type + " " + this.name;
-    }
-
-    public String getFullType() {
-        return "java.lang." + this.type;
+        return JavaSQLMatch.sql2JAVAShort(this.type) + " " + this.name;
     }
 
     public boolean isUnique() {

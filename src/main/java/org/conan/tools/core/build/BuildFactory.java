@@ -83,7 +83,7 @@ final public class BuildFactory {
         map.put("copyright", CopyRight.COPYRIGHT);
 
         map.put("dbname", po.getDbname());
-        map.put("tables", po.getTables());
+        map.put("tables", po.getTablesName());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_DROP_VM, map);
         new WriteFile(res.getSQLDropFile(), vf.getWriter());

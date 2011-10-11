@@ -32,13 +32,10 @@ public class JAXBMarshaller {
         try {
             PropType prop0 = new PropType();
             prop0.setName("name");
-            prop0.setType(TypeSType.STRING);
             PropType prop1 = new PropType();
             prop1.setName("description");
-            prop1.setType(TypeSType.STRING);
             PropType prop2 = new PropType();
             prop2.setName("parentId");
-            prop2.setType(TypeSType.INTEGER);
 
             ModelType model = new ModelType();
             model.setName("Group");

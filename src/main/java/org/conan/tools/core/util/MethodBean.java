@@ -7,6 +7,7 @@ package org.conan.tools.core.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.conan.tools.util.match.JavaSQLMatch;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -26,7 +27,7 @@ public class MethodBean {
     public String getGetMethod() {
         StringBuilder sb = new StringBuilder();
         for (PropertyBean pb : pbs) {
-            sb.append("public " + pb.getType() + " get" + StringMatch.first2Uppercase(pb.getName()) + " (){\n");
+            sb.append("public " + JavaSQLMatch.sql2JAVAShort(pb.getType()) + " get" + StringMatch.first2Uppercase(pb.getName()) + " (){\n");
             sb.append("return this." + pb.getName() + ";\n");
             sb.append("}\n");
         }

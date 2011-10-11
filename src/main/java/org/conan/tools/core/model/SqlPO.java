@@ -38,4 +38,12 @@ public class SqlPO extends FilePO {
         return tables;
     }
 
+    public List<String> getTablesName() {
+        List<String> list = new ArrayList<String>();
+        for (TableBean table : tables) {
+            list.add(table.getTable());
+        }
+        return list;
+    }
+
 }

@@ -44,7 +44,7 @@ public class TableBean {
         sb.append("    id INT PRIMARY KEY AUTO_INCREMENT,\n");
         for (PropertyBean pb : pbs) {
             sb.append("    " + pb.getName());
-            sb.append(" " + pb.getType());
+            sb.append(" " + pb.getType().toUpperCase());
             sb.append(" " + (pb.isNull() ? "NULL" : "NOT NULL"));
             sb.append(" " + (pb.isUnique() ? "UNIQUE" : ""));
             sb.append(" " + (pb.getDefault() != null ? "DEFAULT " + pb.getDefault() : ""));
@@ -56,14 +56,6 @@ public class TableBean {
         return sb.toString();
     }
 
-    // TODO
-    private String java2SQL(String type) {
-        return "a";
-    }
-
-    // TODO
-    private String sql2JAVA(String type) {
-        return "";
-    }
+  
 
 }

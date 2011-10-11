@@ -3,6 +3,8 @@ package org.conan.tools.core.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.conan.tools.util.match.JavaSQLMatch;
+
 /**
  * 
  * @author Conan
@@ -87,15 +89,7 @@ public class SqlMapBean {
             StringBuilder sb = new StringBuilder();
             sb.append("<result property=\"" + pb.getName() + "\" ");
             sb.append("column=\"" + pb.getName() + "\" ");
-            
-            if (pb.getType().equalsIgnoreCase("timestamp")) {
-                sb.append("javaType=\"java.sql." + pb.getType() + "\"/>");
-            } else if (pb.getType().equalsIgnoreCase("date")) {
-                sb.append("javaType=\"java.util." + pb.getType() + "\"/>");
-            } else {
-                sb.append("javaType=\"" + pb.getType() + "\"/>");
-            }
-
+            sb.append("javaType=\"" + JavaSQLMatch.sql2JAVA(pb.getType()) + "\"/>");
             sqlResultMaps.add(sb.toString());
         }
     }
