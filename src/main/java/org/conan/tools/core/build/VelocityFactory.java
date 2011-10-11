@@ -10,22 +10,28 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 /**
- *
+ * 
  * @author Conan
  */
 public class VelocityFactory {
 
     public final static String UTF8 = "UTF-8";
-    public final static String MODEL_VM = "org/conan/tools/core/vm/model.vm";
-    public final static String DAO_VM = "org/conan/tools/core/vm/dao.vm";
-    public final static String IBATIS_VM = "org/conan/tools/core/vm/ibatis.vm";
-    public final static String IBATIS_TEST_VM = "org/conan/tools/core/vm/ibatisTest.vm";
-    public final static String IBATIS_SQL_VM = "org/conan/tools/core/vm/ibatisSQL.vm";
-    public final static String SERVICE_VM = "org/conan/tools/core/vm/service.vm";
-    public final static String SERVICE_IMPL_VM = "org/conan/tools/core/vm/serviceImpl.vm";
-    public final static String FORM_MODEL_VM = "org/conan/tools/core/vm/formModel.vm";
-    public final static String SQL_CREATE_VM = "org/conan/tools/core/vm/sqlCreate.vm";
-    public final static String SQL_DROP_VM = "org/conan/tools/core/vm/sqlDrop.vm";
+    // model
+    public final static String MODEL_VM = "org/conan/tools/core/vm/model/model.vm";
+    public final static String FORM_MODEL_VM = "org/conan/tools/core/vm/model/formModel.vm";
+    // dao
+    public final static String DAO_VM = "org/conan/tools/core/vm/dao/dao.vm";
+    public final static String IBATIS_VM = "org/conan/tools/core/vm/dao/ibatisImpl.vm";
+    public final static String IBATIS_SQL_VM = "org/conan/tools/core/vm/dao/ibatisSQL.vm";
+    // service
+    public final static String SERVICE_VM = "org/conan/tools/core/vm/service/service.vm";
+    public final static String SERVICE_IMPL_VM = "org/conan/tools/core/vm/service/serviceImpl.vm";
+    // sql
+    public final static String SQL_CREATE_VM = "org/conan/tools/core/vm/sql/sqlCreate.vm";
+    public final static String SQL_DROP_VM = "org/conan/tools/core/vm/sql/sqlDrop.vm";
+    // test
+    public final static String IBATIS_TEST_VM = "org/conan/tools/core/vm/test/ibatisImplTest.vm";
+    public final static String SERIVCE_TEST_VM = "org/conan/tools/core/vm/test/serviceTest.vm";
     private String writer;
 
     public static void main(String[] args) {

@@ -1,0 +1,100 @@
+$copyright
+package ${dao_ibatis_package};
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.conan.common.dao.test.BaseDAOTestCaseJunit44;
+import org.conan.common.model.PageInObject;
+import org.conan.common.model.PageOutObject;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import ${import_dao};
+import ${import_model};
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * This is Test of ${model} DAO implemention
+ * @author $author
+ * @date $date
+ */
+public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
+
+    private ${model}DAO ${model_1}DAO;
+    private ${model}DTO dto;
+
+    public ${model}DAOIbatisTest() {
+    }
+
+    @Before
+    public void setUp() {
+        dto = new ${model}DTO();
+    }
+
+    @After
+    public void tearDown() {
+        dto = null;
+    }
+
+    @Test
+    public void insert${model}() {
+        boolean expected = true;
+        int actual = ${model_1}DAO.insert${model}(dto);
+        assertEquals(expected, actual > 1);
+    }
+
+    @Test
+    public void delete${model}() {
+        int expected = 1;
+        int actual = ${model_1}DAO.delete${model}(1);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void update${model}() {
+        dto.setId(2);
+
+        int expected = 1;
+        int actual = ${model_1}DAO.update${model}(dto);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get${model}ById() {
+        ${model}DTO tmp = ${model_1}DAO.get${model}ById(1);
+
+        int expected = 1;
+        int actual = tmp.getId();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get${model}s() {
+        List<${model}DTO> list = ${model_1}DAO.get${model}s(null);
+
+        int expected = 1;
+        int actual = list.get(0).getId();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get${model}sPaging() {
+        Map map = new HashMap();
+        PageInObject page = new PageInObject(0, 4, "id", "asc");
+
+        PageOutObject<${model}DTO> pageOut = ${model_1}DAO.get${model}sPaging(map,page);
+
+        int expected = 4;
+        int actual = pageOut.getList().size();
+        assertEquals(expected, actual);
+    }
+
+    @Autowired
+    public void set${model}DAO(${model}DAO ${model_1}DAO) {
+        this.${model_1}DAO = ${model_1}DAO;
+    }
+}
