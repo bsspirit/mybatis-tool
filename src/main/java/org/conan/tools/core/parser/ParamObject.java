@@ -13,6 +13,7 @@ import org.conan.tools.core.model.ModuleModelPO;
 import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.core.model.ServiceImplPO;
 import org.conan.tools.core.model.ServicePO;
+import org.conan.tools.core.model.SpringServicePO;
 import org.conan.tools.core.model.SqlPO;
 import org.conan.tools.core.model.SqlXMLPO;
 import org.conan.tools.core.model.TestPO;
@@ -32,6 +33,7 @@ public class ParamObject {
 
     private FilePO filePO;
     private SqlPO sqlPO;
+    private SpringServicePO ssPO;
     private List<PackagePO> packageList = new ArrayList<PackagePO>(50);
     private List<ClazzPO> clazzList = new ArrayList<ClazzPO>(50);
     private List<ModelPO> modelList = new ArrayList<ModelPO>(50);
@@ -54,6 +56,8 @@ public class ParamObject {
         filePO = new FilePO(filePath);
         // sql
         sqlPO = new SqlPO(filePath, dbname);
+        // spring service
+        ssPO = new SpringServicePO(filePath, project);
 
         for (ModuleType moduleType : obj.getModules().getModule()) {
 
@@ -66,19 +70,30 @@ public class ParamObject {
             ModuleModelPO mmpo = new ModuleModelPO(filePath, project, module);
             mmList.add(mmpo);
 
+            // spring service
+            ssPO.getModules().add(module);
+
             for (ModelType modelType : moduleType.getModel()) {
 
                 String model = StringMatch.first2Uppercase(modelType.getName());
                 String table = modelType.getTable();
 
-                // clazz,dao,service,serviceImpl,ibatis,test,sqlcreate
+                // clazz
                 clazzList.add(new ClazzPO(filePath, project, module, model));
+
+                // dao
                 daoList.add(new DaoPO(filePath, project, module, model));
+
+                // serviceImpl
                 serviceList.add(new ServicePO(filePath, project, module, model));
+
+                // serviceImpl test
                 serviceImplList.add(new ServiceImplPO(filePath, project, module, model));
 
+                // sql
                 TableBean tb = new TableBean(table);
                 sqlPO.tables.add(tb);
+
                 // ibatisList.add(new IbatisPO(filePath, project, module,
                 // model));
                 // testList.add(new TestPO(filePath, project, module, model));
@@ -179,6 +194,10 @@ public class ParamObject {
 
     public FilePO getFilePO() {
         return filePO;
+    }
+
+    public SpringServicePO getSpringServicePO() {
+        return ssPO;
     }
 
 }

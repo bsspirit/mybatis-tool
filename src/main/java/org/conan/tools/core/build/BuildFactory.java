@@ -15,6 +15,7 @@ import org.conan.tools.core.model.ModelPO;
 import org.conan.tools.core.model.ModuleModelPO;
 import org.conan.tools.core.model.ServiceImplPO;
 import org.conan.tools.core.model.ServicePO;
+import org.conan.tools.core.model.SpringServicePO;
 import org.conan.tools.core.model.SqlPO;
 import org.conan.tools.core.model.SqlXMLPO;
 import org.conan.tools.core.model.TestPO;
@@ -31,6 +32,9 @@ final public class BuildFactory {
     public static void buildALL(ParamObject po) {
         buildSQLCreate(po.getSqlPO());// sql create
         buildSQLDrop(po.getSqlPO());// sql drop
+        buildSpringService(po.getSpringServicePO());// spring service
+//        buildSpringDAO(); // spring dao
+//        buildMybatis();// mybatis
 
         for (ModelPO model : po.getModelList()) {// model
             buildModel(model);
@@ -51,9 +55,23 @@ final public class BuildFactory {
             buildForm(form);
         }
     }
+    
+    public static void buildSpringService(SpringServicePO po){
+        ResourceTree res = new ResourceTree(po);
+        
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("date", DateMatch.getNowDate());
+        map.put("author", CopyRight.AUTHOR);
+        map.put("copyright", CopyRight.COPYRIGHT);
+
+        map.put("modules", po.getModules());
+        
+        VelocityFactory vf = new VelocityFactory(VelocityFactory.CONFIG_SPRING_SERVICE_VM, map);
+        new WriteFile(res.getSpringServiceFile(), vf.getWriter());
+    }
 
     /**
-     * sql create //TODO
+     * sql create
      */
     public static void buildSQLCreate(SqlPO po) {
         ResourceTree res = new ResourceTree(po);
