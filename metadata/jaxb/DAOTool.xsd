@@ -10,6 +10,8 @@
     <xsd:element name="type" type="typeSType"></xsd:element>
     <xsd:element name="table" type="xsd:string"></xsd:element>
     <xsd:element name="null" type="xsd:boolean"></xsd:element>
+    <xsd:element name="unique" type="xsd:boolean"></xsd:element>
+    <xsd:element name="default" type="xsd:string"></xsd:element>
 
     <xsd:element name="daoTool" type="daoToolType"></xsd:element>
     <xsd:element name="modules" type="modulesType"></xsd:element>
@@ -69,6 +71,8 @@
             <xsd:element ref="name" maxOccurs="1" />
             <xsd:element ref="type" maxOccurs="1" />
             <xsd:element ref="null" maxOccurs="1"/>
+            <xsd:element ref="unique" maxOccurs="1"/>
+            <xsd:element ref="default" maxOccurs="1"/>
         </xsd:sequence>
     </xsd:complexType>
 

@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.conan.tools.core.clazz;
+package org.conan.tools.core.util;
 
 /**
- *
+ * 
  * @author Conan
  */
 public class PropertyBean {
@@ -13,6 +13,8 @@ public class PropertyBean {
     private String name;
     private String type;
     private boolean _null;
+    private boolean _unique;
+    private String _default;
 
     public PropertyBean(String name, String type) {
         this.name = name;
@@ -23,6 +25,14 @@ public class PropertyBean {
         this.name = name;
         this.type = type;
         this._null = _null;
+    }
+
+    public PropertyBean(String name, String type, boolean _null, boolean _unique, String _default) {
+        this.name = name;
+        this.type = type;
+        this._null = _null;
+        this._unique = _unique;
+        this._default = _default;
     }
 
     public PropertyBean() {
@@ -59,4 +69,21 @@ public class PropertyBean {
     public String getFullType() {
         return "java.lang." + this.type;
     }
+
+    public boolean isUnique() {
+        return _unique;
+    }
+
+    public void setUnique(boolean _unique) {
+        this._unique = _unique;
+    }
+
+    public String getDefault() {
+        return _default;
+    }
+
+    public void setDefault(String _default) {
+        this._default = _default;
+    }
+
 }

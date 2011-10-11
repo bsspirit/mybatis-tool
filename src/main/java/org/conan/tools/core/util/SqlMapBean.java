@@ -1,4 +1,4 @@
-package org.conan.tools.core.clazz;
+package org.conan.tools.core.util;
 
 import java.util.ArrayList;
 import java.util.List;

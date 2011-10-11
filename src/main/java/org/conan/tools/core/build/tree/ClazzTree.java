@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.PackagePO;
+import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -15,9 +15,9 @@ public class ClazzTree extends PackageTree {
 
     protected String model;
 
-    public ClazzTree(String model, PackagePO po) {
+    public ClazzTree(ClazzPO po) {
         super(po);
-        this.model = model;
+        this.model = po.getModel();
     }
 
     public String getModel() {

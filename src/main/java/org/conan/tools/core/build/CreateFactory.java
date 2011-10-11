@@ -72,7 +72,7 @@ final public class CreateFactory {
      * 类文件
      */
     public static void createClazz(ClazzPO po) {
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
         List<String> trees = clazz.getTreeFile();
         for (String tree : trees) {
             try {

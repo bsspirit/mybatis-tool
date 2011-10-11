@@ -7,8 +7,6 @@ import java.util.Random;
 import org.conan.tools.core.build.tree.ClazzTree;
 import org.conan.tools.core.build.tree.PackageTree;
 import org.conan.tools.core.build.tree.ResourceTree;
-import org.conan.tools.core.clazz.ModelClazzBean;
-import org.conan.tools.core.clazz.SqlMapBean;
 import org.conan.tools.core.model.CopyRight;
 import org.conan.tools.core.model.DaoPO;
 import org.conan.tools.core.model.FormPO;
@@ -21,6 +19,9 @@ import org.conan.tools.core.model.ServicePO;
 import org.conan.tools.core.model.SqlPO;
 import org.conan.tools.core.model.SqlXMLPO;
 import org.conan.tools.core.model.TestPO;
+import org.conan.tools.core.util.ModelClazzBean;
+import org.conan.tools.core.util.SqlBean;
+import org.conan.tools.core.util.SqlMapBean;
 import org.conan.tools.util.io.WriteFile;
 import org.conan.tools.util.match.DateMatch;
 import org.conan.tools.util.match.StringMatch;
@@ -28,7 +29,7 @@ import org.conan.tools.util.match.StringMatch;
 final public class BuildFactory {
 
     public static void buildALL(ParamObject po) {
-        // buildSQLCreate(po.getSqlPO());// sql create
+        buildSQLCreate(po.getSqlPO());// sql create
         buildSQLDrop(po.getSqlPO());// sql drop
 
         for (ModelPO model : po.getModelList()) {// model
@@ -56,22 +57,22 @@ final public class BuildFactory {
      */
     public static void buildSQLCreate(SqlPO po) {
         ResourceTree res = new ResourceTree(po);
+        SqlBean sb = new SqlBean(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
         map.put("author", CopyRight.AUTHOR);
         map.put("copyright", CopyRight.COPYRIGHT);
 
-        // map.put("model", po.getModel());
-        // map.put("import_model", clazz.getModelPackageClazz());
-        // map.put("dao_package", pack.getDAOPackage());
+        map.put("dbname", po.getDbname());
+        map.put("tables", sb.getSqlCreateTables());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.SQL_CREATE_VM, map);
         new WriteFile(res.getSQLCreateFile(), vf.getWriter());
     }
 
     /**
-     * sql drop //TODO
+     * sql drop
      */
     public static void buildSQLDrop(SqlPO po) {
         ResourceTree res = new ResourceTree(po);
@@ -93,7 +94,7 @@ final public class BuildFactory {
      */
     public static void buildModel(ModelPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
         ModelClazzBean mcb = new ModelClazzBean(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -120,7 +121,7 @@ final public class BuildFactory {
      */
     public static void buildDAO(DaoPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
@@ -141,7 +142,7 @@ final public class BuildFactory {
      */
     public static void buildService(ServicePO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
@@ -162,7 +163,7 @@ final public class BuildFactory {
      */
     public static void buildServiceImpl(ServiceImplPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
@@ -186,7 +187,7 @@ final public class BuildFactory {
      */
     public static void buildIbatisSQL(SqlXMLPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
         SqlMapBean smb = new SqlMapBean(po.getProperty(), po.getFinder());
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -217,7 +218,7 @@ final public class BuildFactory {
      */
     public static void buildForm(FormPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
         ModelClazzBean mcb = new ModelClazzBean(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -243,7 +244,7 @@ final public class BuildFactory {
     @Deprecated
     public static void buildIbatis(IbatisPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
@@ -267,7 +268,7 @@ final public class BuildFactory {
     @Deprecated
     public static void buildIbatisTest(TestPO po) {
         PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModel(), po);
+        ClazzTree clazz = new ClazzTree(po);
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("date", DateMatch.getNowDate());
@@ -290,33 +291,35 @@ final public class BuildFactory {
      */
     @Deprecated
     public static void buildModuleModel(ModuleModelPO po) {
-        PackageTree pack = new PackageTree(po);
-        ClazzTree clazz = new ClazzTree(po.getModule(), po);
-        ModelClazzBean mcb = new ModelClazzBean(po);
-
-        // try {
-        // CreateFactory.createClazz(clazz.getModelModuleFile());
-        // } catch (IOException ex) {
+        // PackageTree pack = new PackageTree(po);
+        // ClazzTree clazz = new ClazzTree(po.getModule(), po);
+        // ModelClazzBean mcb = new ModelClazzBean(po);
+        //
+        // // try {
+        // // CreateFactory.createClazz(clazz.getModelModuleFile());
+        // // } catch (IOException ex) {
+        // //
         // Logger.getLogger(BuildModuleModelFile.class.getName()).log(Level.SEVERE,
-        // null, ex);
-        // }
-        // System.out.println(clazz.getModelModuleFile());
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("date", DateMatch.getNowDate());
-        map.put("author", CopyRight.AUTHOR);
-        map.put("copyright", CopyRight.COPYRIGHT);
-        map.put("base", po.getBasePackage());
-
-        map.put("model", po.getModuleModel());
-        map.put("model_package", pack.getModelPackage());
-        map.put("model_constructorMethods", mcb.getConstructorMethod());
-        map.put("model_properties", mcb.getProperties());
-        map.put("model_setMethods", mcb.getSetMethod());
-        map.put("model_getMethods", mcb.getGetMethod());
-
-        VelocityFactory vf = new VelocityFactory(VelocityFactory.MODEL_VM, map);
-        new WriteFile(clazz.getModelModuleFile(), vf.getWriter());
+        // // null, ex);
+        // // }
+        // // System.out.println(clazz.getModelModuleFile());
+        //
+        // Map<String, Object> map = new HashMap<String, Object>();
+        // map.put("date", DateMatch.getNowDate());
+        // map.put("author", CopyRight.AUTHOR);
+        // map.put("copyright", CopyRight.COPYRIGHT);
+        // map.put("base", po.getBasePackage());
+        //
+        // map.put("model", po.getModuleModel());
+        // map.put("model_package", pack.getModelPackage());
+        // map.put("model_constructorMethods", mcb.getConstructorMethod());
+        // map.put("model_properties", mcb.getProperties());
+        // map.put("model_setMethods", mcb.getSetMethod());
+        // map.put("model_getMethods", mcb.getGetMethod());
+        //
+        // VelocityFactory vf = new VelocityFactory(VelocityFactory.MODEL_VM,
+        // map);
+        // new WriteFile(clazz.getModelModuleFile(), vf.getWriter());
     }
 
 }

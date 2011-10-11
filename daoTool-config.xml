@@ -12,8 +12,8 @@
 			<model>
 				<name>bank</name>
 				<table>t_bank</table>
-				<prop><name>bank_name</name><type>String</type></prop>
-				<prop><name>create_date</name><type>Timestamp</type></prop>
+				<prop><name>bank_name</name><type>String</type><unique>true</unique></prop>
+				<prop><name>create_date</name><type>Timestamp</type><default>now()</default></prop>
 			</model>
 			<model>
 				<name>bankLog</name>

@@ -7,6 +7,8 @@ package org.conan.tools.core.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.conan.tools.core.util.TableBean;
+
 /**
  * 
  * @author conan
@@ -14,7 +16,7 @@ import java.util.List;
 public class SqlPO extends FilePO {
 
     private String dbname;
-    List<String> tables = new ArrayList<String>();
+    List<TableBean> tables = new ArrayList<TableBean>();
 
     public SqlPO(String root, String dbname) {
         super(root);
@@ -32,7 +34,7 @@ public class SqlPO extends FilePO {
         this.dbname = dbname;
     }
 
-    public List<String> getTables() {
+    public List<TableBean> getTables() {
         return tables;
     }
 

@@ -1,11 +1,9 @@
-#This is ${model} sql
-#@author $author
-#@date $date
+#This is ${dbname} sql
+#@author ${author}
+#@date ${date}
 
-use bank;
+use ${dbname};
 
-CREATE TABLE t_bank(
-	id int primary key auto_increment,
-	bank_name varchar(32) not null unique,
-	create_date timestamp not null default now()
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#foreach($table in $tables )
+$table
+#end

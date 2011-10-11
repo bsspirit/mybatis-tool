@@ -3,8 +3,9 @@ package org.conan.tools.core.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.clazz.PropertyBean;
-import org.conan.tools.core.clazz.SqlFinderBean;
+import org.conan.tools.core.util.PropertyBean;
+import org.conan.tools.core.util.SqlFinderBean;
+import org.conan.tools.core.util.TableBean;
 import org.conan.tools.core.xmlloader.DaoToolType;
 import org.conan.tools.core.xmlloader.FinderType;
 import org.conan.tools.core.xmlloader.ModelType;
@@ -65,7 +66,9 @@ public class ParamObject {
                 daoList.add(new DaoPO(filePath, project, module, model));
                 serviceList.add(new ServicePO(filePath, project, module, model));
                 serviceImplList.add(new ServiceImplPO(filePath, project, module, model));
-                sqlPO.tables.add(table);
+                
+                TableBean tb = new TableBean(table);
+                sqlPO.tables.add(tb);
                 // ibatisList.add(new IbatisPO(filePath, project, module,
                 // model));
                 // testList.add(new TestPO(filePath, project, module, model));
@@ -85,11 +88,14 @@ public class ParamObject {
                     String propName = prop.getName();
                     String propType = prop.getType().value();
                     boolean propNull = prop.isNull();
+                    boolean propUnique = prop.isUnique();
+                    String propDefault = prop.getDefault();
 
                     // model,sql
                     mpo.property.add(new PropertyBean(propName, propType));
                     fpo.property.add(new PropertyBean(propName, propType));
                     spo.property.add(new PropertyBean(propName, propType, propNull));
+                    tb.getPbs().add(new PropertyBean(propName, propType, propNull, propUnique, propDefault));
 
                     // sql
                     if (propName.equals("mark")) {

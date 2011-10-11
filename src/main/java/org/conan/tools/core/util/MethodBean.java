@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.conan.tools.core.clazz;
+package org.conan.tools.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 import org.conan.tools.util.match.StringMatch;
 
 /**
- *
+ * 
  * @author Conan
  */
 public class MethodBean {
@@ -63,15 +63,15 @@ public class MethodBean {
         return sb.toString();
     }
 
-    public String getConstructorFormMethod(){
+    public String getConstructorFormMethod() {
         StringBuilder sb1 = new StringBuilder();
-         sb1.append(StringMatch.first2Uppercase(model)+"DTO dto");
+        sb1.append(StringMatch.first2Uppercase(model) + "DTO dto");
 
         StringBuilder sb2 = new StringBuilder();
         sb2.append("super.setId(dto.getId());\n");
         for (int i = 0; i < pbs.size(); i++) {
             PropertyBean pb = pbs.get(i);
-            sb2.append("super.set"+StringMatch.first2Uppercase(pb.getName()) + "(dto.get" + StringMatch.first2Uppercase(pb.getName()) + "());\n");
+            sb2.append("super.set" + StringMatch.first2Uppercase(pb.getName()) + "(dto.get" + StringMatch.first2Uppercase(pb.getName()) + "());\n");
 
         }
 

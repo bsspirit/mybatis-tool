@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.conan.tools.core.clazz;
+package org.conan.tools.core.util;
 
 import java.util.ArrayList;
 import java.util.List;

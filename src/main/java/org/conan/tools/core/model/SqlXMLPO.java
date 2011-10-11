@@ -7,8 +7,9 @@ package org.conan.tools.core.model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import org.conan.tools.core.clazz.PropertyBean;
-import org.conan.tools.core.clazz.SqlFinderBean;
+
+import org.conan.tools.core.util.PropertyBean;
+import org.conan.tools.core.util.SqlFinderBean;
 
 /**
  *
@@ -17,7 +18,7 @@ import org.conan.tools.core.clazz.SqlFinderBean;
 public class SqlXMLPO extends ClazzPO {
 
     String table;
-    boolean mark;
+    boolean mark;//标记删除
     List<PropertyBean> property = new LinkedList<PropertyBean>();
     List<SqlFinderBean> finder = new ArrayList<SqlFinderBean>();
 

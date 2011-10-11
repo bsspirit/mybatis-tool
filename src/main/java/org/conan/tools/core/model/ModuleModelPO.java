@@ -6,7 +6,8 @@ package org.conan.tools.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.conan.tools.core.clazz.PropertyBean;
+
+import org.conan.tools.core.util.PropertyBean;
 import org.conan.tools.util.match.StringMatch;
 
 /**
