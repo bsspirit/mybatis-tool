@@ -17,6 +17,7 @@ public class PropertyBean {
     private boolean _null;
     private boolean _unique;
     private String _default;
+    private boolean mark;
 
     public PropertyBean(String name, String type) {
         this.name = name;
@@ -27,6 +28,10 @@ public class PropertyBean {
         this.name = name;
         this.type = type;
         this._null = _null;
+        if (name.equals("mark")) {
+            this.mark = true;
+        }
+
     }
 
     public PropertyBean(String name, String type, boolean _null, boolean _unique, String _default) {
@@ -62,6 +67,14 @@ public class PropertyBean {
 
     public void setNull(boolean _null) {
         this._null = _null;
+    }
+
+    public boolean isMark() {
+        return mark;
+    }
+
+    public void setMark(boolean mark) {
+        this.mark = mark;
     }
 
     public String getTypeName() {

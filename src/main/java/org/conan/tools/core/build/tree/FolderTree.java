@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.FilePO;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -18,8 +17,8 @@ public class FolderTree extends BaseTree {
     public FolderTree() {
     }
 
-    public FolderTree(FilePO po) {
-        this.root = po.getRoot();
+    public FolderTree(String root) {
+        this.root = root;
     }
 
     public String getRootFolder() {

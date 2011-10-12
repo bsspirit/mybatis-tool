@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.ClazzPO;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -15,13 +14,13 @@ public class ClazzTree extends PackageTree {
 
     protected String model;
 
-    public ClazzTree(ClazzPO po) {
-        super(po);
-        this.model = po.getModel();
+    public ClazzTree(String root, String basePackage, String module, String model) {
+        super(root, basePackage, module);
+        this.model = model;
     }
 
     public String getModel() {
-        return model;
+        return StringMatch.first2Uppercase(model);
     }
 
     public String getDAOFile() {
@@ -114,7 +113,7 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getModelModuleClazz() {
-        return StringMatch.first2Uppercase(model) + MODULE_DTO + JAVA_FILE;
+        return getModel() + MODULE_DTO + JAVA_FILE;
     }
 
     public String getModelLowercase() {

@@ -3,15 +3,10 @@ package org.conan.tools.core.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.SqlPO;
-
 public class TableBean {
 
     private String table;
     private List<PropertyBean> pbs = new ArrayList<PropertyBean>();
-
-    public TableBean(SqlPO po) {
-    }
 
     public TableBean(String table) {
         this.table = table;
@@ -55,7 +50,5 @@ public class TableBean {
         sb.append(")ENGINE=InnoDB DEFAULT CHARSET=utf8;\n");
         return sb.toString();
     }
-
-  
 
 }

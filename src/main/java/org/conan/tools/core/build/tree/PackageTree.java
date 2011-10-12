@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.FilePO;
-import org.conan.tools.core.model.PackagePO;
 import org.conan.tools.util.match.StringMatch;
 
 /**
@@ -14,17 +12,14 @@ import org.conan.tools.util.match.StringMatch;
  */
 public class PackageTree extends FolderTree {
 
-    public PackageTree() {
-    }
+    protected String basePackage;
+    protected String module;
 
-    public PackageTree(PackagePO po) {
-        super(new FilePO(po.getRoot()));
-        this.basePackage = po.getBasePackage();
-        this.module = po.getModule();
+    public PackageTree(String root, String basePackage, String module) {
+        super(root);
+        this.module = module;
+        this.basePackage = basePackage;
     }
-
-    private String module;
-    private String basePackage;
 
     public String getBaseFolder() {
         String tmp = getSrcFolder() + File.separator + basePackage;
@@ -110,18 +105,6 @@ public class PackageTree extends FolderTree {
 
     public String getFormWebPackage() {
         return getModulePackage() + POINT + WEB;
-    }
-
-    public void setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
-    }
-
-    public void setModule(String module) {
-        this.module = module;
-    }
-
-    public String getModule() {
-        return module;
     }
 
     @Override

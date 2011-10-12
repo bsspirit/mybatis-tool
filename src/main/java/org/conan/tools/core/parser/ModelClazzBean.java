@@ -7,12 +7,12 @@ package org.conan.tools.core.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.FormPO;
-import org.conan.tools.core.model.ModelPO;
-import org.conan.tools.core.model.ModuleModelPO;
+import org.conan.tools.core.po.model.FormPO;
+import org.conan.tools.core.po.model.ModelPO;
+import org.conan.tools.core.po.model.ModuleModelPO;
 
 /**
- *
+ * 
  * @author Conan
  */
 public class ModelClazzBean {
@@ -27,21 +27,27 @@ public class ModelClazzBean {
         this.constructorMethod = mb.getConstructorMethod();
     }
 
-    public ModelClazzBean(FormPO po){
-        List<PropertyBean> propertiesBean = po.getProperty();
-        setProperties(propertiesBean);
+//    public ModelClazzBean(FormPO po) {
+//        List<PropertyBean> propertiesBean = po.getProperty();
+//        setProperties(propertiesBean);
+//
+//        MethodBean mb = new MethodBean(po.getModel(), po.getProperty());
+//        this.getMethod = mb.getGetMethod();
+//        this.setMethod = mb.getSetMethod();
+//        this.constructorMethod = mb.getConstructorFormMethod();
+//    }
+//
+//    // public ModelClazzBean(ModelPO po) {
+//    // List<PropertyBean> propertiesBean = po.getProperty();
+//    // setProperties(propertiesBean);
+//    // setMethod(po);
+//    // }
 
-        MethodBean mb = new MethodBean(po.getModel(), po.getProperty());
-        this.getMethod = mb.getGetMethod();
-        this.setMethod = mb.getSetMethod();
-        this.constructorMethod = mb.getConstructorFormMethod();
+    public ModelClazzBean(String model, List<PropertyBean> propertiesBean) {
+        setProperties(propertiesBean);
+        setMethod(model, propertiesBean);
     }
 
-    public ModelClazzBean(ModelPO po) {
-        List<PropertyBean> propertiesBean = po.getProperty();
-        setProperties(propertiesBean);
-        setMethod(po);
-    }
     private List<String> properties = new ArrayList<String>(10);
     private String setMethod;
     private String getMethod;
@@ -53,8 +59,8 @@ public class ModelClazzBean {
         }
     }
 
-    public void setMethod(ModelPO po) {
-        MethodBean mb = new MethodBean(po.getModel(), po.getProperty());
+    public void setMethod(String model, List<PropertyBean> propertiesBean) {
+        MethodBean mb = new MethodBean(model, propertiesBean);
         this.getMethod = mb.getGetMethod();
         this.setMethod = mb.getSetMethod();
         this.constructorMethod = mb.getConstructorMethod();

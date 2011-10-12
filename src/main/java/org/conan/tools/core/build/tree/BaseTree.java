@@ -10,7 +10,7 @@ abstract public class BaseTree {
     static final String SQL = "sql";
     static final String WEB = "web";
     static final String DAO = "dao";
-    
+
     static final String DAO_I = "DAO";
     static final String DAO_IBATIS = "DAOIbatis";
     static final String DAO_IBATIS_TEST = "DAOIbatisTest";

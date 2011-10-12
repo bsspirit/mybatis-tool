@@ -4,12 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.FilePO;
-
 public class ResourceTree extends FolderTree {
 
-    public ResourceTree(FilePO po) {
-        super(po);
+    public ResourceTree(String root) {
+        super(root);
     }
 
     // file name ///////////////////////////////////////////////////

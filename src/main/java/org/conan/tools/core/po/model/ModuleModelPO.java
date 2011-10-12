@@ -2,12 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.conan.tools.core.model;
+package org.conan.tools.core.po.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.conan.tools.core.parser.PropertyBean;
+import org.conan.tools.core.po.file.PackagePO;
 import org.conan.tools.util.match.StringMatch;
 
 /**

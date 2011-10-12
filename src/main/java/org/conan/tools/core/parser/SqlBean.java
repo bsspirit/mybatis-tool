@@ -3,14 +3,12 @@ package org.conan.tools.core.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.conan.tools.core.model.SqlPO;
-
 public class SqlBean {
 
     private List<TableBean> list = new ArrayList<TableBean>();
 
-    public SqlBean(SqlPO po) {
-        list.addAll(po.getTables());
+    public SqlBean(List<TableBean> tb) {
+        list.addAll(tb);
     }
 
     public List<String> getSqlCreateTables() {

@@ -1,17 +1,19 @@
-package org.conan.tools.core.model;
+package org.conan.tools.core.po.config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpringServicePO extends FilePO {
+import org.conan.tools.core.po.file.FilePO;
+
+public class MybatisXMLPO extends FilePO {
 
     private List<String> modules = new ArrayList<String>();
     private String project;
 
-    public SpringServicePO() {
+    public MybatisXMLPO() {
     }
 
-    public SpringServicePO(String root, String project) {
+    public MybatisXMLPO(String root, String project) {
         super(root);
         this.project = project;
     }
