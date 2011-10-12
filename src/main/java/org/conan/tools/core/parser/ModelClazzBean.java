@@ -17,31 +17,15 @@ import org.conan.tools.core.po.model.ModuleModelPO;
  */
 public class ModelClazzBean {
 
-    public ModelClazzBean(ModuleModelPO po) {
-        List<PropertyBean> propertiesBean = po.getProperty();
-        setProperties(propertiesBean);
-
-        MethodBean mb = new MethodBean(po.getModuleModel(), po.getProperty());
-        this.getMethod = mb.getGetMethod();
-        this.setMethod = mb.getSetMethod();
-        this.constructorMethod = mb.getConstructorMethod();
-    }
-
-//    public ModelClazzBean(FormPO po) {
-//        List<PropertyBean> propertiesBean = po.getProperty();
-//        setProperties(propertiesBean);
-//
-//        MethodBean mb = new MethodBean(po.getModel(), po.getProperty());
-//        this.getMethod = mb.getGetMethod();
-//        this.setMethod = mb.getSetMethod();
-//        this.constructorMethod = mb.getConstructorFormMethod();
-//    }
-//
-//    // public ModelClazzBean(ModelPO po) {
-//    // List<PropertyBean> propertiesBean = po.getProperty();
-//    // setProperties(propertiesBean);
-//    // setMethod(po);
-//    // }
+    // public ModelClazzBean(ModuleModelPO po) {
+    // List<PropertyBean> propertiesBean = po.getProperty();
+    // setProperties(propertiesBean);
+    //
+    // MethodBean mb = new MethodBean(po.getModuleModel(), po.getProperty());
+    // this.getMethod = mb.getGetMethod();
+    // this.setMethod = mb.getSetMethod();
+    // this.constructorMethod = mb.getConstructorMethod();
+    // }
 
     public ModelClazzBean(String model, List<PropertyBean> propertiesBean) {
         setProperties(propertiesBean);

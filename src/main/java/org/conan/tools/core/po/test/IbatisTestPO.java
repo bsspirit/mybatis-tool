@@ -7,15 +7,10 @@ package org.conan.tools.core.po.test;
 import org.conan.tools.core.po.file.ClazzPO;
 
 /**
- *
+ * 
  * @author conan
  */
+@Deprecated
 public class IbatisTestPO extends ClazzPO {
 
-    public IbatisTestPO(String root, String basePackage, String module, String model) {
-        super(root, basePackage, module, model);
-    }
-
-    public IbatisTestPO() {
-    }
 }
