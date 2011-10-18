@@ -22,6 +22,7 @@ final public class CreateFactory {
         po.getSqlCreatePO().create();
         po.getSqlDropPO().create();
         po.getServiceTestPO().create();
+        po.getSpringDaoXMLPO().create();
     }
 
     // /**

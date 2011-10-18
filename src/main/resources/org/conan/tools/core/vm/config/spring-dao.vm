@@ -12,9 +12,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     @date $date
 -->
 
-	<bean id="bankDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="org.conan.bank.dao.BankDAO" />
-	</bean>
+#foreach($bean in ${dao_beans})
+${bean}
+#end
 	
 </beans>

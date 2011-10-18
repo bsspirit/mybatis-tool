@@ -3,6 +3,8 @@ package org.conan.tools.core.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.conan.tools.core.po.config.MybatisXMLPO;
+import org.conan.tools.core.po.config.SpringDaoXMLPO;
 import org.conan.tools.core.po.config.SpringServiceXMLPO;
 import org.conan.tools.core.po.dao.DaoPO;
 import org.conan.tools.core.po.dao.IbatisPO;
@@ -168,6 +170,14 @@ public class ParamObject {
         return new SpringServiceXMLPO(filePath, project, modules);
     }
 
+    public SpringDaoXMLPO getSpringDaoXMLPO() {
+        return new SpringDaoXMLPO(filePath, project, modules);
+    }
+    
+//    public MybatisXMLPO getMybatisXMLPO() {
+//        return new MybatisXMLPO(filePath, project, modules);
+//    }
+    
     public ModelPO getModelPO() {
         return new ModelPO(filePath, project, modules);
     }
