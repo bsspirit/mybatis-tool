@@ -21,6 +21,7 @@ final public class CreateFactory {
         po.getServiceImpl().create();
         po.getSqlCreatePO().create();
         po.getSqlDropPO().create();
+        po.getServiceTestPO().create();
     }
 
     // /**

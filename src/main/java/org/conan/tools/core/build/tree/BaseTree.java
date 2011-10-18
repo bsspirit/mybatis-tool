@@ -10,12 +10,14 @@ abstract public class BaseTree {
     static final String SQL = "sql";
     static final String WEB = "web";
     static final String DAO = "dao";
+    static final String SERVICE = "service";
 
     static final String DAO_I = "DAO";
     static final String DAO_IBATIS = "DAOIbatis";
     static final String DAO_IBATIS_TEST = "DAOIbatisTest";
-    static final String SERVICE = "service";
+    static final String SERVICE_I = "Service";
     static final String SERVICE_IMPL = "ServiceImpl";
+    static final String SERVICE_IMPL_TEST = "ServiceImplTest";
     static final String IMPL = "impl";
     static final String IBATIS = "ibatis";
     static final String MODEL = "model";

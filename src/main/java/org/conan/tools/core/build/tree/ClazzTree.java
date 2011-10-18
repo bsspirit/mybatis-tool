@@ -49,6 +49,10 @@ public class ClazzTree extends PackageTree {
         return getServiceImplFolder() + File.separator + getServiceImplClazz();
     }
 
+    public String getServiceImplTestFile() {
+        return getServiceTestFolder() + File.separator + getServiceImplTestClazz();
+    }
+
     public String getModelFile() {
         return getModelFolder() + File.separator + getModelClazz();
     }
@@ -66,7 +70,7 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getServicePackageClazz() {
-        return getServicePackage() + PackageTree.POINT + getModel() + SERVICE;
+        return getServicePackage() + PackageTree.POINT + getModel() + SERVICE_I;
     }
 
     @Deprecated
@@ -93,11 +97,15 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getServiceClazz() {
-        return getModel() + SERVICE + JAVA_FILE;
+        return getModel() + SERVICE_I + JAVA_FILE;
     }
 
     public String getServiceImplClazz() {
         return getModel() + SERVICE_IMPL + JAVA_FILE;
+    }
+
+    public String getServiceImplTestClazz() {
+        return getModel() + SERVICE_IMPL_TEST + JAVA_FILE;
     }
 
     public String getWebFormClazz() {
@@ -128,6 +136,7 @@ public class ClazzTree extends PackageTree {
         tree.add(getWebFormFile());
         tree.add(getServiceFile());
         tree.add(getServiceImplFile());
+        tree.add(getServiceImplTestFile());
         // tree.add(getIbatisFile());
         // tree.add(getIbatisTestFile());
         return tree;
@@ -141,6 +150,7 @@ public class ClazzTree extends PackageTree {
         sb.append(getServiceClazz() + "\n");
         sb.append(getServiceImplClazz() + "\n");
         sb.append(getWebFormClazz() + "\n");
+        sb.append(getServiceImplTestClazz() + "\n");
         // sb.append(getIbatisClazz() + "\n");
         // sb.append(getIbatisTestClazz() + "\n");
         return sb.toString();

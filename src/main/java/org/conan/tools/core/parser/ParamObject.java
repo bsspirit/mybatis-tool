@@ -20,6 +20,7 @@ import org.conan.tools.core.po.service.ServicePO;
 import org.conan.tools.core.po.sql.SqlCreatePO;
 import org.conan.tools.core.po.sql.SqlDropPO;
 import org.conan.tools.core.po.test.IbatisTestPO;
+import org.conan.tools.core.po.test.ServiceTestPO;
 import org.conan.tools.core.xmlloader.DaoToolType;
 import org.conan.tools.core.xmlloader.ModuleType;
 
@@ -157,6 +158,10 @@ public class ParamObject {
     
     public SqlDropPO getSqlDropPO() {
         return new SqlDropPO(filePath, dbname, modules);
+    }
+    
+    public ServiceTestPO getServiceTestPO(){
+        return new ServiceTestPO(filePath, project, modules);
     }
 
     public SpringServiceXMLPO getSpringServicePO() {

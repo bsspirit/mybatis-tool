@@ -31,7 +31,7 @@ public class VelocityFactory {
     public final static String SQL_DROP_VM = "org/conan/tools/core/vm/sql/sqlDrop.vm";
     // test
     public final static String IBATIS_TEST_VM = "org/conan/tools/core/vm/test/ibatisImplTest.vm";
-    public final static String SERIVCE_TEST_VM = "org/conan/tools/core/vm/test/serviceTest.vm";
+    public final static String SERIVCE_TEST_VM = "org/conan/tools/core/vm/test/serviceImplTest.vm";
     //config
     public final static String CONFIG_MYBATIS_VM = "org/conan/tools/core/vm/config/mybatis.vm";
     public final static String CONFIG_SPRING_DAO_VM = "org/conan/tools/core/vm/config/spring-dao.vm";

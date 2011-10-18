@@ -1,33 +1,36 @@
 $copyright
-package ${dao_ibatis_package};
+package ${service_impl_package};
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.conan.common.dao.test.BaseDAOTestCaseJunit44;
-import org.conan.common.model.PageInObject;
-import org.conan.common.model.PageOutObject;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ${import_dao};
+import ${base}.base.BaseTestCase;
+import ${base}.base.service.PageInObject;
+import ${base}.base.service.PageOutObject;
+
+import ${import_service};
 import ${import_model};
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * This is Test of ${model} DAO implemention
+ * This is Test of ${model} Service implemention
  * @author $author
  * @date $date
  */
-public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
+public class ${model}ServiceImplTest extends BaseTestCase {
 
-    private ${model}DAO ${model_1}DAO;
+    private ${model}Service ${model_1}Service;
     private ${model}DTO dto;
 
-    public ${model}DAOIbatisTest() {
+    public ${model}ServiceImplTest() {
     }
 
     @Before
@@ -43,14 +46,14 @@ public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
     @Test
     public void insert${model}() {
         boolean expected = true;
-        int actual = ${model_1}DAO.insert${model}(dto);
+        int actual = ${model_1}Service.insert${model}(dto);
         assertEquals(expected, actual > 1);
     }
 
     @Test
     public void delete${model}() {
         int expected = 1;
-        int actual = ${model_1}DAO.delete${model}(1);
+        int actual = ${model_1}Service.delete${model}(1);
         assertEquals(expected, actual);
     }
 
@@ -59,13 +62,13 @@ public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
         dto.setId(2);
 
         int expected = 1;
-        int actual = ${model_1}DAO.update${model}(dto);
+        int actual = ${model_1}Service.update${model}(dto);
         assertEquals(expected, actual);
     }
 
     @Test
     public void get${model}ById() {
-        ${model}DTO tmp = ${model_1}DAO.get${model}ById(1);
+        ${model}DTO tmp = ${model_1}Service.get${model}ById(1);
 
         int expected = 1;
         int actual = tmp.getId();
@@ -74,7 +77,7 @@ public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
 
     @Test
     public void get${model}s() {
-        List<${model}DTO> list = ${model_1}DAO.get${model}s(null);
+        List<${model}DTO> list = ${model_1}Service.get${model}s(null);
 
         int expected = 1;
         int actual = list.get(0).getId();
@@ -83,10 +86,10 @@ public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
 
     @Test
     public void get${model}sPaging() {
-        Map map = new HashMap();
+        Map<String,Object> map = new HashMap<String,Object>();
         PageInObject page = new PageInObject(0, 4, "id", "asc");
 
-        PageOutObject<${model}DTO> pageOut = ${model_1}DAO.get${model}sPaging(map,page);
+        PageOutObject<${model}DTO> pageOut = ${model_1}Service.get${model}sPaging(map,page);
 
         int expected = 4;
         int actual = pageOut.getList().size();
@@ -94,7 +97,7 @@ public class ${model}DAOIbatisTest extends BaseDAOTestCaseJunit44 {
     }
 
     @Autowired
-    public void set${model}DAO(${model}DAO ${model_1}DAO) {
-        this.${model_1}DAO = ${model_1}DAO;
+    public void set${model}Service(${model}Service ${model_1}Service) {
+        this.${model_1}Service = ${model_1}Service;
     }
 }
