@@ -16,19 +16,19 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="bankDTO" type="org.conan.bank.model.BankDTO" />
-		<typeAlias alias="bankLogDTO" type="org.conan.bank.model.BankLogDTO" />
-		<typeAlias alias="bankTransferDTO" type="org.conan.bank.model.BankTransferDTO" />
+#foreach($alias in ${type_alias})
+${alias}
+#end
 	</typeAliases>
 
 	<mappers>
 		<!-- system -->
 		<mapper resource="mybatis-mysql.xml" />
-
-		<!-- bank -->
-		<mapper resource="org/conan/bank/dao/bank.xml" />
-		<mapper resource="org/conan/bank/dao/bankLog.xml" />
-		<mapper resource="org/conan/bank/dao/bankTransfer.xml" />
+		
+		<!-- model -->
+#foreach($mapper in ${xml_mappers})
+${mapper}
+#end
 	</mappers>
 	
 </configuration>

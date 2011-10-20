@@ -157,12 +157,12 @@ public class ParamObject {
     public SqlCreatePO getSqlCreatePO() {
         return new SqlCreatePO(filePath, dbname, modules);
     }
-    
+
     public SqlDropPO getSqlDropPO() {
         return new SqlDropPO(filePath, dbname, modules);
     }
-    
-    public ServiceTestPO getServiceTestPO(){
+
+    public ServiceTestPO getServiceTestPO() {
         return new ServiceTestPO(filePath, project, modules);
     }
 
@@ -173,11 +173,11 @@ public class ParamObject {
     public SpringDaoXMLPO getSpringDaoXMLPO() {
         return new SpringDaoXMLPO(filePath, project, modules);
     }
-    
-//    public MybatisXMLPO getMybatisXMLPO() {
-//        return new MybatisXMLPO(filePath, project, modules);
-//    }
-    
+
+    public MybatisXMLPO getMybatisXMLPO() {
+        return new MybatisXMLPO(filePath, project, modules);
+    }
+
     public ModelPO getModelPO() {
         return new ModelPO(filePath, project, modules);
     }

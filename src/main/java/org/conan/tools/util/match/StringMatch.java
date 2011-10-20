@@ -11,6 +11,10 @@ public class StringMatch {
     public static String point2Separator(String str) {
         return str.replace('.', File.separatorChar);
     }
+    
+    public static String point2left(String str) {
+        return str.replace('.', '/');
+    }
 
     public static String transfer2Separator(String str) {
         String tmp = str.replace('/', File.separatorChar);
