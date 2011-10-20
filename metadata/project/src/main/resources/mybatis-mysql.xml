@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="mysql">
+
+    <sql id="mysql.page.order">
+	    <if test="page !=null ">
+	        <if test="page.pgIndex !=null ">
+	            <if test="page.pgSort !=null ">
+	                ORDER BY ${page.pgIndex} ${page.pgSort}
+	            </if>
+	        </if>
+        </if>
+    </sql>
+
+    <sql id="mysql.page.limit">
+    	<if test="page !=null ">
+	        <if test="page.pgBegin != null">
+	            <if test="page.pgSize != null">
+	                LIMIT ${page.pgBegin} , ${page.pgSize}
+	            </if>
+	        </if>
+	    </if>
+    </sql>
+
+</mapper>

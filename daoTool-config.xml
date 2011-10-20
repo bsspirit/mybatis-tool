@@ -39,14 +39,5 @@
 				<prop><name>tran_ref_no</name><type>varchar(16)</type></prop>
 			</model>
 		</module>
-		<module>
-			<name>user</name>
-			<model>
-				<name>user</name>
-				<table>t_user</table>
-				<prop><name>name</name><type>varchar(128)</type></prop>
-				<prop><name>create_date</name><type>timestamp</type></prop>
-			</model>
-		</module>
 	</modules>
 </daoTool>

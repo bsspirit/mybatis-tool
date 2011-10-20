@@ -4,6 +4,7 @@
  */
 package org.conan.tools.core.po.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,18 +34,18 @@ public class FormPO extends ModelPO {
     public void create() {
         for (ModuleType module : getModuleTypes()) {
             for (ModelType model : module.getModel()) {
+                List<PropertyBean> property = new ArrayList<PropertyBean>(10);
                 for (PropType prop : model.getProp()) {
-                    this.property.add(new PropertyBean(prop.getName(), prop.getType()));
+                    property.add(new PropertyBean(prop.getName(), prop.getType()));
                 }
-                write(module, model);
+                write(module, model, property);
             }
         }
     }
 
-    @Override
-    protected void write(ModuleType module, ModelType model) {
+    protected void write(ModuleType module, ModelType model, List<PropertyBean> property) {
         ClazzTree clazz = new ClazzTree(this.root, this.basePackage, module.getName(), model.getName());
-        ModelClazzBean mcb = new ModelClazzBean(clazz.getModel(), this.property);
+        ModelClazzBean mcb = new ModelClazzBean(clazz.getModel(), property);
 
         Map<String, Object> map = this.getVMMap();
         map.put("model", clazz.getModel());

@@ -66,7 +66,7 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getDAOPackageClazz() {
-        return getDAOPackage() + PackageTree.POINT + getModel() + DAO;
+        return getDAOPackage() + PackageTree.POINT + getModel() + DAO_I;
     }
 
     public String getServicePackageClazz() {

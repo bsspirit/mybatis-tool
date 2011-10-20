@@ -25,9 +25,6 @@ import org.conan.tools.util.match.JavaSQLMatch;
  */
 public class ModelPO extends ClazzPO {
 
-    protected List<PropertyBean> property = new ArrayList<PropertyBean>(10);
-    private List<String> imports = new ArrayList<String>(10);
-
     public ModelPO() {
     }
 
@@ -39,25 +36,27 @@ public class ModelPO extends ClazzPO {
     public void create() {
         for (ModuleType module : getModuleTypes()) {
             for (ModelType model : module.getModel()) {
+                List<PropertyBean> property = new ArrayList<PropertyBean>(10);
+                List<String> imports = new ArrayList<String>(10);
                 for (PropType prop : model.getProp()) {
-                    this.property.add(new PropertyBean(prop.getName(), prop.getType()));
+                    property.add(new PropertyBean(prop.getName(), prop.getType()));
                     if (JavaSQLMatch.isJavaImport(prop.getType())) {
-                        this.imports.add(JavaSQLMatch.sql2JAVA(prop.getType()));
+                        imports.add(JavaSQLMatch.sql2JAVA(prop.getType()));
                     }
                 }
-                write(module, model);
+                write(module, model, property, imports);
             }
         }
     }
 
-    protected void write(ModuleType module, ModelType model) {
+    protected void write(ModuleType module, ModelType model, List<PropertyBean> property, List<String> imports) {
         ClazzTree clazz = new ClazzTree(this.root, this.basePackage, module.getName(), model.getName());
-        ModelClazzBean mcb = new ModelClazzBean(clazz.getModel(), this.property);
+        ModelClazzBean mcb = new ModelClazzBean(clazz.getModel(), property);
 
         Map<String, Object> map = this.getVMMap();
         map.put("model", clazz.getModel());
         map.put("model_package", clazz.getModelPackage());
-        map.put("model_imports", this.imports);
+        map.put("model_imports", imports);
         map.put("model_constructorMethods", mcb.getConstructorMethod());
         map.put("model_properties", mcb.getProperties());
         map.put("model_setMethods", mcb.getSetMethod());
