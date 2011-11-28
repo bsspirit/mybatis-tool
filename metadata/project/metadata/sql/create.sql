@@ -1,4 +1,4 @@
-use bank;
+use demo;
 
 CREATE TABLE t_bank(
 	id int primary key auto_increment,
