@@ -20,7 +20,6 @@ import org.conan.tools.core.xmlloader.ModelType;
 import org.conan.tools.core.xmlloader.ModuleType;
 import org.conan.tools.core.xmlloader.ModulesType;
 import org.conan.tools.core.xmlloader.PropType;
-import org.conan.tools.core.xmlloader.TypeSType;
 
 /**
  * 

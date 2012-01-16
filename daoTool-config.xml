@@ -5,6 +5,7 @@
 	<filePath>metadata/gen</filePath>
 	<project>org.conan</project>
 	<dbname>bank</dbname>
+	<dbtype>mysql</dbtype>
 	
 	<modules>
 		<module>
