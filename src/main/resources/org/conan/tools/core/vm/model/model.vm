@@ -5,7 +5,7 @@ package ${model_package};
 #foreach($import in $model_imports )
 import ${import};
 #end
-import ${base}.base.BaseObject;
+import org.conan.base.BaseObject;
 
 /**
  * This is $model Model DTO

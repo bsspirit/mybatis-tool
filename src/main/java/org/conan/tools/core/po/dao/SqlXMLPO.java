@@ -5,7 +5,6 @@
 package org.conan.tools.core.po.dao;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class SqlXMLPO extends ClazzPO {
 
     private boolean mark;// 标记删除
     private List<SqlFinderBean> finder = new ArrayList<SqlFinderBean>();
-    protected List<PropertyBean> property = new LinkedList<PropertyBean>();
+    protected List<PropertyBean> property = new ArrayList<PropertyBean>();
 
     public SqlXMLPO() {
     }
@@ -41,18 +40,11 @@ public class SqlXMLPO extends ClazzPO {
     public void create() {
         for (ModuleType module : getModuleTypes()) {
             for (ModelType model : module.getModel()) {
-
                 for (PropType prop : model.getProp()) {
                     this.property.add(new PropertyBean(prop.getName(), prop.getType(), prop.isNull()));
-                    // for (FinderType finder : prop.getFinder()) {
-                    // // String id = finder.getId();
-                    // // String sql = finder.getSql();
-                    // // spo.getFinder().add(new
-                    // // SqlFinderBean(StringMatch.first2Lowercase(model) +
-                    // // "." + id, sql));
-                    // }
                 }
                 write(module, model);
+                this.property.clear();
             }
         }
     }

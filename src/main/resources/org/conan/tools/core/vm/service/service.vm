@@ -11,9 +11,9 @@ package ${service_package};
 
 import java.util.List;
 import java.util.Map;
-import ${base}.base.service.PageInObject;
-import ${base}.base.service.PageOutObject;
-import ${base}.base.service.SpringService;
+import org.conan.base.service.PageInObject;
+import org.conan.base.service.PageOutObject;
+import org.conan.base.service.SpringService;
 
 import ${import_model};
 

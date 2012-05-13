@@ -39,10 +39,23 @@ public class TableBean {
         sb.append("    id INT PRIMARY KEY AUTO_INCREMENT,\n");
         for (PropertyBean pb : pbs) {
             sb.append("    " + pb.getName());
-            sb.append(" " + pb.getType().toUpperCase());
+
+            if (pb.getType().equalsIgnoreCase("long")) {
+                sb.append(" BIGINT");
+            } else {
+                sb.append(" " + pb.getType().toUpperCase());
+            }
+
             sb.append(" " + (pb.isNull() ? "NULL" : "NOT NULL"));
             sb.append(" " + (pb.isUnique() ? "UNIQUE" : ""));
-            sb.append(" " + (pb.getDefault() != null ? "DEFAULT " + pb.getDefault() : ""));
+
+            if (pb.getDefault() != null) {
+                String defaultStr = pb.getDefault();
+                if (pb.getType().toUpperCase().contains("CHAR")) {
+                    defaultStr = "'" + pb.getDefault() + "'";
+                }
+                sb.append(" " + (pb.getDefault() != null ? "DEFAULT " + defaultStr : ""));
+            }
             sb.append(",");
             sb.append("\n");
         }

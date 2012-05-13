@@ -47,7 +47,7 @@ public class SqlCreatePO extends FilePO {
             for (ModelType model : module.getModel()) {
                 TableBean tb = new TableBean(model.getTable());
                 for (PropType prop : model.getProp()) {
-                    tb.getPbs().add(new PropertyBean(prop.getName(), prop.getType()));
+                    tb.getPbs().add(new PropertyBean(prop.getName(), prop.getType(),prop.isNull(), prop.isUnique(), prop.getDefault()));
                 }
                 tables.add(tb);
             }

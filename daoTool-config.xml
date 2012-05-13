@@ -3,41 +3,59 @@
 	xsi:noNamespaceSchemaLocation="./metadata/jaxb/DAOTool.xsd">
 
 	<filePath>metadata/gen</filePath>
-	<project>org.conan</project>
-	<dbname>bank</dbname>
+	<project>org.conan.fans</project>
+	<dbname>fans</dbname>
 	<dbtype>mysql</dbtype>
 	
 	<modules>
 		<module>
-			<name>bank</name>
+			<name>weibo</name>
 			<model>
-				<name>bank</name>
-				<table>t_bank</table>
-				<prop><name>bank_name</name><type>varchar(128)</type><unique>true</unique></prop>
+				<name>userRelate</name>
+				<table>t_user_relate</table>
+				<prop><name>uid</name><type>long</type></prop>
+				<prop><name>fansid</name><type>long</type></prop>
 				<prop><name>create_date</name><type>timestamp</type><default>now()</default></prop>
 			</model>
 			<model>
-				<name>bankLog</name>
-				<table>t_bank_log</table>
-				<prop><name>bankid</name><type>int</type></prop>
-				<prop><name>tran_ref_no</name><type>varchar(16)</type></prop>
-				<prop><name>code</name><type>varchar(32)</type></prop>
-				<prop><name>description</name><type>text</type></prop>
-				<prop><name>create_date</name><type>timestamp</type></prop>
+				<name>user</name>
+				<table>t_user</table>
+				<prop><name>uid</name><type>long</type><unique>true</unique></prop>
+				<prop><name>screen_name</name><type>varchar(32)</type><unique>true</unique></prop>
+				<prop><name>name</name><type>varchar(32)</type><unique>true</unique></prop>
+				<prop><name>province</name><type>int</type><null>true</null></prop>
+				<prop><name>city</name><type>int</type><null>true</null></prop>
+				<prop><name>location</name><type>varchar(32)</type><null>true</null></prop>
+				<prop><name>description</name><type>varchar(128)</type><null>true</null></prop>
+				<prop><name>url</name><type>varchar(128)</type><null>true</null></prop>
+				<prop><name>profile_image_url</name><type>varchar(128)</type><null>true</null></prop>
+				<prop><name>domain</name><type>varchar(32)</type><null>true</null></prop>
+				<prop><name>gender</name><type>varchar(1)</type><default>m</default><null>true</null></prop>
+				<prop><name>followers_count</name><type>int</type><default>0</default></prop>
+				<prop><name>friends_count</name><type>int</type><default>0</default></prop>
+				<prop><name>statuses_count</name><type>int</type><default>0</default></prop>
+				<prop><name>favourites_count</name><type>int</type><default>0</default></prop>
+				<prop><name>created_at</name><type>datetime</type></prop>
+				<prop><name>following</name><type>varchar(1)</type><default>f</default></prop>
+				<prop><name>allow_all_act_msg</name><type>varchar(1)</type><default>f</default><null>true</null></prop>
+				<prop><name>remark</name><type>varchar(32)</type><null>true</null></prop>
+				<prop><name>geo_enabled</name><type>varchar(1)</type><default>t</default><null>true</null></prop>
+				<prop><name>verified</name><type>varchar(1)</type><default>f</default><null>true</null></prop>
+				<prop><name>allow_all_comment</name><type>varchar(1)</type><default>t</default><null>true</null></prop>
+				<prop><name>avatar_large</name><type>varchar(128)</type><null>true</null></prop>
+				<prop><name>verified_reason</name><type>varchar(32)</type><null>true</null></prop>
+				<prop><name>follow_me</name><type>varchar(1)</type><default>f</default><null>true</null></prop>
+				<prop><name>online_status</name><type>int</type><null>true</null></prop>
+				<prop><name>bi_followers_count</name><type>int</type><default>0</default><null>true</null></prop>
+				<prop><name>lang</name><type>varchar(8)</type><null>true</null></prop>
+				<prop><name>weihao</name><type>varchar(32)</type><null>true</null></prop>
+				<prop><name>verifiedType</name><type>int</type><null>true</null></prop>
+				<prop><name>create_date</name><type>timestamp</type><default>now()</default></prop>
 			</model>
 			<model>
-				<name>bankTransfer</name>
-				<table>t_bank_transfer</table>
-				<prop><name>bankid</name><type>int</type></prop>
-				<prop><name>tran_date</name><type>varchar(8)</type><null>true</null></prop>
-				<prop><name>tran_time</name><type>varchar(6)</type><null>true</null></prop>
-				<prop><name>tran_flag</name><type>varchar(8)</type><null>true</null></prop>
-				<prop><name>tran_msg</name><type>varchar(512)</type><null>true</null></prop>
-				<prop><name>taocan_flag</name><type>varchar(8)</type><null>true</null></prop>
-				<prop><name>taocan_type</name><type>varchar(8)</type><null>true</null></prop>
-				<prop><name>tran_fee</name><type>varchar(16)</type><null>true</null></prop>
-				<prop><name>p_flowno</name><type>varchar(16)</type><null>true</null></prop>
-				<prop><name>tran_ref_no</name><type>varchar(16)</type></prop>
+				<name>provinces</name>
+				<table>t_provinces</table>
+				<prop><name>name</name><type>varchar(16)</type></prop>
 			</model>
 		</module>
 	</modules>

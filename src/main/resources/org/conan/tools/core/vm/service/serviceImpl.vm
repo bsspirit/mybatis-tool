@@ -24,9 +24,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ${base}.base.service.SpringServiceImpl;
-import ${base}.base.service.PageInObject;
-import ${base}.base.service.PageOutObject;
+import org.conan.base.service.SpringServiceImpl;
+import org.conan.base.service.PageInObject;
+import org.conan.base.service.PageOutObject;
 
 import ${import_dao};
 import ${import_service};
@@ -43,32 +43,26 @@ public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
     @Autowired
     ${dao} ${model_1}DAO;
 
-    @Override
     public int ${insert}(${dto} dto) {
         return ${model_1}DAO.${insert}(dto);
     }
 
-    @Override
     public int ${delete}(int id) {
         return ${model_1}DAO.${delete}(id);
     }
 
-    @Override
     public int ${update}(${dto} dto) {
         return ${model_1}DAO.${update}(dto);
     }
 
-    @Override
     public ${dto} ${getId}(int id) {
         return ${model_1}DAO.${getId}(id);
     }
 
-    @Override
     public List<${dto}> ${getList}(Map<String, Object> paramMap) {
         return ${model_1}DAO.${getList}(paramMap);
     }
 
-    @Override
     public PageOutObject<${dto}> ${getPage}(Map<String, Object> paramMap, PageInObject page) {
         paramMap.put("page", page);
         List<${dto}> list = ${model_1}DAO.${getList}(paramMap);
@@ -76,7 +70,6 @@ public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
         return new PageOutObject<${dto}>(count, list, page);
     }
     
-    @Override
     public int ${getCount}(Map<String, Object> paramMap) {
         return ${model_1}DAO.${getList}Count(paramMap);
     }
