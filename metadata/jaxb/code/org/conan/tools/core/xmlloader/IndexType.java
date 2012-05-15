@@ -17,16 +17,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for modulesType complex type.
+ * <p>Java class for indexType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="modulesType">
+ * &lt;complexType name="indexType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}module" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}type"/>
+ *         &lt;element ref="{}name" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,41 +37,68 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "modulesType", propOrder = {
-    "module"
+@XmlType(name = "indexType", propOrder = {
+    "type",
+    "name"
 })
-public class ModulesType {
+public class IndexType {
 
     @XmlElement(required = true)
-    protected List<ModuleType> module;
+    protected String type;
+    @XmlElement(required = true)
+    protected List<String> name;
 
     /**
-     * Gets the value of the module property.
+     * Gets the value of the type property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the value of the type property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setType(String value) {
+        this.type = value;
+    }
+
+    /**
+     * Gets the value of the name property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the module property.
+     * This is why there is not a <CODE>set</CODE> method for the name property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getModule().add(newItem);
+     *    getName().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ModuleType }
+     * {@link String }
      * 
      * 
      */
-    public List<ModuleType> getModule() {
-        if (module == null) {
-            module = new ArrayList<ModuleType>();
+    public List<String> getName() {
+        if (name == null) {
+            name = new ArrayList<String>();
         }
-        return this.module;
+        return this.name;
     }
 
 }

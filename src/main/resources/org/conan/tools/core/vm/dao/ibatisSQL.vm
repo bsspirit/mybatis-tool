@@ -70,6 +70,20 @@
     </delete>
 #end
 
+#if($sql_delete_mark)
+    UPDATE $table
+        SET
+            mark = 1
+        WHERE
+        <include refid="condition"/>
+#{else}
+	<delete id="deleteUserRelates" parameterType="java.util.Map">
+        DELETE FROM $table
+        WHERE
+        <include refid="condition"/>
+    </delete>
+#end
+
     <update id="${update}" parameterType="${dto_1}">
         UPDATE $table
         SET

@@ -23,8 +23,9 @@ import ${import_model};
 public interface ${dao} extends MybatisDAO {
 
     int ${insert}(${dto} dto);
-    int ${delete}(int id);
     int ${update}(${dto} dto);
+    int ${delete}(int id);
+    int ${delete}s (${dto} dto);
 
     ${dto} ${getId}(int id);
     List<${dto}> ${getList}(Map<String,Object> paramMap);

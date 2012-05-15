@@ -1,6 +1,7 @@
 package org.conan.tools.util.match;
 
 import java.io.File;
+import java.util.List;
 
 /**
  *
@@ -29,5 +30,13 @@ public class StringMatch {
     public static String first2Lowercase(String str) {
         String tmp = str.substring(0, 1).toLowerCase();
         return tmp + str.substring(1);
+    }
+    
+    public static String stringLines(List<String> list){
+        StringBuilder sb = new StringBuilder();
+        for(String line:list){
+            sb.append(","+line);
+        }
+        return sb.toString().substring(1);
     }
 }

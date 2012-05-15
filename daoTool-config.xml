@@ -15,7 +15,8 @@
 				<table>t_user_relate</table>
 				<prop><name>uid</name><type>long</type></prop>
 				<prop><name>fansid</name><type>long</type></prop>
-				<prop><name>create_date</name><type>timestamp</type><default>now()</default></prop>
+				<prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
+                <index><type>unique</type><name>uid</name><name>fansid</name></index>
 			</model>
 			<model>
 				<name>user</name>
@@ -36,7 +37,6 @@
 				<prop><name>statuses_count</name><type>int</type><default>0</default></prop>
 				<prop><name>favourites_count</name><type>int</type><default>0</default></prop>
 				<prop><name>created_at</name><type>datetime</type></prop>
-				<prop><name>following</name><type>varchar(1)</type><default>f</default></prop>
 				<prop><name>allow_all_act_msg</name><type>varchar(1)</type><default>f</default><null>true</null></prop>
 				<prop><name>remark</name><type>varchar(32)</type><null>true</null></prop>
 				<prop><name>geo_enabled</name><type>varchar(1)</type><default>t</default><null>true</null></prop>
@@ -44,13 +44,11 @@
 				<prop><name>allow_all_comment</name><type>varchar(1)</type><default>t</default><null>true</null></prop>
 				<prop><name>avatar_large</name><type>varchar(128)</type><null>true</null></prop>
 				<prop><name>verified_reason</name><type>varchar(32)</type><null>true</null></prop>
-				<prop><name>follow_me</name><type>varchar(1)</type><default>f</default><null>true</null></prop>
 				<prop><name>online_status</name><type>int</type><null>true</null></prop>
-				<prop><name>bi_followers_count</name><type>int</type><default>0</default><null>true</null></prop>
 				<prop><name>lang</name><type>varchar(8)</type><null>true</null></prop>
 				<prop><name>weihao</name><type>varchar(32)</type><null>true</null></prop>
 				<prop><name>verifiedType</name><type>int</type><null>true</null></prop>
-				<prop><name>create_date</name><type>timestamp</type><default>now()</default></prop>
+				<prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
 			</model>
 			<model>
 				<name>provinces</name>

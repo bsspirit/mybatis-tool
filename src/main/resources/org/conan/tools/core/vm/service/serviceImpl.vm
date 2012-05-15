@@ -46,13 +46,17 @@ public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
     public int ${insert}(${dto} dto) {
         return ${model_1}DAO.${insert}(dto);
     }
+    
+    public int ${update}(${dto} dto) {
+        return ${model_1}DAO.${update}(dto);
+    }
 
     public int ${delete}(int id) {
         return ${model_1}DAO.${delete}(id);
     }
 
-    public int ${update}(${dto} dto) {
-        return ${model_1}DAO.${update}(dto);
+	public int ${delete}(${dto} dto) {
+        return ${model_1}DAO.${delete}s(dto);
     }
 
     public ${dto} ${getId}(int id) {
