@@ -13,10 +13,12 @@
             <model>
                 <name>account</name>
                 <table>t_account</table>
-                <prop><name>uid</name><type>long</type></prop>
+                <prop><name>uid</name><type>long</type><unique>true</unique></prop>
                 <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
                 <prop><name>expireIn</name><type>varchar(16)</type><null>true</null></prop>
                 <prop><name>refresh</name><type>varchar(32)</type><null>true</null></prop>
+                <prop><name>state</name><type>varchar(32)</type><null>true</null></prop>
+                <prop><name>screen_name</name><type>varchar(32)</type><unique>true</unique></prop>
                 <prop><name>token</name><type>varchar(32)</type></prop>
             </model>
 			<model>

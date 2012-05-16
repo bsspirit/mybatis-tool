@@ -3,7 +3,9 @@
 #set( $insert = "insert"+${model})
 #set( $delete = "delete"+${model})
 #set( $update = "update"+${model})
+#set( $updins = "updins"+${model})
 #set( $getId = "get"+${model}+"ById")
+#set( $getOne = "get"+${model}+"One")
 #set( $getList = "get"+${model}+"s")
 #set( $getPage = ${getList}+"Paging")
 $copyright
@@ -26,11 +28,14 @@ public interface ${service} extends SpringService {
 
     int ${insert}(${dto} dto);
     int ${update}(${dto} dto);
+    int ${updins}(${dto} dto);
+    int ${updins}(${dto} dto, Map<String,Object> paramMap);
     int ${delete}(int id);
     int ${delete}(${dto} dto);
     
 
     ${dto} ${getId}(int id);
+    ${dto} ${getOne}(Map<String,Object> paramMap);
     List<${dto}> ${getList}(Map<String,Object> paramMap);
     PageOutObject<${dto}> ${getPage}(Map<String,Object> paramMap, PageInObject page);
     int ${getList}Count(Map<String,Object> paramMap);

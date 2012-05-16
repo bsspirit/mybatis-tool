@@ -7,6 +7,7 @@
 #set( $update = "update"+${model})
 #set( $getId = "get"+${model}+"ById")
 #set( $getList = "get"+${model}+"s")
+#set( $getOne = "get"+${model}+"One")
 #set( $getPage = ${getList}+"Paging")
 #set( $getCount = ${getList}+"Count")
 #set( $paramId = "#"+"{id}")
@@ -104,6 +105,18 @@
             mark = 0 and
 #end
             id = ${paramId}
+    </select>
+    
+    <select id="${getOne}" parameterType="java.util.Map" resultMap="result">
+        <include refid="select"/>
+        FROM
+            $table
+        WHERE
+#if($sql_delete_mark)
+            mark = 0 and
+#end
+        <include refid="condition"/>
+        limit 1
     </select>
 
     <select id="${getList}" parameterType="java.util.Map" resultMap="result">

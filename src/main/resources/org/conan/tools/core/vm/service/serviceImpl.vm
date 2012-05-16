@@ -5,7 +5,9 @@
 #set( $insert = "insert"+${model})
 #set( $delete = "delete"+${model})
 #set( $update = "update"+${model})
+#set( $updins = "updins"+${model})
 #set( $getId = "get"+${model}+"ById")
+#set( $getOne = "get"+${model}+"One")
 #set( $getList = "get"+${model}+"s")
 #set( $getPage = ${getList}+"Paging")
 #set( $getCount = ${getList}+"Count")
@@ -50,6 +52,22 @@ public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
     public int ${update}(${dto} dto) {
         return ${model_1}DAO.${update}(dto);
     }
+    
+    public int ${updins}(${dto} dto) {
+        if (dto.getId() > 0) {
+            return ${update}(dto);
+        }
+        return ${insert}(dto);
+    }
+
+    public int ${updins}(${dto} dto, Map<String, Object> paramMap) {
+        ${dto} obj = ${getOne}(paramMap);
+        if (obj != null) {
+            dto.setId(obj.getId());
+            return ${update}(dto);
+        }
+         return ${insert}(dto);
+    }
 
     public int ${delete}(int id) {
         return ${model_1}DAO.${delete}(id);
@@ -61,6 +79,10 @@ public class ${serviceImpl} extends SpringServiceImpl implements ${service} {
 
     public ${dto} ${getId}(int id) {
         return ${model_1}DAO.${getId}(id);
+    }
+    
+    public ${dto} ${getOne}(Map<String, Object> paramMap) {
+        return ${model_1}DAO.${getOne}(paramMap);
     }
 
     public List<${dto}> ${getList}(Map<String, Object> paramMap) {
