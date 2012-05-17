@@ -3,7 +3,7 @@
 #set( $insert = "insert"+${model})
 #set( $delete = "delete"+${model})
 #set( $update = "update"+${model})
-#set( $updins = "updins"+${model})
+#set( $save = "save"+${model})
 #set( $getId = "get"+${model}+"ById")
 #set( $getOne = "get"+${model}+"One")
 #set( $getList = "get"+${model}+"s")
@@ -28,8 +28,8 @@ public interface ${service} extends SpringService {
 
     int ${insert}(${dto} dto);
     int ${update}(${dto} dto);
-    int ${updins}(${dto} dto);
-    int ${updins}(${dto} dto, Map<String,Object> paramMap);
+    int ${save}(${dto} dto);
+    int ${save}(${dto} dto, Map<String,Object> paramMap);
     int ${delete}(int id);
     int ${delete}(${dto} dto);
     
