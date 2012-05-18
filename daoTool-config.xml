@@ -29,6 +29,14 @@
 				<prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
                 <index><type>unique</type><name>uid</name><name>fansid</name></index>
 			</model>
+            <model>
+              <name>userBirelate</name>
+              <table>t_user_birelate</table>
+              <prop><name>uid</name><type>long</type></prop>
+              <prop><name>biuid</name><type>long</type></prop>
+              <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
+              <index><type>unique</type><name>uid</name><name>biuid</name></index>
+            </model>
 			<model>
 				<name>user</name>
 				<table>t_user</table>

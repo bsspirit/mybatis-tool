@@ -78,7 +78,7 @@
         WHERE
         <include refid="condition"/>
 #{else}
-	<delete id="deleteUserRelates" parameterType="java.util.Map">
+	<delete id="${delete}s" parameterType="java.util.Map">
         DELETE FROM $table
         WHERE
         <include refid="condition"/>
