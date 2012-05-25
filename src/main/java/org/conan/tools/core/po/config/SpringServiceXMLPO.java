@@ -41,6 +41,7 @@ public class SpringServiceXMLPO extends FilePO {
         ResourceTree res = new ResourceTree(this.root);
 
         Map<String, Object> map = this.getVMMap();
+        map.put("project", this.getProject());
         map.put("modules", this.getModules());
 
         VelocityFactory vf = new VelocityFactory(VelocityFactory.CONFIG_SPRING_SERVICE_VM, map);

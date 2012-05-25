@@ -10,6 +10,7 @@ abstract public class BaseTree {
     static final String SQL = "sql";
     static final String WEB = "web";
     static final String DAO = "dao";
+    static final String FORM= "form";
     static final String SERVICE = "service";
 
     static final String DAO_I = "DAO";
@@ -22,7 +23,7 @@ abstract public class BaseTree {
     static final String IBATIS = "ibatis";
     static final String MODEL = "model";
     static final String DTO = "DTO";
-    static final String FORM = "Form";
+    static final String FORM_I = "Form";
     static final String MODULE_DTO = "ModuleDTO";
     static final String POINT = ".";
 

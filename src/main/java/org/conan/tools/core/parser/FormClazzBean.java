@@ -11,19 +11,9 @@ import java.util.List;
  * 
  * @author Conan
  */
-public class ModelClazzBean {
+public class FormClazzBean {
 
-    // public ModelClazzBean(ModuleModelPO po) {
-    // List<PropertyBean> propertiesBean = po.getProperty();
-    // setProperties(propertiesBean);
-    //
-    // MethodBean mb = new MethodBean(po.getModuleModel(), po.getProperty());
-    // this.getMethod = mb.getGetMethod();
-    // this.setMethod = mb.getSetMethod();
-    // this.constructorMethod = mb.getConstructorMethod();
-    // }
-
-    public ModelClazzBean(String model, List<PropertyBean> propertiesBean) {
+    public FormClazzBean(String model, List<PropertyBean> propertiesBean) {
         setProperties(propertiesBean);
         setMethod(model, propertiesBean);
     }
@@ -43,7 +33,7 @@ public class ModelClazzBean {
         MethodBean mb = new MethodBean(model, propertiesBean);
         this.getMethod = mb.getGetMethod();
         this.setMethod = mb.getSetMethod();
-        this.constructorMethod = mb.getConstructorMethod();
+        this.constructorMethod = mb.getConstructorFormMethod();
     }
 
     public List<String> getProperties() {

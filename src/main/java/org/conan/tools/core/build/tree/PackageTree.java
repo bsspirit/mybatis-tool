@@ -65,7 +65,7 @@ public class PackageTree extends FolderTree {
     public String getIbatisTestFolder() {
         return StringMatch.point2Separator(getTestFolder() + File.separator + basePackage) + File.separator + module + File.separator + DAO + File.separator + IBATIS;
     }
-    
+
     public String getServiceTestFolder() {
         return StringMatch.point2Separator(getTestFolder() + File.separator + basePackage) + File.separator + module + File.separator + SERVICE + File.separator + IMPL;
     }
@@ -93,8 +93,8 @@ public class PackageTree extends FolderTree {
     public String getServiceImplPackage() {
         return getServicePackage() + POINT + IMPL;
     }
-    
-    public String getServiceImplTestPackage(){
+
+    public String getServiceImplTestPackage() {
         return getServicePackage() + POINT + IMPL;
     }
 
@@ -112,7 +112,7 @@ public class PackageTree extends FolderTree {
     }
 
     public String getFormWebPackage() {
-        return getModulePackage() + POINT + WEB;
+        return getModulePackage() + POINT + WEB + POINT + FORM;
     }
 
     @Override

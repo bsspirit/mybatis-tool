@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.conan.tools.core.build.VelocityFactory;
 import org.conan.tools.core.build.tree.ClazzTree;
-import org.conan.tools.core.parser.ModelClazzBean;
+import org.conan.tools.core.parser.FormClazzBean;
 import org.conan.tools.core.parser.PropertyBean;
 import org.conan.tools.core.xmlloader.ModelType;
 import org.conan.tools.core.xmlloader.ModuleType;
@@ -45,7 +45,7 @@ public class FormPO extends ModelPO {
 
     protected void write(ModuleType module, ModelType model, List<PropertyBean> property) {
         ClazzTree clazz = new ClazzTree(this.root, this.basePackage, module.getName(), model.getName());
-        ModelClazzBean mcb = new ModelClazzBean(clazz.getModel(), property);
+        FormClazzBean mcb = new FormClazzBean(clazz.getModel(), property);
 
         Map<String, Object> map = this.getVMMap();
         map.put("model", clazz.getModel());

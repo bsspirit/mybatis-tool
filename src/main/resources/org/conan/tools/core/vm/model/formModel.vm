@@ -12,6 +12,8 @@ import ${import_model};
  */
 public class ${form} extends ${dto} {
 
+private static final long serialVersionUID = ${timestamp};
+
 ${model_constructorMethods}
 
 }

@@ -109,7 +109,7 @@ public class ClazzTree extends PackageTree {
     }
 
     public String getWebFormClazz() {
-        return getModel() + FORM + JAVA_FILE;
+        return getModel() + FORM_I + JAVA_FILE;
     }
 
     public String getIbatisSQLClazz() {
