@@ -69,6 +69,16 @@
 				<prop><name>verifiedType</name><type>int</type><null>true</null></prop>
 				<prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
 			</model>
+            <model>
+                <name>userIncrease</name>
+                <table>t_user_increase</table>
+                <prop><name>uid</name><type>long</type></prop>
+                <prop><name>date</name><type>int</type></prop>
+                <prop><name>type</name><type>varchar(8)</type></prop>
+                <prop><name>count</name><type>long</type><default>0</default></prop>
+                <index><type>unique</type><name>uid</name><name>date</name><name>type</name></index>
+                <index><name>date</name></index>
+            </model>
 			<model>
 				<name>provinces</name>
 				<table>t_provinces</table>

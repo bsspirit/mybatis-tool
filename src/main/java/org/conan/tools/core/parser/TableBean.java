@@ -68,7 +68,7 @@ public class TableBean {
         
         for (int i = 0; i < ibs.size(); i++) {
             IndexBean ib = ibs.get(i);
-            sb.append("CREATE " + (ib.getType().equalsIgnoreCase("UNIQUE") ? ib.getType().toUpperCase() : ""));
+            sb.append("CREATE " + (ib.getType()!=null && ib.getType().equalsIgnoreCase("UNIQUE") ? ib.getType().toUpperCase() : ""));
             sb.append(" INDEX " + table + "_IDX_" + i);
             sb.append(" on " + table + "(" + StringMatch.stringLines(ib.getName()) + ");\n");
         }
