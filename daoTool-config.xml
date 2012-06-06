@@ -82,7 +82,11 @@
 			<model>
 				<name>provinces</name>
 				<table>t_provinces</table>
-				<prop><name>name</name><type>varchar(16)</type></prop>
+				<prop><name>name</name><type>varchar(32)</type></prop>
+                <prop><name>pid</name><type>int</type></prop>
+                <prop><name>cid</name><type>int</type><default>1000</default><null>true</null></prop>
+                <prop><name>longitude</name><type>varchar(16)</type><null>true</null></prop>
+                <prop><name>latitude</name><type>varchar(16)</type><null>true</null></prop>
 			</model>
 		</module>
 		<module>
