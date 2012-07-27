@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!--
+    This is QuizData sql
+    @author Conan Zhang
+    @date 2012-07-27
+-->
+<mapper namespace="org.conan.dm.quiz.dao.QuizDataDAO">
+
+    <resultMap id="result" type="quizDataDTO">
+        <result property="id" column="id" javaType="java.lang.Integer"/>
+        <result property="type" column="type" javaType="java.lang.Integer"/>
+        <result property="file" column="file" javaType="java.lang.String"/>
+        <result property="local" column="local" javaType="java.lang.String"/>
+        <result property="create_date" column="create_date" javaType="java.sql.Timestamp"/>
+        <result property="qid" column="qid" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <sql id="select">
+        SELECT
+            id,
+            type,
+            file,
+            local,
+            create_date,
+            qid
+    </sql>
+
+    <sql id="condition">
+        <if test="type!=null">type = #{type} and</if>
+        <if test="file!=null">file = #{file} and</if>
+        <if test="local!=null">local = #{local} and</if>
+        <if test="create_date!=null">create_date = #{create_date} and</if>
+        <if test="qid!=null">qid = #{qid} and</if>
+        1=1
+    </sql>
+
+    <insert id="insertQuizData" parameterType="quizDataDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_quiz_data(
+            type,
+            file,
+            local,
+            <if test="create_date!=null ">create_date,</if>
+            qid
+        ) VALUES (
+            #{type},
+            #{file},
+            #{local},
+            <if test="create_date!=null">#{create_date},</if>
+            #{qid}
+        )
+    </insert>
+
+    <delete id="deleteQuizData" parameterType="java.lang.Integer">
+        DELETE FROM t_quiz_data
+        WHERE
+            id = #{id}
+    </delete>
+
+	<delete id="deleteQuizDatas" parameterType="java.util.Map">
+        DELETE FROM t_quiz_data
+        WHERE
+        <include refid="condition"/>
+    </delete>
+
+    <update id="updateQuizData" parameterType="quizDataDTO">
+        UPDATE t_quiz_data
+        SET
+            <if test="type!=null">type = #{type},</if>
+            <if test="file!=null">file = #{file},</if>
+            <if test="local!=null">local = #{local},</if>
+            <if test="create_date!=null">create_date = #{create_date},</if>
+            <if test="qid!=null">qid = #{qid},</if>
+            id = #{id}
+        WHERE
+            id = #{id}
+    </update>
+
+    <select id="getQuizDataById" parameterType="java.lang.Integer" resultMap="result">
+        <include refid="select"/>
+        FROM
+            t_quiz_data
+        WHERE
+            id = #{id}
+    </select>
+    
+    <select id="getQuizDataOne" parameterType="java.util.Map" resultMap="result">
+        <include refid="select"/>
+        FROM
+            t_quiz_data
+        WHERE
+        <include refid="condition"/>
+        limit 1
+    </select>
+
+    <select id="getQuizDatas" parameterType="java.util.Map" resultMap="result">
+        <include refid="select"/>
+        FROM
+            t_quiz_data
+        WHERE
+        <include refid="condition"/>
+        <include refid="mysql.page.order"/>
+        <include refid="mysql.page.limit"/>
+    </select>
+
+    <select id="getQuizDatasCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT
+            count(id)
+        FROM
+            t_quiz_data
+        WHERE
+        <include refid="condition"/>
+    </select>
+
+
+</mapper>
