@@ -87,6 +87,7 @@
                 <prop><name>cid</name><type>int</type><default>1000</default><null>true</null></prop>
                 <prop><name>longitude</name><type>varchar(16)</type><null>true</null></prop>
                 <prop><name>latitude</name><type>varchar(16)</type><null>true</null></prop>
+                <index><type>unique</type><name>pid</name><name>cid</name></index>
 			</model>
 		</module>
 		<module>
@@ -109,54 +110,6 @@
                 <prop><name>limit_time</name><type>long</type><null>true</null><default>-1</default></prop>
                 <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
                 <index><type>unique</type><name>uid</name><name>name</name></index>
-            </model>
-            <model>
-                <name>applyUser</name>
-                <table>t_apply_user</table>
-                <prop><name>uid</name><type>long</type></prop>
-                <prop><name>name</name><type>varchar(16)</type></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <index><type>unique</type><name>uid</name><name>name</name></index>
-            </model>
-        </module>
-        <module>
-            <name>web</name>
-            <model>
-                <name>blog</name>
-                <table>t_blog</table>
-                <prop><name>title</name><type>varchar(256)</type></prop>
-                <prop><name>content</name><type>mediumtext</type><null>true</null></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <prop><name>uid</name><type>long</type></prop>
-                <prop><name>utype</name><type>varchar(16)</type><default>weibo</default><null>true</null></prop>
-            </model>
-            <model>
-                <name>blogComment</name>
-                <table>t_blog_comment</table>
-                <prop><name>blogid</name><type>int</type></prop>
-                <prop><name>blogcid</name><type>int</type><default>0</default><null>true</null></prop>
-                <prop><name>comment</name><type>text</type><null>true</null></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <prop><name>uid</name><type>long</type></prop>
-                <prop><name>utype</name><type>varchar(16)</type><default>weibo</default><null>true</null></prop>
-            </model>
-            <model>
-                <name>blogAction</name>
-                <table>t_blog_action</table>
-                <prop><name>blogid</name><type>int</type></prop>
-                <prop><name>action</name><type>int</type><default>1</default><null>true</null></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <prop><name>uid</name><type>long</type></prop>
-                <prop><name>utype</name><type>varchar(16)</type><default>weibo</default><null>true</null></prop>
-            </model>
-            <model>
-                <name>blogTag</name>
-                <table>t_blog_tag</table>
-                <prop><name>blogid</name><type>int</type></prop>
-                <prop><name>tag</name><type>varchar(256)</type></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <prop><name>uid</name><type>long</type></prop>
-                <prop><name>utype</name><type>varchar(16)</type><default>weibo</default><null>true</null></prop>
             </model>
         </module>
 	</modules>
