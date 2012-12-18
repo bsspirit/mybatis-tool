@@ -12,11 +12,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.0.5.RELEASE</spring.version>
-    <mybatis.version>3.0.4</mybatis.version>
+    <spring.version>3.1.1.RELEASE</spring.version>
+    <mybatis.version>3.1.1</mybatis.version>
 	<slf4j.version>1.5.8</slf4j.version>
-	<log4j.version>1.2.14</log4j.version>
-	<mybatis.ehcache.version>1.0.0-RC1</mybatis.ehcache.version>
+	<log4j.version>1.2.15</log4j.version>
+	<mybatis.ehcache.version>1.0.0</mybatis.ehcache.version>
   </properties>
 
   <dependencies>
@@ -84,16 +84,35 @@
 	-->
 	
 	<!-- log -->
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-log4j12</artifactId>
-		<version>${slf4j.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>${log4j.version}</version>
-	</dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.jms</groupId>
+          <artifactId>jms</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jdmk</groupId>
+          <artifactId>jmxtools</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.jmx</groupId>
+          <artifactId>jmxri</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
 	<!-- commons-lang -->
 	<dependency>
@@ -102,33 +121,33 @@
 		<version>2.4</version>
 	</dependency>
 	
-	<!-- myibatis -->
-	<dependency>
-		<groupId>org.mybatis</groupId>
-		<artifactId>mybatis</artifactId>
-		<version>${mybatis.version}</version>
-	</dependency>
-	<dependency>  
-        <groupId>org.mybatis</groupId>  
-        <artifactId>mybatis-spring</artifactId>  
-        <version>1.0.1</version>  
+	<!-- mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
     </dependency>
-	<dependency>
-		<groupId>cglib</groupId>
-		<artifactId>cglib</artifactId>
-		<version>2.2</version>
-	</dependency>
-	<dependency>
-		<groupId>org.mybatis.caches</groupId>
-		<artifactId>mybatis-ehcache</artifactId>
-		<version>${mybatis.ehcache.version}</version>
-	</dependency>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-ehcache</artifactId>
+      <version>${mybatis.ehcache.version}</version>
+    </dependency>
 
 	<!-- mysql -->
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
-		<version>5.1.10</version>
+		<version>5.1.21</version>
 	</dependency>
 	<dependency>
 		<groupId>commons-dbcp</groupId>
