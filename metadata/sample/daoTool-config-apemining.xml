@@ -4,7 +4,7 @@
 
 	<filePath>metadata/gen/apemining</filePath>
 	<project>org.ape.mining.biz</project>
-	<dbname>ape_mining</dbname>
+	<dbname>r_metadata</dbname>
 	<dbtype>mysql</dbtype>
 	
 	<modules>
@@ -153,16 +153,6 @@
                 <index><name>tableName</name></index>
                 <index><name>hdfsPathRef</name></index>
                 <index><name>hiveSourceRef</name></index>
-            </model>
-            <model>
-                <name>hiveTableConf</name>
-                <table>t_hive_table_conf</table>
-                <prop><name>beanName</name><type>varchar(32)</type></prop>
-                <prop><name>hiveTableRef</name><type>varchar(32)</type></prop>
-                <prop><name>hqls</name><type>varchar(1024)</type></prop>
-                <prop><name>create_date</name><type>timestamp</type><default>now()</default><null>true</null></prop>
-                <index><type>unique</type><name>beanName</name></index>
-                <index><name>hiveTableRef</name></index>
             </model>
             <model>
                 <name>MapRedAlgorithm</name>
